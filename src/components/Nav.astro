@@ -1,0 +1,105 @@
+---
+import Action from "@components/Action.astro";
+
+import {SignIn, SignOut} from "auth-astro/components";
+import {getSession} from "auth-astro/server";
+
+const session = await getSession(Astro.request);
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-md z-50"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex">
+        <div class="flex-shrink-0 flex items-center">
+          <a href="/" class="text-sm md:text-xl font-bold text-primary"> Antagonista </a>
+        </div>
+        <div class="hidden sm:ml-8 sm:flex sm:space-x-8">
+          <a
+            href="/"
+            class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-primary/70"
+          >
+            Inicio
+          </a>
+          <a
+            href="/characters"
+            class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-gray-900 hover:text-primary/70"
+          >
+            Personajes
+          </a>
+        </div>
+      </div>
+      <div class="flex items-center ml-3 md:ml-0">
+        {
+          session ? (
+            <div class="flex gap-2 items-center">
+              <p class="skew-x-[-20deg] text-xs font-semibold bg-primary rounded-sm text-white border-2 border-primary md:text-sm py-1 px-2 md:px-5 md:py-2">
+                Hola {session.user?.name}
+              </p>
+
+              <Action
+                id="logout"
+                class="text-xs md:text-sm py-1 px-2"
+                as="button"
+                aria-label="Iniciar sesión de usuario"
+              >
+                Cerrar sesión
+              </Action>
+            </div>
+          ) : (
+            <Action
+              id="login"
+              class="w-full text-xs md:text-sm py-2 px-3"
+              as="button"
+              aria-label="Iniciar sesión de usuario"
+            >
+              ¡Inicia sesión para participar!
+            </Action>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  import {$} from "@lib/dom-selector";
+
+  const {signOut} = await import("auth-astro/client");
+
+  document.addEventListener("astro:page-load", () => {
+    const $login = $("#login");
+    const $logout = $("#logout");
+
+    if ($logout) {
+      $logout.onclick = () => signOut();
+    }
+
+    if ($login) {
+      $login.onclick = () => {
+        const width = 600;
+        const height = 700;
+        const left = window.innerWidth / 2 - width / 2;
+        const top = window.innerHeight / 2 - height / 2;
+
+        window.open(
+          "/auth/twitch",
+          "Twitch Login",
+          `toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=${width}, height=${height}, top=${top}, left=${left}`,
+        );
+
+        $login.setAttribute("aria-disabled", "true");
+        const $span = $login.querySelector("span");
+
+        if ($span) $span.innerText = "Iniciando sesión...";
+        // Añade un temporizador que restablezca el botón después de 3 segundos
+        setTimeout(() => {
+          $login.removeAttribute("aria-disabled");
+          if ($span) $span.innerText = "¡Inicia sesión para participar!";
+        }, 4000);
+      };
+    }
+  });
+</script>

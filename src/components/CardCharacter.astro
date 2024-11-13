@@ -1,0 +1,25 @@
+---
+interface Props {
+    id: number;
+    name: string;
+    image: string;
+}
+
+const {name, image, id} = Astro.props as Props;
+---
+
+<div class="overflow-hidden border border-gray-100 text-center rounded-lg shadow-md transition-all duration-300  hover:shadow-xl hover:shadow-violet-300 bg-white" id={"CardCharacter" + id}>
+    <div class="p-0">
+      <img
+        src={image}
+        alt={name}
+        width={200}
+        height={200}
+        class="w-full h-48 object-cover"
+      />
+      <div class="p-4">
+        <h3 class="font-semibold text-lg">{name}</h3>
+        <button class=" transition-all font-bold text-white mt-2 py-1.5 w-full border-2 bg-violet-700 hover:bg-violet-500 rounded-md active:scale-95">Vote</button>
+      </div>
+    </div>
+  </div>
