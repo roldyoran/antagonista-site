@@ -12,7 +12,7 @@ interface Props {
 const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onVote }) => {
     return (
         <div
-            className={`overflow-hidden border text-center rounded-lg shadow-md transition-all duration-300 hover:shadow-xl  ${isSelected ? 'bg-violet-100 shadow-md shadow-primary' : 'bg-white border-gray-100'
+            className={`overflow-hidden border text-center rounded-lg shadow-md transition-all duration-300 hover:shadow-xl  ${isSelected ? 'bg-primary text-white shadow-md shadow-primary' : 'bg-white border-gray-100'
                 }`}
             id={`CardCharacter${id}`}
             onClick={onVote}
@@ -23,7 +23,8 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
                     alt={name}
                     width={200}
                     height={200}
-                    className={`w-full h-48 object-cover ${isSelected ? '' : 'grayscale'}`}
+                    // className={`w-full h-48 object-cover ${isSelected ? '' : 'grayscale'}`}
+                    className='w-full h-48 object-cover grayscale'
                 />
                 <div className="p-4">
                     <h3 className="font-semibold text-lg">{name}</h3>
@@ -32,7 +33,7 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
                             #{rank}
                         </span>
                     )}
-                    <button className={`transition-all font-bold text-primary mt-2 py-1.5 w-full border-2 border-primary hover:bg-primary/80 hover:text-white rounded-md active:scale-90 uppercase text-sm ${isSelected ? 'bg-primary text-white' : ''
+                    <button className={`transition-all font-bold  mt-2 py-1.5 w-full border-2 rounded-md active:scale-90 uppercase text-sm ${isSelected ? 'bg-white text-primary hover:bg-white hover:text-primary' : 'text-primary border-primary hover:bg-primary/80 hover:text-white'
                         }   `}>
                         {
                             isSelected ? 'Votado' : 'Votar'

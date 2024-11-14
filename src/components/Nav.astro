@@ -35,15 +35,16 @@ const session = await getSession(Astro.request);
         {
           session ? (
             <div class="flex gap-2 items-center">
-              <p class="skew-x-[-20deg] text-xs font-semibold bg-primary rounded-sm text-white border-2 border-primary md:text-sm py-1 px-2 md:px-5 md:py-2">
-                Hola {session.user?.name}
+              <p class="flex gap-2 items-center skew-x-[-20deg] text-xs font-semibold bg-primary rounded-sm text-white border-2 border-primary md:text-sm py-1 px-2 md:px-5 md:py-2">
+                <img src={session.user?.image}  alt="usuario img" class="w-4 h-4 rounded-full skew-x-[+20deg]" />
+                {session.user?.name}
               </p>
 
               <Action
                 id="logout"
                 class="text-xs md:text-sm py-1 px-2"
                 as="button"
-                aria-label="Iniciar sesión de usuario"
+                aria-label="Iniciar sesión con Twitch"
               >
                 Cerrar sesión
               </Action>
