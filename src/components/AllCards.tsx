@@ -38,14 +38,44 @@ const CharactersPage: React.FC = () => {
     };
 
     return (
-        <div>
-            <input
+        <div className=''>
+            {/* <input
                 type="text"
                 placeholder="Buscar personaje..."
-                className="md:skew-x-[-20deg] mx-auto py-2 px-6 border-2 border-primary rounded-sm w-full max-w-full mb-10 focus:ring-2 focus:ring-primary focus:outline-none"
+                className="md:skew-x-[-20deg] mx-auto max-w-xl py-2 px-6 border-2 border-primary rounded-sm w-full  mb-10 focus:ring-2 focus:ring-primary focus:outline-none"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            /> */}
+            <div className="flex justify-center min-w-screen">
+                <div className="relative w-full max-w-4xl mb-2">
+                    {/* Campo de entrada con margen izquierdo para el ícono */}
+                    <input
+                        id="search"
+                        type="text"
+                        placeholder="Buscar personaje..."
+                        className="md:skew-x-[-20deg] py-2 px-10 border-2 border-primary rounded-sm w-full  mb-10 focus:ring-2 focus:ring-primary focus:outline-none"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                    {/* Ícono de búsqueda */}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#696969"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="absolute left-3 top-1/2 transform -translate-y-7 text-gray-400 w-5 h-5"
+                    >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                        <path d="M21 21l-6 -6" />
+                    </svg>
+                </div>
+            </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {filteredCharacters.map((character) => {
@@ -62,6 +92,12 @@ const CharactersPage: React.FC = () => {
                         />
                     );
                 })}
+            </div>
+
+            <div className="flex justify-center min-w-screen mt-8">
+                
+                    <a href="/characters" className="text-sm md:text-xl md:skew-x-[-20deg] font-bold text-primary px-6 py-2 border-2 border-primary hover:scale-105 transition-all">Enviar mis Votos</a>
+           
             </div>
         </div>
     );

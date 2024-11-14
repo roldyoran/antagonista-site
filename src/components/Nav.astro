@@ -72,6 +72,7 @@ const session = await getSession(Astro.request);
   import {$} from "@lib/dom-selector";
 
   const {signOut} = await import("auth-astro/client");
+  const {signIn} = await import("auth-astro/client");
 
   document.addEventListener("astro:page-load", () => {
     const $login = $("#login");
@@ -81,6 +82,11 @@ const session = await getSession(Astro.request);
       $logout.onclick = () => signOut();
     }
 
+    // if ($login) {
+    //   $login.onclick = () => signIn();
+    // }
+
+    
     if ($login) {
       $login.onclick = () => {
         const width = 600;
