@@ -1,8 +1,8 @@
 ---
-import Action from "@components/Action.astro";
-
 import {SignIn, SignOut} from "auth-astro/components";
 import {getSession} from "auth-astro/server";
+import Action from "@components/Action.astro";
+import AntagonistaLogo from "src/icons/AntagonistaLogo.astro";
 
 const session = await getSession(Astro.request);
 ---
@@ -14,18 +14,21 @@ const session = await getSession(Astro.request);
     <div class="flex justify-between h-16">
       <div class="flex">
         <div class="flex-shrink-0 flex items-center">
-          <a href="/" class="text-sm md:text-xl font-bold text-primary"> Antagonista </a>
+          <a href="/" class="text-sm md:text-xl font-bold text-primary">
+             <!-- Antagonista  -->
+              <AntagonistaLogo color="rgb(0, 0, 0)" width={96} height={68} />
+            </a>
         </div>
         <div class="hidden sm:ml-8 sm:flex sm:space-x-8">
           <a
             href="/"
-            class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-primary/70"
+            class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-primary/70 transition-all"
           >
             Inicio
           </a>
           <a
             href="/characters"
-            class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-gray-900 hover:text-primary/70"
+            class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-gray-900 hover:text-primary/70 transition-all"
           >
             Personajes
           </a>
@@ -35,14 +38,14 @@ const session = await getSession(Astro.request);
         {
           session ? (
             <div class="flex gap-2 items-center">
-              <p class="flex gap-2 items-center skew-x-[-20deg] text-xs font-semibold bg-primary rounded-sm text-white border-2 border-primary md:text-sm py-1 px-2 md:px-5 md:py-2">
+              <p class="flex gap-2 items-center skew-x-[-20deg] text-[10px] font-semibold bg-primary rounded-sm text-white border-2 border-primary md:text-sm py-1 px-2 md:px-5 md:py-2">
                 <img src={session.user?.image}  alt="usuario img" class="w-4 h-4 rounded-full skew-x-[+20deg]" />
                 {session.user?.name}
               </p>
 
               <Action
                 id="logout"
-                class="text-xs md:text-sm py-1 px-2"
+                class="text-[10px] md:text-sm py-1 px-2"
                 as="button"
                 aria-label="Iniciar sesión con Twitch"
               >

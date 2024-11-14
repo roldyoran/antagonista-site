@@ -23,13 +23,13 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
                     alt={name}
                     width={200}
                     height={200}
-                    // className={`w-full h-48 object-cover ${isSelected ? '' : 'grayscale'}`}
-                    className='w-full h-48 object-cover grayscale'
+                    className={`w-full h-48 object-cover ${isSelected ? '' : 'grayscale'}`}
+                    // className='w-full h-48 object-cover grayscale'
                 />
                 <div className="p-4">
                     <h3 className="font-semibold text-lg">{name}</h3>
                     {isSelected && rank && (
-                        <span className="absolute top-2 left-2 bg-primary text-white font-bold py-1 px-2 rounded-full">
+                        <span className="absolute top-2 left-2 bg-primary text-white font-bold py-1 px-2 rounded-full md:px-3 md:py-2">
                             #{rank}
                         </span>
                     )}
