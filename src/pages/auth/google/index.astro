@@ -2,10 +2,10 @@
 
 ---
 <main class="flex min-h-screen items-center justify-center text-center">
-	Redirigiendo a Twitch...
+	Redirigiendo a Google...
 </main>
 
 <script>
 	const { signIn } = await import("auth-astro/client")
-	signIn("twitch", { callbackUrl: "/auth/twitch/callback" })
+	signIn("google", { callbackUrl: "/auth/google/callback" })
 </script>
