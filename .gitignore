@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # code sanbox
 /.codesandbox
+
+# db
+/db
