@@ -1,7 +1,10 @@
 ---
-import {characters} from "@data/characters";
+import {getSession} from "auth-astro/server";
 import Layout from "@layouts/Layout.astro";
 import CharactersPage from "@components/AllCards";
+
+const session = await getSession(Astro.request);
+const statesession = session ? true : false;
 ---
 
 <Layout title="Personajes | Sistema de Votacion Antagonista" css="bg-transparent">
@@ -22,8 +25,20 @@ import CharactersPage from "@components/AllCards";
           </p>
         </div>
       </div>
+      
+      <!-- {
+        session ? (
+            <CharactersPage client:load />
+        ) : (
+          <div class="text-center">
+            <p class="text-sm text-gray-600 mb-2">
+              ¡Inicia sesión para votar!
+            </p>
+          </div>
+        )
+      } -->
 
-      <CharactersPage client:load />
+      <CharactersPage statesession={statesession} client:load />
 
       <!-- El inicio de sesion se puede cambiar a Gmail de Google -->
       <p class=" text-center font-bold mt-8 bg-red-400/50 border border-red-600 py-3 px-5 text-red-950">Nota:  <br> (Esto es un Prototipo)</p>
