@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { characters } from '@data/characters';
 import CharacterCard from '@components/CharacterCard';
+
 
 interface SelectedCharacter {
     id: number;
     rank: number;
 }
 
-const CharactersPage: React.FC = () => {
+interface SessionActiveUser {
+    statesession: boolean;
+}
+
+const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCharacters, setSelectedCharacters] = useState<SelectedCharacter[]>([]);
+
+    // Cargar los votos guardados desde localStorage cuando se monta el componente
+    useEffect(() => {
+        const storedVotes = localStorage.getItem('selectedCharacters');
+        if (storedVotes) {
+            setSelectedCharacters(JSON.parse(storedVotes));
+        }
+    }, []);
+
+    // Guardar los votos en localStorage cuando selectedCharacters cambie
+    useEffect(() => {
+        if (selectedCharacters.length > 0) {
+            localStorage.setItem('selectedCharacters', JSON.stringify(selectedCharacters));
+        }
+    }, [selectedCharacters]);
 
     const filteredCharacters = characters.filter((character) =>
         character.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -39,16 +59,8 @@ const CharactersPage: React.FC = () => {
 
     return (
         <div className=''>
-            {/* <input
-                type="text"
-                placeholder="Buscar personaje..."
-                className="md:skew-x-[-20deg] mx-auto max-w-xl py-2 px-6 border-2 border-primary rounded-sm w-full  mb-10 focus:ring-2 focus:ring-primary focus:outline-none"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            /> */}
             <div className="flex justify-center min-w-screen">
                 <div className="relative w-full max-w-4xl mb-2">
-                    {/* Campo de entrada con margen izquierdo para el ícono */}
                     <input
                         id="search"
                         type="text"
@@ -57,7 +69,6 @@ const CharactersPage: React.FC = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                    {/* Ícono de búsqueda */}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -95,9 +106,27 @@ const CharactersPage: React.FC = () => {
             </div>
 
             <div className="flex justify-center min-w-screen mt-8">
-                
-                    <a href="/characters" className="text-sm md:text-xl md:skew-x-[-20deg] font-bold text-primary px-6 py-2 border-2 border-primary hover:scale-105 transition-all">Enviar mis Votos</a>
-           
+                {
+                    (statesession)
+                        ? 
+                        <a
+                            href="/personajes"
+                            className={`text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2  transition-all hover:scale-105 ${(selectedCharacters.length === 3 && statesession)
+                                    ? 'hover:bg-primary/80 hover:text-white text-primary border-primary active:scale-100'
+                                    : 'cursor-not-allowed bg-gray-200 text-gray-600'
+                                }`}
+                            style={{
+                                pointerEvents: (selectedCharacters.length === 3 && statesession) ? 'auto' : 'none'
+                            }}
+                        >
+                            Enviar mis Votos {selectedCharacters.length}/3
+                        </a>
+                        :
+                        <a className='text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2  transition-all cursor-not-allowed bg-gray-200 text-gray-600'>
+                            ¡Inicia sesión para enviar tus votos!  
+                        </a>
+
+                }
             </div>
         </div>
     );
