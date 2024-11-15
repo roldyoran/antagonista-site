@@ -7,5 +7,5 @@
 
 <script>
 	const { signIn } = await import("auth-astro/client")
-	signIn("google")
+	signIn("google", { callbackUrl: "/auth/google/callback" })
 </script>
