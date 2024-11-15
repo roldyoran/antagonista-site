@@ -27,7 +27,7 @@ const session = await getSession(Astro.request);
             Inicio
           </a>
           <a
-            href="/characters"
+            href="/personajes"
             class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-gray-900 hover:text-primary/70 transition-all"
           >
             Personajes
@@ -37,8 +37,8 @@ const session = await getSession(Astro.request);
       <div class="flex items-center ml-3 md:ml-0">
         {
           session ? (
-            <div class="flex gap-2 items-center">
-              <p class="flex gap-2 items-center skew-x-[-20deg] text-[10px] font-semibold bg-primary rounded-sm text-white border-2 border-primary md:text-sm py-1 px-2 md:px-5 md:py-2">
+            <div class="flex gap-3 items-center">
+              <p class="flex gap-2 items-center skew-x-[-20deg] text-[10px] font-semibold bg-primary  text-white border-2 border-primary md:text-sm py-1 px-2 md:px-5 md:py-2">
                 <img src={session.user?.image}  alt="usuario img" class="w-4 h-4 rounded-full skew-x-[+20deg]" />
                 {session.user?.name}
               </p>
