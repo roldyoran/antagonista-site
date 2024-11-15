@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { characters } from '@data/characters';
 import CharacterCard from '@components/CharacterCard';
 
-
 interface SelectedCharacter {
     id: number;
     rank: number;
@@ -15,6 +14,7 @@ interface SessionActiveUser {
 const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCharacters, setSelectedCharacters] = useState<SelectedCharacter[]>([]);
+    const [showOnlyVotes, setShowOnlyVotes] = useState(false); // Estado para el filtro de votos
 
     // Cargar los votos guardados desde localStorage cuando se monta el componente
     useEffect(() => {
@@ -31,9 +31,12 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
         }
     }, [selectedCharacters]);
 
-    const filteredCharacters = characters.filter((character) =>
-        character.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // Filtrar personajes basado en el término de búsqueda y el filtro de votos
+    const filteredCharacters = characters.filter((character) => {
+        const matchesSearch = character.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const isSelected = selectedCharacters.some((c) => c.id === character.id);
+        return matchesSearch && (!showOnlyVotes || isSelected);
+    });
 
     const handleVote = (id: number) => {
         const existingSelection = selectedCharacters.find((character) => character.id === id);
@@ -59,13 +62,13 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
 
     return (
         <div className=''>
-            <div className="flex justify-center min-w-screen">
-                <div className="relative w-full max-w-4xl mb-2">
+            <div className="flex flex-wrap items-center justify-center min-w-screen pb-6 space-x-1">
+                <div className="relative w-full max-w-4xl">
                     <input
                         id="search"
                         type="text"
                         placeholder="Buscar personaje..."
-                        className="md:skew-x-[-20deg] py-2 px-10 border-2 border-primary rounded-sm w-full  mb-10 focus:ring-2 focus:ring-primary focus:outline-none"
+                        className="w-full py-2 px-10 border-2 border-primary rounded-sm mb-4 focus:ring-2 focus:ring-primary focus:outline-none md:skew-x-[-20deg]"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -79,14 +82,25 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="absolute left-3 top-1/2 transform -translate-y-7 text-gray-400 w-5 h-5"
+                        className="absolute left-3 top-3 text-gray-400 w-5 h-5"
                     >
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
                         <path d="M21 21l-6 -6" />
                     </svg>
                 </div>
+                <button
+                    onClick={() => setShowOnlyVotes(!showOnlyVotes)}
+                    className={`md:transform md:-translate-y-2 px-4 py-2 border-2 border-gray-500 rounded transition-all md:skew-x-[-20deg] ${showOnlyVotes
+                            ? 'bg-primary text-white hover:bg-primary/90'
+                            : 'bg-gray-200 text-gray-600 hover:text-white hover:bg-gray-500'
+                        }`}
+                >
+                    {showOnlyVotes ? 'Mostrar todos' : 'Mostrar mis votos'}
+                </button>
             </div>
+
+
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {filteredCharacters.map((character) => {
@@ -108,12 +122,12 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
             <div className="flex justify-center min-w-screen mt-8">
                 {
                     (statesession)
-                        ? 
+                        ?
                         <a
                             href="/personajes"
-                            className={`text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2  transition-all hover:scale-105 ${(selectedCharacters.length === 3 && statesession)
-                                    ? 'hover:bg-primary/80 hover:text-white text-primary border-primary active:scale-100'
-                                    : 'cursor-not-allowed bg-gray-200 text-gray-600'
+                            className={`text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2 transition-all hover:scale-105 ${(selectedCharacters.length === 3 && statesession)
+                                ? 'hover:bg-primary/80 hover:text-white text-primary border-primary active:scale-100'
+                                : 'cursor-not-allowed bg-gray-200 text-gray-600'
                                 }`}
                             style={{
                                 pointerEvents: (selectedCharacters.length === 3 && statesession) ? 'auto' : 'none'
@@ -122,8 +136,8 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                             Enviar mis Votos {selectedCharacters.length}/3
                         </a>
                         :
-                        <a className='text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2  transition-all cursor-not-allowed bg-gray-200 text-gray-600'>
-                            ¡Inicia sesión para enviar tus votos!  
+                        <a className='text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2 transition-all cursor-not-allowed bg-gray-200 text-gray-600'>
+                            ¡Inicia sesión para enviar tus votos!
                         </a>
 
                 }
