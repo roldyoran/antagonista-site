@@ -11,10 +11,6 @@ const client = createClient({
 
 export const addUser = async (userId: string) => {
     // -- Inserta usuarios
-    // INSERT INTO Usuarios (id_usuario) VALUES
-    // ('juanperez_1a2b3c4d'),
-    // ('mariagonzalez_5f6g7h8i'),
-    // ('pedrolopez_9j0k1l2m');
     const sql = `INSERT OR IGNORE INTO Usuarios (id_usuario) VALUES (?)`;
     // convierte el sql y el id a un batch que pueda enviar a la base de datos
     
