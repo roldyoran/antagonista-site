@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { characters } from '@data/characters';
 import CharacterCard from '@components/CharacterCard';
+import SubmitVotesButton from '@components/SubmitVotesButton';
 
 interface SelectedCharacter {
     id: number;
@@ -92,8 +93,8 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                 <button
                     onClick={() => setShowOnlyVotes(!showOnlyVotes)}
                     className={`md:transform md:-translate-y-2 px-4 py-2 border-2 border-gray-500 rounded transition-all md:skew-x-[-20deg] ${showOnlyVotes
-                            ? 'bg-primary text-white hover:bg-primary/90'
-                            : 'bg-gray-200 text-gray-600 hover:text-white hover:bg-gray-500'
+                        ? 'bg-primary text-white hover:bg-primary/90'
+                        : 'bg-gray-200 text-gray-600 hover:text-white hover:bg-gray-500'
                         }`}
                 >
                     {showOnlyVotes ? 'Mostrar todos' : 'Mostrar mis votos'}
@@ -119,29 +120,12 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                 })}
             </div>
 
-            <div className="flex justify-center min-w-screen mt-8">
-                {
-                    (statesession)
-                        ?
-                        <a
-                            href="/personajes"
-                            className={`text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2 transition-all hover:scale-105 ${(selectedCharacters.length === 3 && statesession)
-                                ? 'hover:bg-primary/80 hover:text-white text-primary border-primary active:scale-100'
-                                : 'cursor-not-allowed bg-gray-200 text-gray-600'
-                                }`}
-                            style={{
-                                pointerEvents: (selectedCharacters.length === 3 && statesession) ? 'auto' : 'none'
-                            }}
-                        >
-                            Enviar mis Votos {selectedCharacters.length}/3
-                        </a>
-                        :
-                        <a className='text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2 transition-all cursor-not-allowed bg-gray-200 text-gray-600'>
-                            ¡Inicia sesión para enviar tus votos!
-                        </a>
+            <SubmitVotesButton
+                selectedCharacters={selectedCharacters}
+                statesession={statesession}
+            />
 
-                }
-            </div>
+
         </div>
     );
 };
