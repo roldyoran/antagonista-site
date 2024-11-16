@@ -63,7 +63,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
 
     return (
         <div className=''>
-            <div className="flex flex-wrap items-center justify-center min-w-screen pb-6 space-x-1">
+            <div className="flex flex-wrap items-center justify-center min-w-screen pb-6 space-x-2">
                 <div className="relative w-full max-w-4xl">
                     <input
                         id="search"
@@ -92,9 +92,9 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                 </div>
                 <button
                     onClick={() => setShowOnlyVotes(!showOnlyVotes)}
-                    className={`md:transform md:-translate-y-2 px-4 py-2 border-2 border-gray-500 rounded transition-all md:skew-x-[-20deg] ${showOnlyVotes
-                        ? 'bg-primary text-white hover:bg-primary/90'
-                        : 'bg-gray-200 text-gray-600 hover:text-white hover:bg-gray-500'
+                    className={`md:transform md:-translate-y-2 font-bold px-4 py-2 border-2 rounded-sm uppercase transition-all md:skew-x-[-20deg] ${showOnlyVotes
+                        ? 'bg-gray-600 hover:text-gray-600 text-white hover:bg-gray-300'
+                        : 'bg-primary text-white hover:bg-primary/80 border-primary hover:scale-105 active:scale-100'
                         }`}
                 >
                     {showOnlyVotes ? 'Mostrar todos' : 'Mostrar mis votos'}

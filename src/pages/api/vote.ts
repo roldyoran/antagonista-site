@@ -3,7 +3,7 @@ import { object, string, safeParse, array, number } from "valibot";
 import { type APIRoute } from "astro";
 import { getSession } from "auth-astro/server";
 import { characters } from "@data/characters";
-import { addUserVotes, addUser } from "src/db/client";
+import { addUserVotes, addUser, getUser } from "src/db/client";
 
 
 const VoteSchema = object({
@@ -14,6 +14,7 @@ const VoteSchema = object({
         })
     ),
 });
+
 
 const generateID = (str: string) => {
     return createHash("sha256").update(str).digest("hex");
@@ -32,6 +33,11 @@ export const POST: APIRoute = async ({ request }) => {
         return new Response("Unauthorized", { status: 401 });
     }
 
+    const userId = session.user.id;
+    if (!userId) {
+        return new Response("Unauthorized", { status: 401 });
+    }
+
     const { success, output } = safeParse(VoteSchema, await request.json());
     if (!success) {
         return new Response("Bad Request", { status: 400 });
@@ -46,8 +52,9 @@ export const POST: APIRoute = async ({ request }) => {
         }
     }
     // console.log(votesToSave);
-    const userId = generateID(email);
+    const userId_hash = generateID(userId.toString());
     // console.log(userId);
+    // console.log(userId_hash);
     // fecha en formato dd/mm/aaaa hh:mm:ss
     const voteDate = new Date().toLocaleDateString("es-ES", {
         day: "2-digit",
@@ -66,24 +73,21 @@ export const POST: APIRoute = async ({ request }) => {
 
 
     // LLAMAR A LA BASE DE DATOS
-    // Si el usuario no existe, lo inserta pero si ya existe que continue con la siguiente instruccion y que no mande el error 500
-
-
     try {
-        await addUser(userId);
+        await getUser(userId_hash);
     } catch (error) {
         // console.error(error);
-        return new Response("Error al guardar el usuario", { status: 500 });
+        return new Response("User not Found", { status: 302 });
     }
 
-    
-
     try {
-        await addUserVotes(userId, votesToSave, voteDate);
+        await addUser(userId_hash);
+        await addUserVotes(userId_hash, votesToSave, voteDate);
     } catch (error) {
         // console.error(error);
         return new Response("Error al guardar las votaciones", { status: 500 });
     }
+
 
 
     return new Response("ok", { status: 200 });

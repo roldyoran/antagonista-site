@@ -9,24 +9,27 @@ const client = createClient({
 });
 
 
+export const getUser = async (userId: string) => {
+    const rs = await client.execute({
+        sql: "SELECT COUNT(*) AS user_exists FROM Usuarios WHERE id_usuario = ?",
+        args: [userId],
+    });
+    // console.log("user exists");
+    // console.log(rs.rows[0].user_exists);
+    if (rs.rows[0].user_exists === 1) {
+        throw new Error("User not Found"); // Lanza error si el usuario no existe
+    }
+    return true;
+}
+
 export const addUser = async (userId: string) => {
     // -- Inserta usuarios
     const sql = `INSERT OR IGNORE INTO Usuarios (id_usuario) VALUES (?)`;
     // convierte el sql y el id a un batch que pueda enviar a la base de datos
-    
     const inserts = [{ sql, args: [userId] }];
     // console.log(inserts);
-
-    try {
-        const result = await client.batch(inserts, "write");
-
-        return result;
-    } catch (error) {
-        // Manejo de errores
-        console.error(error);
-        throw error;
-    }
-
+    const result = await client.batch(inserts, "write");
+    return result;
 }
 
 export const addUserVotes = async (userId: string, votes: TypeVotes, date: string) => {
@@ -43,14 +46,3 @@ export const addUserVotes = async (userId: string, votes: TypeVotes, date: strin
     return result;
 };
 
-
-
-
-
-// BORRAR LOS VOTOS DE UN USUARIO PARA ACTUALIZARLOS CON LOS NUEVOS
-// export const cleanUserVotes = async (userId: string) => {
-//     await client.execute(
-//         sql: `DELETE FROM votes WHERE id_usuario = ?`,
-//         args: []
-//     )
-// };

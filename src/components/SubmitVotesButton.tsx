@@ -5,7 +5,7 @@ const RESULT_STATUS = {
     IDLE: 0,
     LOADING: 1,
     SUCCESS: 2,
-    RETRY: 3
+    MSG: 3
 };
 
 interface SelectedCharacter {
@@ -20,6 +20,7 @@ interface SubmitVotesButtonProps {
 
 const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacters, statesession }) => {
     const [status, setStatus] = useState(RESULT_STATUS.IDLE);
+    const [msgerror, setMsgerror] = useState('');
 
     // // Al cargar el componente, comprobamos si VOLVERAVOTAR está en localStorage
     // useEffect(() => {
@@ -40,6 +41,12 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
                 body: JSON.stringify({ votes: selectedCharacters }),
             });
 
+            if (response.status === 302) {
+                setStatus(RESULT_STATUS.MSG);
+                setMsgerror('Solo puedes votar una vez');
+                return; // Evitar continuar si el usuario no existe
+            }
+
             if (!response.ok) {
                 setStatus(RESULT_STATUS.ERROR);
                 return; // Evitar continuar si hay un error
@@ -58,20 +65,20 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
             {statesession ? (
                 <button
                     onClick={handleSubmit}
-                    className={`text-sm uppercase md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2 transition-all duration-300 ${status === RESULT_STATUS.ERROR
-                        ? 'bg-red-400 text-white border-red-700 cursor-not-allowed'
+                    className={`text-sm uppercase md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2 transition-all ${status === RESULT_STATUS.ERROR || status === RESULT_STATUS.MSG
+                        ? 'bg-red-400/90 text-red-950 border-red-700 cursor-not-allowed'
                         : status === RESULT_STATUS.SUCCESS
-                            ? 'bg-green-400 text-green-900 border-green-400 cursor-not-allowed'
-                            : status === RESULT_STATUS.RETRY
-                                ? 'bg-gray-200 text-gray-600 cursor-not-allowed'
-                                : selectedCharacters.length === 3
-                                    ? 'hover:bg-primary/80 hover:text-white text-primary border-primary active:scale-100  hover:scale-105'
-                                    : 'cursor-not-allowed bg-gray-200 text-gray-600'
+                            ? 'bg-green-400 text-green-950 border-green-500 cursor-not-allowed'
+                            : selectedCharacters.length === 3
+                                ? 'hover:bg-primary/80 bg-primary/5 hover:text-white text-primary border-primary active:scale-100  hover:scale-105'
+                                : 'cursor-not-allowed bg-gray-200 text-gray-600'
                         }`}
                     style={{
-                        pointerEvents: status === RESULT_STATUS.RETRY ? 'none' : selectedCharacters.length === 3 ? 'auto' : 'none',
+                        pointerEvents:
+                            status === RESULT_STATUS.LOADING || status === RESULT_STATUS.ERROR || status === RESULT_STATUS.SUCCESS || status === RESULT_STATUS.MSG ? 'none' :
+                                selectedCharacters.length === 3 ? 'auto' : 'none',
                     }}
-                    disabled={status === RESULT_STATUS.LOADING || status === RESULT_STATUS.ERROR || status === RESULT_STATUS.RETRY} // Desactiva el botón también en RETRY
+                    disabled={status === RESULT_STATUS.LOADING || status === RESULT_STATUS.ERROR}
                 >
                     {status === RESULT_STATUS.LOADING
                         ? 'Enviando...'
@@ -79,8 +86,8 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
                             ? '¡Votos Enviados!'
                             : status === RESULT_STATUS.ERROR
                                 ? 'Error al enviar los votos'
-                                : status === RESULT_STATUS.RETRY
-                                    ? 'No puedes votar nuevamente'
+                                : status === RESULT_STATUS.MSG
+                                    ? msgerror
                                     : `Enviar mis Votos ${selectedCharacters.length}/3`}
                 </button>
             ) : (
