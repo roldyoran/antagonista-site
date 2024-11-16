@@ -21,13 +21,13 @@ interface SubmitVotesButtonProps {
 const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacters, statesession }) => {
     const [status, setStatus] = useState(RESULT_STATUS.IDLE);
 
-    // Al cargar el componente, comprobamos si VOLVERAVOTAR está en localStorage
-    useEffect(() => {
-        const volverAVotar = localStorage.getItem('VOLVERAVOTAR');
-        if (volverAVotar === 'false') {
-            setStatus(RESULT_STATUS.RETRY);
-        }
-    }, []);
+    // // Al cargar el componente, comprobamos si VOLVERAVOTAR está en localStorage
+    // useEffect(() => {
+    //     const volverAVotar = localStorage.getItem('VOLVERAVOTAR');
+    //     if (volverAVotar === 'false') {
+    //         setStatus(RESULT_STATUS.RETRY);
+    //     }
+    // }, []);
 
     const handleSubmit = async () => {
         setStatus(RESULT_STATUS.LOADING);
@@ -45,7 +45,7 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
                 return; // Evitar continuar si hay un error
             }
 
-            localStorage.setItem('VOLVERAVOTAR', 'false');
+            // localStorage.setItem('VOLVERAVOTAR', 'false');
             // Al enviar los votos con éxito, setea VOLVERAVOTAR a false en localStorage
             setStatus(RESULT_STATUS.SUCCESS);
         } catch (error) {
