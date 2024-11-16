@@ -49,24 +49,28 @@ const session = await getSession(Astro.request);
                 {session.user?.name}
               </p>
 
-              <Action
-                id="logout"
-                class="text-[10px] md:text-sm py-1 px-2"
-                as="button"
-                aria-label="Iniciar sesión con Google"
-              >
-                Cerrar sesión
-              </Action>
+              <button>
+                <Action
+                  id="logout"
+                  class="text-[10px] md:text-sm py-1 px-2"
+                  as="button"
+                  aria-label="Iniciar sesión con Google"
+                >
+                  Cerrar sesión
+                </Action>
+              </button>
             </div>
           ) : (
-            <Action
-              id="login"
-              class="w-full text-xs md:text-sm py-2 px-3"
-              as="button"
-              aria-label="Iniciar sesión de usuario"
-            >
-              ¡Inicia sesión para participar!
-            </Action>
+            <button>
+              <Action
+                id="login"
+                class="w-full text-xs md:text-sm py-2 px-3"
+                as="button"
+                aria-label="Iniciar sesión de usuario"
+              >
+                ¡Inicia sesión para participar!
+              </Action>
+            </button>
           )
         }
       </div>
