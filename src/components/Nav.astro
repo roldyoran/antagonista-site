@@ -49,28 +49,42 @@ const session = await getSession(Astro.request);
                 {session.user?.name}
               </p>
 
-              <button>
-                <Action
-                  id="logout"
-                  class="text-[10px] md:text-sm py-1 px-2"
-                  as="button"
-                  aria-label="Iniciar sesión con Google"
-                >
-                  Cerrar sesión
-                </Action>
-              </button>
+              <Action
+                id="logout"
+                class="text-[10px] md:text-sm py-1 px-2"
+                as="button"
+                aria-label="Iniciar sesión con Google"
+              >
+                Cerrar sesión
+              </Action>
             </div>
           ) : (
-            <button>
-              <Action
-                id="login"
-                class="w-full text-xs md:text-sm py-2 px-3"
-                as="button"
-                aria-label="Iniciar sesión de usuario"
-              >
-                ¡Inicia sesión para participar!
-              </Action>
-            </button>
+            // <Action
+            //   id="login"
+            //   class="w-full text-xs md:text-sm py-2 px-3"
+            //   as="button"
+            //   aria-label="Iniciar sesión de usuario"
+            // >
+            //   ¡Inicia sesión para participar!
+            // </Action>
+            <SignIn
+              provider="google"
+              class:list={[
+                "inline-block skew-x-[-20deg] cursor-pointer border-2 border-primary",
+                "font-bold uppercase",
+                "md:px-5 md:py-2",
+                "before:absolute before:-inset-0.5 before:origin-right before:scale-x-0 before:bg-primary",
+                "hover:scale-105 hover:text-secondary hover:before:origin-left hover:before:scale-x-100",
+                "aria-disabled:pointer-events-none aria-disabled:border-[#666] aria-disabled:bg-[#666] aria-disabled:text-[#111]",
+                "ease-in motion-safe:transition-[color,transform] motion-safe:before:transition-transform motion-safe:before:duration-300 motion-safe:before:ease-in motion-safe:hover:delay-100 motion-safe:hover:ease-out motion-safe:hover:before:delay-100 motion-safe:hover:before:ease-out",
+                "active:scale-100",
+                "w-full text-xs md:text-sm py-2 px-3",
+              ]}
+            >
+              <span class="inline-block skew-x-[9deg] ">
+                Iniciar sesión con Google
+              </span>
+            </SignIn>
           )
         }
       </div>
