@@ -37,12 +37,12 @@ export const characters: Character[] = [
   },
   {
     id: 7,
-    name: "Camilo El Weon",
+    name: "Camilo",
     image: "camilo.png"
   },
   {
     id: 8,
-    name: "Eros El otro Weon",
+    name: "Eros",
     image: "eros.png"
   },
   {
