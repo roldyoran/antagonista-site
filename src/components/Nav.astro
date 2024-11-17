@@ -2,7 +2,9 @@
 import {SignIn, SignOut} from "auth-astro/components";
 import {getSession} from "auth-astro/server";
 import Action from "@components/Action.astro";
-import AntagonistaLogo from "src/icons/AntagonistaLogo.astro";
+import AntagonistaLogo from "@icons/AntagonistaLogo.astro";
+import Insta from "@icons/Insta.astro";
+import MangaPlus from "@icons/MangaPlus.astro";
 
 const session = await getSession(Astro.request);
 
@@ -24,7 +26,7 @@ const session = await getSession(Astro.request);
             <AntagonistaLogo color="rgb(0, 0, 0)" width={96} height={68} />
           </a>
         </div>
-        <div class="hidden sm:ml-8 sm:flex sm:space-x-8">
+        <div class="hidden sm:ml-8 sm:flex sm:space-x-7">
           <a
             href="/"
             class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-primary/70 transition-all"
@@ -36,6 +38,20 @@ const session = await getSession(Astro.request);
             class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-gray-900 hover:text-primary/70 transition-all"
           >
             Personajes
+          </a>
+          <a
+            href="https://www.instagram.com/saikomic"
+            target="_blank"
+            class="inline-flex font-semibold items-center px-1 pt-1 transition-all"
+          >
+            <Insta />
+          </a>
+          <a
+            href="https://medibang.com/mpc/titles/6k2208160633320990004683825/"
+            target="_blank"
+            class="inline-flex font-semibold items-center px-1 pt-1 transition-all"
+          >
+            <MangaPlus />
           </a>
         </div>
       </div>
@@ -77,7 +93,7 @@ const session = await getSession(Astro.request);
                 "font-bold uppercase",
                 "md:px-5 md:py-2",
                 "before:absolute before:-inset-0.5 before:origin-right before:scale-x-0 before:bg-primary",
-                "hover:scale-105 hover:text-secondary hover:before:origin-left hover:before:scale-x-100",
+                "hover:scale-105 hover:text-white hover:before:origin-left hover:before:scale-x-100",
                 "aria-disabled:pointer-events-none aria-disabled:border-[#666] aria-disabled:bg-[#666] aria-disabled:text-[#111]",
                 "ease-in motion-safe:transition-[color,transform] motion-safe:before:transition-transform motion-safe:before:duration-300 motion-safe:before:ease-in motion-safe:hover:delay-100 motion-safe:hover:ease-out motion-safe:hover:before:delay-100 motion-safe:hover:before:ease-out",
                 "active:scale-100",
