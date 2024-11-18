@@ -64,16 +64,16 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
     };
 
     return (
-        <div className="flex justify-center min-w-screen mt-14">
+        <div className="flex justify-center min-w-screen mt-16 mb-4">
             {statesession ? (
                 <button
                     onClick={handleSubmit}
-                    className={` text-xl uppercase md:text-3xl skew-x-[-20deg] font-bold px-8 py-3 border-2 transition-all motion-safe:hover:ease-out ${status === RESULT_STATUS.ERROR || status === RESULT_STATUS.MSG
+                    className={` text-xl uppercase md:text-3xl skew-x-[-20deg] font-bold px-9 py-3 border-2 transition-all motion-safe:hover:ease-out ${status === RESULT_STATUS.ERROR || status === RESULT_STATUS.MSG
                         ? 'bg-red-400/90 text-red-950 border-red-700 cursor-not-allowed'
                         : status === RESULT_STATUS.SUCCESS
                             ? 'bg-green-400 text-green-950 border-green-500 cursor-not-allowed'
                             : selectedCharacters.length === 3
-                                ? 'hover:bg-primary bg-white/70 hover:text-white text-primary border-primary active:scale-100  hover:scale-105'
+                                ? 'hover:bg-primary bg-white/80 hover:text-white shadow-lg shadow-primary border-primary active:scale-100  hover:scale-105'
                                 : 'cursor-not-allowed bg-secondary/70 border-secondary text-gray-50'
                         }`}
                     style={{
@@ -94,7 +94,7 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
                                     : `Enviar mis Votos ${selectedCharacters.length}/3`}
                 </button>
             ) : (
-                <p className="text-sm md:text-xl skew-x-[-20deg] font-bold px-6 py-2 border-2 transition-all cursor-not-allowed bg-gray-200 text-gray-600">
+                <p className="text-lg text-center text-wrap md:text-3xl skew-x-[-20deg] font-bold px-6 py-2 border-2 transition-all cursor-not-allowed bg-gray-200 text-gray-600">
                     ¡Inicia sesión para enviar tus votos!
                 </p>
             )}

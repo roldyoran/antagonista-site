@@ -19,32 +19,20 @@ const statesession = session ? true : false;
         </p>
         <div class="md:max-w-md mx-auto mt-6 max-w-72">
           <p
-            class="text-sm md:text-lg py-2 px-12 md:px-2 font-bold border-2 bg-violet-50/80 border-primary text-primary rounded-lg"
+            class="text-sm md:text-lg py-2 px-12 md:px-2 font-bold border-2 bg-purple-100/50 border-purple-400 text-primary rounded-lg"
           >
             Vota por tus 3 personajes favoritos
           </p>
         </div>
       </div>
       
-      <!-- {
-        session ? (
-            <CharactersPage client:load />
-        ) : (
-          <div class="text-center">
-            <p class="text-sm text-gray-600 mb-2">
-              ¡Inicia sesión para votar!
-            </p>
-          </div>
-        )
-      } -->
-
       <CharactersPage statesession={statesession} client:load />
 
       <!-- El inicio de sesion se puede cambiar a Gmail de Google -->
       <!-- <p class=" text-center font-bold mt-8 bg-red-400/50 border border-red-600 py-3 px-5 text-red-950">Nota:  <br> (Esto es un Prototipo)</p> -->
        <!-- crea un footer con @2424 como texto -->
       </div>
-      <footer class="text-center text-gray-50 py-3 bg-primary">
+      <footer class="text-center text-gray-50 py-2 text-sm bg-primary">
         © 2024 Copyright: antagonista.site
       </footer>
     <a

@@ -94,7 +94,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                     onClick={() => setShowOnlyVotes(!showOnlyVotes)}
                     className={`md:transform md:-translate-y-2 font-bold px-4 py-2 border-2 rounded-sm uppercase transition-all md:skew-x-[-20deg] ${showOnlyVotes
                         ? 'bg-secondary text-white hover:bg-secondary/80 hover:scale-105 active:scale-100'
-                        : 'bg-white/70 text-primary hover:bg-primary hover:text-white border-primary hover:scale-105 active:scale-100'
+                        : 'bg-white/70  hover:bg-primary hover:text-white border-primary hover:scale-105 active:scale-100'
                         }`}
                 >
                     {showOnlyVotes ? 'Mostrar todos' : 'Mostrar mis votos'}
