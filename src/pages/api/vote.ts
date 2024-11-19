@@ -45,12 +45,18 @@ export const POST: APIRoute = async ({ request }) => {
 
     const votesToSave = output.votes;
 
+    if (votesToSave.length !== 3) {
+        return new Response("Bad Request, Votes length must be 3", { status: 400 });
+    }
+    
     for (const vote of votesToSave) {
         const character = characters.find((c) => c.id === vote.id);
         if (!character) {
             return new Response("Bad Request, Id not found", { status: 400 });
         }
     }
+
+
     // console.log(votesToSave);
     const userId_hash = generateID(userId.toString());
     // console.log(userId);
