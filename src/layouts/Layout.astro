@@ -12,7 +12,7 @@ const {title, css} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Votaciones Antagonista: elige y vota por tus personajes favoritos. Inicia sesión con tu cuenta de Google, selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
@@ -69,6 +69,11 @@ const {title, css} = Astro.props;
     background: rgba(0, 0, 0, 0.2);
     animation: animate 25s linear infinite;
     bottom: -150px;
+  }
+
+  /* Modificar el color de los círculos en modo oscuro */
+  .dark .circles li {
+    background: rgba(51, 51, 51, 0.151); /* Círculos blancos en modo oscuro */
   }
 
   .circles li:nth-child(1) {

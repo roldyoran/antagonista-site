@@ -12,7 +12,9 @@ interface Props {
 const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onVote }) => {
     return (
         <div
-            className={`overflow-hidden border text-center rounded-lg shadow-md transition-all duration-300 hover:shadow-xl  ${isSelected ? 'bg-primary text-white shadow-md shadow-primary' : 'bg-white border-gray-100'
+            className={`overflow-hidden border border-gray-300 text-center rounded-lg shadow-md transition-all duration-300 hover:shadow-xl  ${isSelected 
+                ? 'bg-primary text-white shadow-md shadow-primary dark:shadow-xl dark:shadow-purple-800 dark:border-none dark:bg-purple-800' 
+                : 'bg-white border-gray-100'
                 }`}
             id={`CardCharacter${id}`}
             onClick={onVote}
@@ -24,7 +26,7 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
                     width={200}
                     height={200}
                     className={`w-full h-48 object-cover ${isSelected ? '' : 'grayscale'}`}
-                    // className='w-full h-48 object-cover grayscale'
+                // className='w-full h-48 object-cover grayscale'
                 />
                 <div className="p-4">
                     <h3 className="font-semibold text-lg">{name}</h3>

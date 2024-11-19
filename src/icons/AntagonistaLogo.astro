@@ -1,11 +1,10 @@
 ---
 interface Props {
-  color: string;
   width: number;
   height: number;
 }
 
-const {color, width, height} = Astro.props;
+const {width, height} = Astro.props;
 ---
 
 <?xml version="1.0" standalone="no"?>
@@ -16,7 +15,7 @@ const {color, width, height} = Astro.props;
  preserveAspectRatio="xMidYMid meet">
 
 <g transform="translate(0.000000,257.000000) scale(0.100000,-0.100000)"
-fill={color} stroke="none">
+ class="fill-black dark:fill-white" stroke="none">
 <path d="M4060 2550 c8 -5 20 -10 25 -10 6 0 3 5 -5 10 -8 5 -19 10 -25 10 -5
 0 -3 -5 5 -10z"/>
 <path d="M4135 2526 c22 -8 58 -14 80 -14 39 0 38 1 -10 8 -27 4 -63 10 -80

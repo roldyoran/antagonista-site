@@ -2,20 +2,24 @@
 import {SignIn, SignOut} from "auth-astro/components";
 import {getSession} from "auth-astro/server";
 import Action from "@components/Action.astro";
+import ThemeToggle from "./ThemeToggle";
 import AntagonistaLogo from "@icons/AntagonistaLogo.astro";
 import Insta from "@icons/Insta.astro";
 import MangaPlus from "@icons/MangaPlus.astro";
 
 const session = await getSession(Astro.request);
 
-// if (session) {
-//   console.log(session?.user?.id);
-// }
+let name = '';
+if (session) {
+  name = session.user?.name.split(' ')[0];
+}
+
 
 ---
 
 <nav
-  class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-md z-50"
+  class="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-md shadow-md z-50 
+ dark:bg-stone-950"
 >
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
@@ -23,19 +27,23 @@ const session = await getSession(Astro.request);
         <div class="flex-shrink-0 flex items-center">
           <a href="/" class="">
             <!-- Antagonista  -->
-            <AntagonistaLogo color="rgb(0, 0, 0)" width={96} height={68} />
+            <AntagonistaLogo width={96} height={64} />
           </a>
         </div>
         <div class="hidden sm:ml-8 sm:flex sm:space-x-7">
           <a
             href="/"
-            class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-primary/70 transition-all"
+            class="inline-flex font-semibold items-center px-1 pt-1 transition-all
+              text-gray-900 hover:text-primary/70
+              dark:text-gray-100 dark:hover:text-purple-400"
           >
             Inicio
           </a>
           <a
             href="/personajes"
-            class="inline-flex font-semibold items-center px-1 pt-1 text-gray-900 hover:text-gray-900 hover:text-primary/70 transition-all"
+            class="inline-flex font-semibold items-center px-1 pt-1 transition-all
+              text-gray-900 hover:text-primary/70
+              dark:text-gray-100 dark:hover:text-purple-400"
           >
             Personajes
           </a>
@@ -56,16 +64,21 @@ const session = await getSession(Astro.request);
         </div>
       </div>
       <div class="flex items-center ml-3 md:ml-0">
+        <ThemeToggle client:load />
         {
           session ? (
             <div class="flex gap-3 items-center">
-              <p class="flex gap-2 items-center skew-x-[-20deg] text-[10px] font-semibold bg-primary  text-white border-2 border-primary md:text-sm py-1 px-2 md:px-5 md:py-2">
+              <p
+                class="flex gap-2 items-center skew-x-[-20deg] text-[10px] font-semibold md:text-sm py-1 px-2 md:px-5 md:py-2 
+               bg-primary  text-white border-2 border-primary 
+               dark:shadow-md dark:shadow-purple-500"
+              >
                 <img
                   src={session.user?.image}
                   alt="usuario img"
                   class="w-4 h-4 rounded-full skew-x-[+20deg]"
                 />
-                {session.user?.name}
+                {name}
               </p>
 
               <Action
@@ -74,18 +87,11 @@ const session = await getSession(Astro.request);
                 as="button"
                 aria-label="Iniciar sesión con Google"
               >
-                Cerrar sesión
+                <span class="dark:absolute dark:inset-0 dark:bg-purple-500 dark:blur-lg dark:opacity-30 dark:rounded-lg" />
+                <span class="dark:relative">Cerrar Sesión</span>
               </Action>
             </div>
           ) : (
-            // <Action
-            //   id="login"
-            //   class="w-full text-xs md:text-sm py-2 px-3"
-            //   as="button"
-            //   aria-label="Iniciar sesión de usuario"
-            // >
-            //   ¡Inicia sesión para participar!
-            // </Action>
             <SignIn
               provider="google"
               class:list={[
@@ -98,10 +104,12 @@ const session = await getSession(Astro.request);
                 "ease-in motion-safe:transition-[color,transform] motion-safe:before:transition-transform motion-safe:before:duration-300 motion-safe:before:ease-in motion-safe:hover:delay-100 motion-safe:hover:ease-out motion-safe:hover:before:delay-100 motion-safe:hover:before:ease-out",
                 "active:scale-100",
                 "w-full text-xs md:text-sm py-2 px-3",
+                "dark:text-white dark:border-white/8 dark:hover:text-white dark:shadow-md dark:shadow-purple-500",
               ]}
             >
               <span class="inline-block skew-x-[9deg] ">
-                Iniciar sesión con Google
+                <span class="dark:absolute dark:inset-0 dark:bg-purple-500 dark:blur-lg dark:opacity-30 dark:rounded-lg" />
+                <span class="dark:relative">Iniciar sesión con Google</span>
               </span>
             </SignIn>
           )

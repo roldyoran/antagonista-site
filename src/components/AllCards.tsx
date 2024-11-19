@@ -62,14 +62,15 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
     };
 
     return (
-        <div className=''>
+        <>
             <div className="flex flex-wrap items-center justify-center min-w-screen pb-6 space-x-2">
                 <div className="relative w-full max-w-4xl">
                     <input
                         id="search"
                         type="text"
                         placeholder="Buscar personaje..."
-                        className="w-full py-2 px-10 border-2 border-primary rounded-sm mb-4 focus:ring-2 focus:ring-primary focus:outline-none md:skew-x-[-20deg]"
+                        className="w-full py-2 px-10 border-2 border-primary rounded-sm mb-4 focus:ring-2 focus:ring-primary focus:outline-none md:skew-x-[-20deg] 
+                        dark:bg-transparent dark:text-white dark:border-purple-600 dark:focus:shadow-lg dark:focus:shadow-purple-500"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
@@ -92,12 +93,27 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                 </div>
                 <button
                     onClick={() => setShowOnlyVotes(!showOnlyVotes)}
-                    className={`md:transform md:-translate-y-2 font-bold px-4 py-2 border-2 rounded-sm uppercase transition-all md:skew-x-[-20deg] ${showOnlyVotes
-                        ? 'bg-secondary text-white hover:bg-secondary/80 hover:scale-105 active:scale-100'
-                        : 'bg-white/70  hover:bg-primary hover:text-white border-primary hover:scale-105 active:scale-100'
+                    className={`md:transform md:-translate-y-2 font-bold px-4 py-2 border-2 rounded-sm uppercase transition-all md:skew-x-[-20deg] dark:relative ${showOnlyVotes
+                        ? 'bg-secondary text-white hover:bg-secondary/80 hover:scale-105 active:scale-100  dark:text-white dark:bg-transparent dark:border-cyan-600 dark:hover:shadow-lg dark:hover:shadow-cyan-600'
+                        : 'bg-white/70  hover:bg-primary hover:text-white border-primary hover:scale-105 active:scale-100  dark:text-white dark:bg-transparent dark:border-purple-600 dark:hover:shadow-lg dark:hover:shadow-purple-600'
                         }`}
                 >
-                    {showOnlyVotes ? 'Mostrar todos' : 'Mostrar mis votos'}
+                    {showOnlyVotes ?
+
+                        <>
+                            <span
+                                className="dark:absolute dark:inset-0 dark:bg-cyan-500 dark:blur-lg dark:opacity-30 dark:rounded-lg"
+                            ></span>
+                            <span className="dark:relative">Mostrar Todos</span>
+                        </>
+                        :
+                        <>
+                            <span
+                                className="dark:absolute dark:inset-0 dark:bg-purple-500 dark:blur-lg dark:opacity-30 dark:rounded-lg"
+                            ></span>
+                            <span className="dark:relative">Mostrar mis votos</span>
+                        </>
+                    }
                 </button>
             </div>
 
@@ -126,7 +142,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
             />
 
 
-        </div>
+        </ >
     );
 };
 

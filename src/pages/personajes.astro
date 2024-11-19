@@ -7,34 +7,43 @@ const session = await getSession(Astro.request);
 const statesession = session ? true : false;
 ---
 
-<Layout title="Personajes | Sistema de Votacion Antagonista" css="bg-transparent">
+<Layout
+  title="Personajes | Sistema de Votacion Antagonista"
+  css="bg-transparent dark:bg-zinc-950"
+>
   <main id="top">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">
+        <h1
+          class="text-4xl font-bold text-gray-900 mb-4
+        dark:text-white"
+        >
           Encuesta de Popularidad
         </h1>
-        <p class="text-lg text-gray-600 mb-2">
+        <p class="text-lg text-gray-600 mb-2
+         dark:text-gray-400">
           ¡Vota por tus personajes favoritos y ayúdalos a subir al top!
         </p>
-        <div class="md:max-w-md mx-auto mt-6 max-w-72">
-          <p
-            class="text-sm md:text-lg py-2 px-12 md:px-2 font-bold border-2 bg-purple-100/50 border-purple-400 text-primary rounded-lg"
-          >
-            Vota por tus 3 personajes favoritos
-          </p>
+        <div
+          class="md:max-w-md mx-auto mt-6 max-w-72 border-2 border-purple-500 rounded-lg py-3 px-6 text-primary font-bold tracking-wide bg-purple-200/10
+        dark:relative dark:text-purple-100 dark:bg-transparent dark:border-purple-600 dark:shadow-lg dark:shadow-purple-600 dark:border-2 dark:rounded-lg"
+        >
+          <span
+            class="dark:absolute dark:inset-0 dark:bg-purple-500 dark:blur-xl dark:opacity-30 dark:rounded-lg"
+          ></span>
+          <span class="dark:relative">Vota por tus 3 personajes favoritos</span>
         </div>
       </div>
-      
+
       <CharactersPage statesession={statesession} client:load />
 
       <!-- El inicio de sesion se puede cambiar a Gmail de Google -->
       <!-- <p class=" text-center font-bold mt-8 bg-red-400/50 border border-red-600 py-3 px-5 text-red-950">Nota:  <br> (Esto es un Prototipo)</p> -->
-       <!-- crea un footer con @2424 como texto -->
-      </div>
-      <footer class="text-center text-gray-50 py-2 text-sm bg-primary">
-        © 2024 Copyright: antagonista.site
-      </footer>
+      <!-- crea un footer con @2424 como texto -->
+    </div>
+    <footer class="text-center text-gray-50 py-2 text-sm bg-primary">
+      © 2024 Copyright: antagonista.site
+    </footer>
     <a
       href="#top"
       class="fixed text-white flex items-center justify-center font-bold bottom-0 right-0 mb-2 mr-2 w-11 h-11 z-10 bg-zinc-800 rounded-full hover:bg-primary hover:border-violet-200 hover:border-2"
