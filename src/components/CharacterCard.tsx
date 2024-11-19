@@ -14,7 +14,7 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
         <div
             className={`overflow-hidden border border-gray-300 text-center rounded-lg shadow-md transition-all duration-300 hover:shadow-xl  ${isSelected 
                 ? 'bg-primary text-white shadow-md shadow-primary dark:shadow-xl dark:shadow-purple-800 dark:border-none dark:bg-purple-800' 
-                : 'bg-white border-gray-100'
+                : 'bg-white border-gray-100 dark:bg-neutral-900 dark:border-zinc-700 dark:text-white'
                 }`}
             id={`CardCharacter${id}`}
             onClick={onVote}
@@ -35,7 +35,7 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
                             #{rank}
                         </span>
                     )}
-                    <button className={`transition-all font-bold  mt-2 py-1.5 w-full border-2 rounded-md active:scale-90 uppercase text-sm ${isSelected ? 'bg-white text-primary hover:bg-white hover:text-primary' : 'text-primary border-primary hover:bg-primary/80 hover:text-white'
+                    <button className={`transition-all font-bold  mt-2 py-1.5 w-full border-2 rounded-md active:scale-90 uppercase text-sm ${isSelected ? 'bg-white text-primary hover:bg-white hover:text-primary' : 'text-primary border-primary hover:bg-primary/80 hover:text-white dark:text-purple-400 dark:border-purple-800 dark:hover:bg-purple-400 dark:hover:text-white'
                         }   `}>
                         {
                             isSelected ? 'Votado' : 'Votar'
