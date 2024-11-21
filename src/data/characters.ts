@@ -8,51 +8,51 @@ export const characters: Character[] = [
   {
     id: 1,
     name: "Tago",
-    image: "tago.png"
+    image: "tago.webp"
   },
   {
     id: 2,
     name: "Tania",
-    image: "tania.png"
+    image: "tania.webp"
   },
   {
     id: 3,
     name: "Leji",
-    image: "leji.png"
+    image: "leji.webp"
   },
   {
     id: 4,
     name: "Yang",
-    image: "yang.png"
+    image: "yang.webp"
   },
   {
     id: 5,
     name: "Panzer",
-    image: "panzer.png"
+    image: "panzer.webp"
   },
   {
     id: 6,
     name: "One",
-    image: "one.png"
+    image: "one.webp"
   },
   {
     id: 7,
     name: "Camilo",
-    image: "camilo.png"
+    image: "camilo.webp"
   },
   {
     id: 8,
     name: "Eros",
-    image: "eros.png"
+    image: "eros.webp"
   },
   {
     id: 9,
     name: "Bruja",
-    image: "bruja.png"
+    image: "bruja.webp"
   },
   {
     id: 10,
     name: "DJ",
-    image: "dj.png"
+    image: "dj.webp"
   }
 ];
