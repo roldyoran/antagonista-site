@@ -119,7 +119,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
 
 
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                 {filteredCharacters.map((character) => {
                     const selection = selectedCharacters.find((c) => c.id === character.id);
                     return (
@@ -134,7 +134,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                         />
                     );
                 })}
-            </div>
+            </ul>
 
             <SubmitVotesButton
                 selectedCharacters={selectedCharacters}
