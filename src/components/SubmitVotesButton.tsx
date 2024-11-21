@@ -24,14 +24,6 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
     const [status, setStatus] = useState(RESULT_STATUS.IDLE);
     const [msgerror, setMsgerror] = useState('');
 
-    // // Al cargar el componente, comprobamos si VOLVERAVOTAR está en localStorage
-    // useEffect(() => {
-    //     const volverAVotar = localStorage.getItem('VOLVERAVOTAR');
-    //     if (volverAVotar === 'false') {
-    //         setStatus(RESULT_STATUS.RETRY);
-    //     }
-    // }, []);
-
     const handleSubmit = async () => {
         setStatus(RESULT_STATUS.LOADING);
         try {
@@ -54,8 +46,6 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
                 return; // Evitar continuar si hay un error
             }
 
-            // localStorage.setItem('VOLVERAVOTAR', 'false');
-            // Al enviar los votos con éxito, setea VOLVERAVOTAR a false en localStorage
             setStatus(RESULT_STATUS.SUCCESS);
             confetti();
         } catch (error) {
@@ -92,8 +82,6 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
                                 : status === RESULT_STATUS.MSG
                                     ? msgerror
                                     :
-
-                                    // `Enviar mis Votos ${selectedCharacters.length}/3`
                                     <>
                                         <span
                                             className="dark:absolute dark:inset-0 dark:bg-purple-600 dark:blur-lg dark:opacity-30 dark:rounded-lg"
