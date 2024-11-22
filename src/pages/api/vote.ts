@@ -3,7 +3,7 @@ import { object, string, safeParse, array, number } from "valibot";
 import { type APIRoute } from "astro";
 import { getSession } from "auth-astro/server";
 import { characters } from "@data/characters";
-import { addUserVotes, addUser, getUser } from "src/db/client";
+import { getUser, addUserWithVotes } from "src/db/client";
 
 
 const VoteSchema = object({
@@ -87,8 +87,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     try {
-        await addUser(userId_hash);
-        await addUserVotes(userId_hash, votesToSave, voteDate);
+        await addUserWithVotes(userId_hash, votesToSave, voteDate);
     } catch (error) {
         // console.error(error);
         return new Response("Error al guardar las votaciones", { status: 500 });

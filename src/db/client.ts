@@ -22,27 +22,25 @@ export const getUser = async (userId: string) => {
     return true;
 }
 
-export const addUser = async (userId: string) => {
-    // -- Inserta usuarios
-    const sql = `INSERT OR IGNORE INTO Usuarios (id_usuario) VALUES (?)`;
-    // convierte el sql y el id a un batch que pueda enviar a la base de datos
-    const inserts = [{ sql, args: [userId] }];
-    // console.log(inserts);
-    const result = await client.batch(inserts, "write");
-    return result;
-}
+export const addUserWithVotes = async (userId: string, votes: TypeVotes, date: string) => {
+    // Prepara las instrucciones SQL para la transacción
+    const sqlStatements = [
+        {
+            sql: "INSERT OR IGNORE INTO Usuarios (id_usuario) VALUES (?)",
+            args: [userId],
+        },
+        ...votes.map((vote) => ({
+            sql: "INSERT INTO Votos (id_usuario, id_personaje, posicion, fecha) VALUES (?, ?, ?, ?)",
+            args: [userId, vote.id, vote.rank, date],
+        })),
+    ];
 
-export const addUserVotes = async (userId: string, votes: TypeVotes, date: string) => {
-
-    const sql = `INSERT INTO Votos (id_usuario, id_personaje, posicion, fecha) VALUES (?, ?, ?, ?)`;
-    // el argumento de cada unos de los votos es un array de objetos con id y rank
-    const args = votes.map((vote) => [userId, vote.id, vote.rank, date]);
-
-    // las insersiones por cada argumento con el formato: [ { sql: "INSERT INTO votes (id_usuario, id_personaje, rank, fecha) VALUES (?, ?, ?, ?)", args: [userId, vote.id, vote.rank, date] }]
-    const inserts = args.map((arg) => ({ sql, args: arg }));
-    // console.log(inserts);
-
-    const result = await client.batch(inserts, "write");
-    return result;
+    try {
+        // Ejecuta las consultas dentro de una transacción
+        const result = await client.batch(sqlStatements, "write");
+        return { success: true, message: "User and votes added successfully", result };
+    } catch (error) {
+        console.error("Transaction failed:", error);
+        throw new Error("Failed to add user and votes");
+    }
 };
-
