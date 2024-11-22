@@ -119,8 +119,9 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
 
 
 
-            <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                {filteredCharacters.map((character) => {
+            <ul
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                {filteredCharacters.map((character, index) => {
                     const selection = selectedCharacters.find((c) => c.id === character.id);
                     return (
                         <CharacterCard
@@ -131,6 +132,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                             isSelected={!!selection}
                             rank={selection?.rank}
                             onVote={() => handleVote(character.id)}
+                            delay={index * 0.02}
                         />
                     );
                 })}

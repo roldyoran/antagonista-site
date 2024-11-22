@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'motion/react';
 
 interface Props {
     id: number;
@@ -7,13 +8,20 @@ interface Props {
     isSelected: boolean;
     rank?: number;
     onVote: () => void;
+    delay: number;
 }
 
-const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onVote }) => {
+const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onVote, delay }) => {
     return (
-        <li
-            className={`overflow-hidden border border-gray-300 text-center rounded-lg shadow-md transition-all duration-300 hover:shadow-xl  ${isSelected 
-                ? 'bg-primary text-white shadow-md shadow-primary dark:shadow-xl dark:shadow-purple-800 dark:border-none dark:bg-purple-800' 
+        <motion.li
+            initial={{ opacity: 0, y: 75 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: delay, duration: 0.2, ease: 'easeInOut' }}
+            viewport={{ once: true }}
+
+
+            className={`overflow-hidden border border-gray-300 text-center rounded-lg shadow-md transition-all duration-300 hover:shadow-xl  ${isSelected
+                ? 'bg-primary text-white shadow-md shadow-primary dark:shadow-xl dark:shadow-purple-800 dark:border-none dark:bg-purple-800'
                 : 'bg-white border-gray-100 dark:bg-neutral-900 dark:border-zinc-700 dark:text-white'
                 }`}
             id={`CardCharacter${id}`}
@@ -43,7 +51,7 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
                     </button>
                 </div>
             </div>
-        </li>
+        </motion.li>
     );
 };
 
