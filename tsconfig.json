@@ -20,6 +20,9 @@
       ],
       "@icons/*": [
         "src/icons/*"
+      ],
+      "@db/*": [
+        "src/db/*"
       ]
     },
     "jsx": "react-jsx"
