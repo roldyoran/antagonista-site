@@ -15,10 +15,18 @@ const {title, css} = Astro.props;
 <html lang="es" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Votaciones Antagonista: elige y vota por tus personajes favoritos. Inicia sesión con tu cuenta de Google, selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
-    <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/antagonista_logo.svg" />
+
+    <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+
+    <meta name="description" content="Votaciones Antagonista: elige y vota por tus personajes favoritos. Inicia sesión con tu cuenta de Google, selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
+    <meta name="autor" content="Edgar Alvarez (roldyoran)" />
+     
+    <meta property="og:title" content="Votaciones Antagonista" />
+    <meta property="og:description" content="Votaciones Antagonista: elige y vota por tus personajes favoritos. Inicia sesión con tu cuenta de Google, selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
+    <meta property="og:image" content="https://antagonista.site/tago.webp" />
+
     <title>{title}</title>
     <ViewTransitions />
   </head>
