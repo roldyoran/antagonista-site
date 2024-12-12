@@ -16,27 +16,27 @@ if (session) {
   name = session.user?.name.split(" ")[0];
 }
 ---
-<nav class="dark:text-white dark:bg-neutral-950/80 bg-neutral-50/80 px-16 py-1capitalize border-b-2 border-gray-100/10 fixed top-0 left-0 right-0 z-50 backdrop-blur text-sm md:text-md lg:text-base">
+<nav class="dark:text-white dark:bg-neutral-950/80 bg-neutral-50/80 md:px-16 px-4 md:py-1 uppercase border-b-2 border-gray-100/10 fixed top-0 left-0 right-0 z-50 backdrop-blur text-sm md:text-md lg:text-base">
   <ul class="flex items-center gap-5 font-bold">
-      <li class="font-bold mr-6"><AntagonistaLogo width={96} height={64} /></li>
-      <li class="hidden md:block"><a href="/" title="Inicio">Inicio</a></li>
-      <li class="hidden md:block"><a href="/personajes" title="Personajes">Personajes</a></li>
-      <li class="hidden md:block"><a  href="https://www.instagram.com/saikomic" title="Instagram" target="_blank"> <Insta /></a></li>
-      <li class="hidden md:block"><a  href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" title="Mangaplus" target="_blank"><MangaPlus /></a></li>
+      <li class="font-bold mr-1 md:mr-6"><AntagonistaLogo width={96} height={64} /></li>
+      <li class="hidden lg:block"><a href="/" title="Inicio">Inicio</a></li>
+      <li class="hidden lg:block"><a href="/personajes" title="Personajes">Personajes</a></li>
+      <li class="hidden lg:block"><a  href="https://www.instagram.com/saikomic" title="Instagram" target="_blank"> <Insta /></a></li>
+      <li class="hidden lg:block"><a  href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" title="Mangaplus" target="_blank"><MangaPlus /></a></li>
       <li class="m-0 p-0 translate-y-1" title="Cambiar Tema"><ThemeToggle client:load /></li>
       {
           session
               ? <li class="flex items-center ml-auto space-x-5">
                       <Avatar src={session.user?.image} name={name} />
-                      <SignOut class:list={"hover:scale-110 cursor-pointer transition-all border-2 px-5 py-0.5 -skew-x-12 hover:text-white hover:bg-purple-800 border-purple-800"} >
-                          <span class="font-bold">Cerrar Sesión</span>
+                      <SignOut class:list={"hover:scale-110 cursor-pointer transition-all border-2 px-3 md:px-5 py-2 md:py-1 -skew-x-12 hover:text-white hover:bg-purple-800 border-purple-800"} >
+                          <span class="text-xs md:text-base font-bold uppercase">Cerrar Sesión</span>
                       </SignOut>
                   
               </li>
               : <li class="ml-auto cursor-pointer">
-                      <SignIn provider="google" class="inline-flex items-center gap-2 border-2 px-5 py-0.5 -skew-x-12 hover:text-white hover:bg-purple-800 border-purple-800 hover:scale-110  transition-all" >
+                      <SignIn provider="google" class="inline-flex items-center gap-2 border-2 px-3 md:px-5 py-2 md:py-1 -skew-x-12 hover:text-white hover:bg-purple-800 border-purple-800 hover:scale-110  transition-all" >
                           <Google />
-                          <span class="font-bold">Iniciar Sesión</span>
+                          <span class="text-xs md:text-base font-bold uppercase">Iniciar Sesión</span>
                       </SignIn>
               </li>
       }
