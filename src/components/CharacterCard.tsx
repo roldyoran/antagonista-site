@@ -14,7 +14,7 @@ interface Props {
 const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onVote, delay }) => {
     return (
         <motion.li
-            initial={{ opacity: 0, y: 75 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: delay, duration: 0.2, ease: 'easeInOut' }}
             viewport={{ once: true }}
