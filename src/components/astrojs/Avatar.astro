@@ -4,7 +4,7 @@ const {src, name} = Astro.props;
 
 ---
 
-<div class="flex items-center gap-3 text-sm bg-purple-800 text-white px-2 rounded-xl py-1">
+<div class="flex items-center gap-3 text-sm bg-purple-800 text-white px-2 md:px-4 rounded-xl py-1">
     <!-- <img src={src} alt="avatar" class="w-6 h-6 rounded-full" /> -->
      <Image src={src} alt="avatar" width="24" height="24" class="rounded-full" />
     <span class="hidden md:block text-xs font-bold">{name}</span>

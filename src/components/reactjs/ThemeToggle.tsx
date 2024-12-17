@@ -28,6 +28,8 @@ export default function ThemeToggle() {
 
   return (
     <button
+      type='button'
+      aria-label="Cambiar Tema"
       onClick={toggleTheme}
     >
       {isDarkMode ? (
