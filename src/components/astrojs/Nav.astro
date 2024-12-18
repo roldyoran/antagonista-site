@@ -23,8 +23,8 @@ if (session) {
       <li class="font-bold mr-1 md:mr-6"><a href="/" title="Inicio"><AntagonistaLogo width={96} height={64} /></a></li>
       <li class="hidden lg:block"><a href="/" title="Inicio">Inicio</a></li>
       <li class="hidden lg:block"><a href="/personajes" title="Personajes">Personajes</a></li>
-      <li class="hidden lg:block"><a  href="https://www.instagram.com/saikomic" title="Instagram" target="_blank"> <Insta /></a></li>
-      <li class="hidden lg:block"><a  href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" title="Mangaplus" target="_blank"><MangaPlus /></a></li>
+      <li class="hidden lg:block"><a  href="https://www.instagram.com/saikomic" target="_blank"><Insta /></a></li>
+      <li class="hidden lg:block"><a  href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank"><MangaPlus /></a></li>
       <li class="m-0 p-0 translate-y-1" title="Cambiar Tema"><ThemeToggle client:load /></li>
       {
           session
@@ -54,7 +54,7 @@ if (session) {
 </header>
 
 <style>
-  li {
+  a {
     @apply hover:text-purple-500 transition-all
   }
 </style>
