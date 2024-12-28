@@ -26,6 +26,10 @@ export default defineConfig({
       clientSecret: import.meta.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
+  pages: {
+    signIn: '/',
+    error: '/'
+  },
   callbacks: {
     session: ({ session, token }) => ({
       ...session,
