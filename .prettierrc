@@ -1,0 +1,13 @@
+{
+   "useTabs": true,
+   "tabWidth": 4,
+   "singleQuote": true,
+   "trailingComma": "none",
+   "semi": false,
+   "printWidth": 124,
+   "plugins": [
+      "prettier-plugin-astro",
+      "prettier-plugin-tailwindcss"
+   ],
+   "pluginSearchDirs": false
+}
