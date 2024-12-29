@@ -132,7 +132,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                             isSelected={!!selection}
                             rank={selection?.rank}
                             onVote={() => handleVote(character.id)}
-                            delay={index * 0.04}
+                            delay={index * 0.06}
                         />
                     );
                 })}
