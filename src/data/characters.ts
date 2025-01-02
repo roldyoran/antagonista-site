@@ -8,51 +8,101 @@ export const characters: Character[] = [
   {
     id: 1,
     name: "Tago",
-    image: "tago.webp"
+    image: "TAGO.webp"
   },
   {
     id: 2,
     name: "Tania",
-    image: "tania.webp"
+    image: "TANIA.webp"
   },
   {
     id: 3,
     name: "Leji",
-    image: "leji.webp"
+    image: "LEJI.webp"
   },
   {
     id: 4,
-    name: "Yang",
-    image: "yang.webp"
+    name: "One",
+    image: "ONE.webp"
   },
   {
     id: 5,
     name: "Panzer",
-    image: "panzer.webp"
+    image: "PANZER.webp"
   },
   {
     id: 6,
-    name: "One",
-    image: "one.webp"
+    name: "Yang",
+    image: "YANG.webp"
   },
   {
     id: 7,
-    name: "Camilo",
-    image: "camilo.webp"
+    name: "Jota",
+    image: "JOTA.webp"
   },
   {
     id: 8,
-    name: "Eros",
-    image: "eros.webp"
+    name: "Boxy",
+    image: "BOXY.webp"
   },
   {
     id: 9,
-    name: "Bruja",
-    image: "bruja.webp"
+    name: "Gabi",
+    image: "GABI.webp"
   },
   {
     id: 10,
+    name: "Bruja",
+    image: "BRUJA.webp"
+  },
+  {
+    id: 11,
+    name: "AfroKid",
+    image: "AFROKID.webp"
+  },
+  {
+    id: 12,
+    name: "Marco",
+    image: "MARCO.webp"
+  },
+  {
+    id: 13,
+    name: "Rayitos",
+    image: "RAYITOS.webp"
+  },
+  {
+    id: 14,
     name: "DJ",
-    image: "dj.webp"
+    image: "DJ.webp"
+  },
+  {
+    id: 15,
+    name: "Tata",
+    image: "TATA.webp"
+  },
+  {
+    id: 16,
+    name: "Viktor",
+    image: "VIKTOR.webp"
+  },
+  {
+    id: 17,
+    name: "Karen",
+    image: "KAREN.webp"
+  },
+  {
+    id: 18,
+    name: "HermanosPower",
+    image: "HERMANOSPOWER.webp"
+  },
+  {
+    id: 19,
+    name: "Aron",
+    image: "ARON.webp"
+  },
+  {
+    id: 20,
+    name: "KaruYYaru",
+    image: "KARUYYARU.webp"
   }
 ];
