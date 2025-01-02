@@ -20,7 +20,7 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
             viewport={{ once: true }}
 
 
-            className={`overflow-hidden relative cursor-pointer opacity-0 border-2 border-neutral-300 dark:border-neutral-700 text-center rounded-lg hover:border-purple-950 dark:hover:border-purple-400 transition-all duration-300  ${isSelected
+            className={`overflow-hidden relative cursor-pointer opacity-0 border-2 border-neutral-300 dark:border-neutral-800 text-center rounded-lg hover:border-purple-950 dark:hover:border-purple-400 transition-all duration-300  ${isSelected
                 ? 'bg-purple-700/60 border-opacity-40 text-white shadow-lg shadow-purple-600 dark:shadow-lg dark:shadow-purple-900'
                 : 'bg-white border-neutral-100 dark:bg-neutral-900 dark:border-zinc-700 dark:text-white'
                 }`}
