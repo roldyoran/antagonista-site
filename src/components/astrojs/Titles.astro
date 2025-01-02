@@ -1,4 +1,5 @@
 ---
+import Image from 'astro/components/Image.astro'
 // create astro props
 interface Props {
 	title: string
@@ -11,16 +12,18 @@ const {title, subtitle, info} = Astro.props
 ---
 
 <div class="mb-12 text-center">
-	<h1 class="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
+	<!-- <h1 class="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
 		{title}
-	</h1>
-	<p class="mb-2 text-lg text-gray-600 dark:text-gray-400">
+	</h1> -->
+	<p class="mb-2 text-2xl text-gray-600 dark:text-gray-400">
 		{subtitle}
 	</p>
-	<div
+	<!-- <div
 		class="mx-auto mt-6 max-w-72 rounded-lg border-2 border-purple-500 bg-purple-200/10 px-6 py-3 font-bold tracking-wide text-primary dark:relative dark:rounded-lg dark:border-2 dark:border-purple-600 dark:bg-transparent dark:text-purple-100 dark:shadow-lg dark:shadow-purple-600 md:max-w-md"
-	>
-		<span class="dark:absolute dark:inset-0 dark:rounded-lg dark:bg-purple-500 dark:opacity-30 dark:blur-xl"></span>
-		<span class="dark:relative">{info}</span>
+	> -->
+	<div class="mx-auto flex justify-center">
+		<!-- <span class="dark:absolute dark:inset-0 dark:rounded-lg dark:bg-purple-500 dark:opacity-30 dark:blur-xl"></span> -->
+		<!-- <span class="dark:relative">{info}</span> -->
+		<Image src="/encuesta.webp" width={200} height={1000} alt="info" class=" h-72 w-auto object-cover" />
 	</div>
 </div>
