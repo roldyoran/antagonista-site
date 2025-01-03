@@ -30,8 +30,8 @@ const CharacterCard: React.FC<Props> = ({ id, name, image, isSelected, rank, onV
             <div>
                     {/* <span className="font-semibold text-lg">{name}</span> */}
                     {isSelected && rank && (
-                        <span className="absolute top-2 left-2 bg-purple-950 border border-white/50 text-white font-bold py-1 px-2 rounded-full md:px-3 md:py-2">
-                            #{rank}
+                        <span className="absolute top-2 left-2 bg-purple-950 border-2 border-white/40 text-white font-bold text-xs py-1 px-2 rounded-full lowercase tracking-wider md:px-3 md:py-2">
+                            #{rank} ➜ {4-rank}pts
                         </span>
                     )}
                     {/* <button type='button' className={`transition-all font-bold  mt-2 py-1.5 w-full border-2 rounded-md active:scale-90 uppercase text-sm ${isSelected ? 'bg-white text-primary hover:bg-white hover:text-primary' : 'text-primary border-primary hover:bg-primary/80 hover:text-white dark:text-purple-400 dark:border-purple-800 dark:hover:bg-purple-400 dark:hover:text-white'
