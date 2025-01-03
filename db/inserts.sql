@@ -1,0 +1,22 @@
+-- Inserta personajes
+INSERT INTO Personajes (id_personaje, nombre) VALUES
+(1, 'Tago'),
+(2, 'Tania'),
+(3, 'Leji'),
+(4, 'One'),
+(5, 'Panzer'),
+(6, 'Yang'),
+(7, 'Jota'),
+(8, 'Boxy'),
+(9, 'Gabi'),
+(10, 'Bruja'),
+(11, 'AfroKid'),
+(12, 'Marco'),
+(13, 'Rayitos'),
+(14, 'DJ'),
+(15, 'Tata'),
+(16, 'Viktor'),
+(17, 'Karen'),
+(18, 'HermanosPower'),
+(19, 'Aron'),
+(20, 'KaruYYaru');
