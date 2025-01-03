@@ -62,10 +62,10 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
                         ? 'bg-red-400/90 text-red-950 border-red-700 cursor-not-allowed'
                         : status === RESULT_STATUS.SUCCESS
                             ? 'bg-green-400 text-green-950 border-green-500 cursor-not-allowed dark:shadow-lg dark:shadow-green-800'
-                            : selectedCharacters.length === 3
-                                ? 'hover:bg-primary bg-white/80 hover:text-white shadow-lg shadow-primary border-primary active:scale-100  hover:scale-105  dark:text-white dark:bg-transparent dark:border-purple-700 dark:hover:shadow-xl dark:hover:shadow-purple-600'
-                                : status === RESULT_STATUS.LOADING
-                                    ? 'animate-pulse'
+                            : status === RESULT_STATUS.LOADING
+                                ? 'animate-pulse bg-purple-950/90 text-white/90'
+                                : selectedCharacters.length === 3
+                                    ? 'hover:bg-primary bg-white/80 hover:text-white shadow-lg shadow-primary border-primary active:scale-100  hover:scale-105  dark:text-white dark:bg-transparent dark:border-purple-700 dark:hover:shadow-xl dark:hover:shadow-purple-600'
                                     : 'cursor-not-allowed bg-secondary/70 border-secondary animate-pulse text-gray-50'
                         }`}
                     style={{
