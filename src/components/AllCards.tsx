@@ -29,6 +29,8 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
     useEffect(() => {
         if (selectedCharacters.length > 0) {
             localStorage.setItem('selectedCharacters', JSON.stringify(selectedCharacters));
+        } else {
+            localStorage.removeItem('selectedCharacters'); // Limpiar localStorage si no hay seleccionados
         }
     }, [selectedCharacters]);
 
