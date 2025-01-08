@@ -8,4 +8,48 @@ import Hero from '@components/astrojs/Hero.astro'
 		title="Vota por tus personajes favoritos"
 		description="Únete a nuestra comunidad y participa en la votación para los personajes más populares de Antagonista. Tu voto importa para determinar quién está en la cima!"
 	/>
+
+	<h4 class=" flex text-center justify-center text-xl text-black dark:text-white">¿Cuánto tiempo queda para votar?</h4>
+	<div id="countdown" class="flex justify-center gap-4 p-4 mb-28">
+		<div class="countdown-item flex flex-col items-center bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-md">
+			<div class="countdown-number text-2xl md:text-4xl font-bold text-gray-800 dark:text-gray-100" id="days"></div>
+			<div class="countdown-item-label text-xs text-gray-600 dark:text-gray-400">Días</div>
+		</div>
+		<div class="countdown-item flex flex-col items-center bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-md">
+			<div class="countdown-number text-2xl md:text-4xl font-bold text-gray-800 dark:text-gray-100" id="hours"></div>
+			<div class="countdown-item-label text-xs text-gray-600 dark:text-gray-400">Horas</div>
+		</div>
+		<div class="countdown-item flex flex-col items-center bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-md">
+			<div class="countdown-number text-2xl md:text-4xl font-bold text-gray-800 dark:text-gray-100" id="minutes"></div>
+			<div class="countdown-item-label text-xs text-gray-600 dark:text-gray-400">Minutos</div>
+		</div>
+		<div class="countdown-item flex flex-col items-center bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-md">
+			<div class="countdown-number text-2xl md:text-4xl font-bold text-gray-800 dark:text-gray-100" id="seconds"></div>
+			<div class="countdown-item-label text-xs text-gray-600 dark:text-gray-400">Segundos</div>
+		</div>
+	</div>
+	
 </Layout>
+
+
+<script>
+	const targetDate = new Date('January 21, 2025 00:00:00').getTime();
+
+	function updateCountdown() {
+		const now = new Date().getTime();
+		const difference = targetDate - now;
+
+		const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+		const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+		const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+		document.getElementById('days').textContent = days.toString();
+		document.getElementById('hours').textContent = hours.toString();
+		document.getElementById('minutes').textContent = minutes.toString();
+		document.getElementById('seconds').textContent = seconds.toString();
+	}
+
+	setInterval(updateCountdown, 1000);
+	updateCountdown(); // Llamar de inmediato para evitar el retraso inicial
+</script>
