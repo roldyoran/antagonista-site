@@ -53,6 +53,8 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
         }
     };
 
+
+    
     return (
         <div className="flex justify-center min-w-screen mt-20 mb-4">
             {statesession ? (
