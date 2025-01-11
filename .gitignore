@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # code sanbox
 /.codesandbox
+
+# python json
+db/python
