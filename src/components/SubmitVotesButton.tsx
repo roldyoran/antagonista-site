@@ -80,7 +80,7 @@ const SubmitVotesButton: React.FC<SubmitVotesButtonProps> = ({ selectedCharacter
                     {status === RESULT_STATUS.LOADING
                         ? 'Enviando...'
                         : status === RESULT_STATUS.SUCCESS
-                            ? '¡Votos Enviados!'
+                            ? '¡Votos Enviados Exitosamente!'
                             : status === RESULT_STATUS.ERROR
                                 ? 'Error al enviar los votos, intenta mas tarde'
                                 : status === RESULT_STATUS.MSG
