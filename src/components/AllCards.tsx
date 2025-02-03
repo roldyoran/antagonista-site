@@ -71,7 +71,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                         id="search"
                         type="text"
                         placeholder="Buscar personaje..."
-                        className="w-full py-2 px-10 border-2 border-primary rounded-sm mb-4 focus:ring-2 focus:ring-primary focus:outline-none md:skew-x-[-20deg] 
+                        className="w-full py-2 px-10 border-2 border-lime-500 rounded-sm mb-4 focus:ring-2 focus:ring-lime-500 focus:outline-none md:skew-x-[-20deg] 
                         dark:bg-transparent dark:text-white dark:border-purple-600 dark:focus:shadow-lg dark:focus:shadow-purple-500"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
@@ -97,7 +97,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                     onClick={() => setShowOnlyVotes(!showOnlyVotes)}
                     className={`md:transform md:-translate-y-2 font-bold px-4 py-2 border-2 rounded-sm uppercase transition-all md:skew-x-[-20deg] dark:relative ${showOnlyVotes
                         ? 'bg-secondary text-white hover:bg-secondary/80 hover:scale-105 active:scale-100  dark:text-white dark:bg-transparent dark:border-cyan-600 dark:hover:shadow-lg dark:hover:shadow-cyan-600'
-                        : 'bg-white/70  hover:bg-primary hover:text-white border-primary hover:scale-105 active:scale-100  dark:text-white dark:bg-transparent dark:border-purple-600 dark:hover:shadow-lg dark:hover:shadow-purple-600'
+                        : 'bg-white/70  hover:bg-lime-500 hover:text-white border-lime-500 hover:scale-105 active:scale-100  dark:text-white dark:bg-transparent dark:border-purple-600 dark:hover:shadow-lg dark:hover:shadow-purple-600'
                         }`}
                 >
                     {showOnlyVotes ?
@@ -122,7 +122,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
 
 
             <ul
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mb-16">
                 {filteredCharacters.map((character, index) => {
                     const selection = selectedCharacters.find((c) => c.id === character.id);
                     return (
@@ -140,10 +140,22 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
                 })}
             </ul>
 
-            <SubmitVotesButton
+            {/* <h4 className='text-center text-5xl border-4 shadow-lg shadow-lime-400/50 rounded-xl border-green-950 my-20 bg-lime-300/90 py-8 text-green-950 font-bold'>¡Gracias por Votar!</h4> */}
+            <div className='flex justify-center'>
+
+            <div
+					className="skew-x-[-20deg] border-2 mx-auto border-lime-500 px-12 py-6 text-5xl font-bold uppercase transition-all hover:scale-110 hover:bg-lime-500 hover:text-white motion-safe:hover:ease-out dark:relative dark:border-lime-600 dark:bg-transparent dark:text-white dark:hover:shadow-xl dark:hover:shadow-lime-600"
+				>
+					<span className="dark:absolute dark:inset-0 dark:rounded-lg dark:bg-lime-500 dark:opacity-30 dark:blur-lg"
+					></span>
+					<span className="dark:relative">¡Gracias por Votar!</span>
+				</div>
+            </div>
+
+            {/* <SubmitVotesButton
                 selectedCharacters={selectedCharacters}
                 statesession={statesession}
-            />
+            /> */}
 
 
         </ >
