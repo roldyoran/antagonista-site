@@ -144,7 +144,7 @@ const CharactersPage: React.FC<SessionActiveUser> = ({ statesession }) => {
             <div className='flex justify-center'>
 
             <div
-					className="skew-x-[-20deg] border-2 mx-auto border-lime-500 px-12 py-6 text-5xl font-bold uppercase transition-all hover:scale-110 hover:bg-lime-500 hover:text-white motion-safe:hover:ease-out dark:relative dark:border-lime-600 dark:bg-transparent dark:text-white dark:hover:shadow-xl dark:hover:shadow-lime-600"
+					className="skew-x-[-20deg] border-2 mx-auto border-lime-500 px-12 py-6 text-3xl text-center font-bold uppercase transition-all hover:scale-110 hover:bg-lime-500 hover:text-white motion-safe:hover:ease-out dark:relative dark:border-lime-600 dark:bg-transparent dark:text-white dark:hover:shadow-xl dark:hover:shadow-lime-600"
 				>
 					<span className="dark:absolute dark:inset-0 dark:rounded-lg dark:bg-lime-500 dark:opacity-30 dark:blur-lg"
 					></span>
