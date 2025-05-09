@@ -33,23 +33,39 @@ import Hero from '@components/astrojs/Hero.astro'
 
 
 <script>
-	const targetDate = new Date('February 14, 2025 00:00:00').getTime();
+	document.addEventListener('DOMContentLoaded', function() {
+		const targetDate = new Date('February 14, 2025 00:00:00').getTime();
 
-	function updateCountdown() {
-		const now = new Date().getTime();
-		const difference = targetDate - now;
+		function updateCountdown() {
+			const now = new Date().getTime();
+			const difference = targetDate - now;
 
-		const days = 0
-		const hours = 0
-		const minutes  = 0
-		const seconds = 0
+			// Calculate time components
+			const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+			const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+			const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-		document.getElementById('days').textContent = days.toString();
-		document.getElementById('hours').textContent = hours.toString();
-		document.getElementById('minutes').textContent = minutes.toString();
-		document.getElementById('seconds').textContent = seconds.toString();
-	}
+			// Get elements
+			const daysEl = document.getElementById('days');
+			const hoursEl = document.getElementById('hours');
+			const minutesEl = document.getElementById('minutes');
+			const secondsEl = document.getElementById('seconds');
 
-	setInterval(updateCountdown, 1000);
-	updateCountdown(); // Llamar de inmediato para evitar el retraso inicial
+			// Update elements if they exist
+			if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+			if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+			if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+			if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+		}
+
+		// Start countdown
+		const countdownInterval = setInterval(updateCountdown, 1000);
+		updateCountdown(); // Initial call
+
+		// Cleanup interval when needed
+		document.addEventListener('astro:after-swap', function() {
+			clearInterval(countdownInterval);
+		});
+	});
 </script>

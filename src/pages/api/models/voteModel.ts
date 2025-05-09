@@ -30,10 +30,19 @@ export const validateVotes = (votes: any): boolean => {
 
 export const saveVotesToDB = async (userId: string, votes: TypeVotes, voteDate: string) => {
     const userIdHash = generateID(userId);
+    
+    // We'll use localStorage to check if user has voted
     try {
-        await getUser(userIdHash);
+        const hasVoted = await getUser(userIdHash);
+        if (hasVoted) {
+            throw new Error("USER_FOUND_PREVIOUSLY");
+        }
     } catch (error) {
-        throw new Error("USER_FOUND_PREVIOUSLY");
+        if (error.message === "User not Found") {
+            // This is good, means user hasn't voted
+        } else {
+            throw error;
+        }
     }
 
     try {

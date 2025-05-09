@@ -1,11 +1,7 @@
 ---
-import {getSession} from 'auth-astro/server'
 import Layout from '@layouts/Layout.astro'
 import Titles from '@components/astrojs/Titles.astro'
-import CharactersPage from '@components/AllCards'
-
-const session = await getSession(Astro.request)
-const statesession = session ? true : false
+import CharactersPage from '@components/vuejs/AllCards.vue'
 ---
 
 <Layout title="Personajes | Sistema de Votacion Antagonista" css="bg-transparent dark:bg-zinc-950">
@@ -16,7 +12,7 @@ const statesession = session ? true : false
 				subtitle="¡Vota por tus personajes favoritos y ayúdalos a subir al top!"
 				info="Vota por tus 3 personajes favoritos"
 			/>
-			<CharactersPage statesession={statesession} client:load />
+			<CharactersPage client:load />
 		</section>
 		<!-- Flecha para subir al top -->
 		<a

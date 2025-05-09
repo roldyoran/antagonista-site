@@ -1,19 +1,8 @@
 ---
-import {SignIn, SignOut} from 'auth-astro/components'
-import {getSession} from 'auth-astro/server'
-import ThemeToggle from '@components/reactjs/ThemeToggle'
-import Avatar from '@components/astrojs/Avatar.astro'
+import ThemeToggle from '@components/vuejs/ThemeToggle.vue'
 import AntagonistaLogo from '@icons/AntagonistaLogo.astro'
 import Insta from '@icons/Insta.astro'
 import MangaPlus from '@icons/MangaPlus.astro'
-import Google from '@icons/Google.astro'
-
-const session = await getSession(Astro.request)
-
-let name = ''
-if (session) {
-	name = session.user?.name.split(' ')[0]
-}
 ---
 
 <header>
@@ -31,33 +20,6 @@ if (session) {
 				<a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank"><MangaPlus /></a>
 			</li>
 			<li class="m-0 translate-y-1 p-0" title="Cambiar Tema"><ThemeToggle client:load /></li>
-			{
-				session ? (
-					<li class="ml-auto flex items-center space-x-5">
-						<Avatar src={session.user?.image} name={name} />
-						<SignOut
-							class:list={
-								'relative -skew-x-12 cursor-pointer border-2 border-purple-800 px-3 py-2 transition-all hover:scale-110 hover:bg-purple-800 hover:text-white md:px-5 md:py-1'
-							}
-						>
-							<span class="dark:absolute dark:inset-0 dark:rounded-lg dark:bg-purple-500 dark:opacity-30 dark:blur-lg" />
-							<span class="text-xs font-bold uppercase dark:relative md:text-base">Cerrar Sesión</span>
-							{/* <span class="text-xs md:text-base font-bold uppercase">Cerrar Sesión</span> */}
-						</SignOut>
-					</li>
-				) : (
-					<li class="ml-auto cursor-pointer">
-						<SignIn
-							provider="google"
-							class="inline-flex -skew-x-12 items-center gap-2 border-2 border-purple-800 px-3 py-2 transition-all hover:scale-110 hover:bg-purple-800 hover:text-white md:px-5 md:py-1"
-						>
-							<Google />
-							<span class="dark:absolute dark:inset-0 dark:rounded-lg dark:bg-purple-500 dark:opacity-30 dark:blur-lg" />
-							<span class="text-xs font-bold uppercase dark:relative md:text-base">INICIAR SESIÓN</span>
-						</SignIn>
-					</li>
-				)
-			}
 		</ul>
 	</nav>
 </header>
