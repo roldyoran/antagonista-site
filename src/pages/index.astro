@@ -3,26 +3,33 @@ import Layout from '@layouts/Layout.astro'
 import Hero from '@components/astrojs/Hero.astro'
 ---
 
+<!-- Página principal del sitio -->
 <Layout title="Bienvenido a las Votaciones de popularidad de Antagonista" css="dark:bg-stone-950">
+	<!-- Componente Hero con título y descripción principal -->
 	<Hero
 		title="Vota por tus personajes favoritos"
 		description="Únete a nuestra comunidad y participa en la votación para los personajes más populares de Antagonista. Tu voto importa para determinar quién está en la cima!"
 	/>
 
+	<!-- Sección de cuenta regresiva -->
 	<h4 class=" flex text-center justify-center text-xl text-black dark:text-white">¿Cuánto tiempo queda para votar?</h4>
 	<div id="countdown" class="flex justify-center gap-4 p-4 mb-28">
+		<!-- Elemento para mostrar días -->
 		<div class="countdown-item flex flex-col items-center bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-md">
 			<div class="countdown-number text-2xl md:text-4xl font-bold text-gray-800 dark:text-gray-100" id="days"></div>
 			<div class="countdown-item-label text-xs text-gray-600 dark:text-gray-400">Días</div>
 		</div>
+		<!-- Elemento para mostrar horas -->
 		<div class="countdown-item flex flex-col items-center bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-md">
 			<div class="countdown-number text-2xl md:text-4xl font-bold text-gray-800 dark:text-gray-100" id="hours"></div>
 			<div class="countdown-item-label text-xs text-gray-600 dark:text-gray-400">Horas</div>
 		</div>
+		<!-- Elemento para mostrar minutos -->
 		<div class="countdown-item flex flex-col items-center bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-md">
 			<div class="countdown-number text-2xl md:text-4xl font-bold text-gray-800 dark:text-gray-100" id="minutes"></div>
 			<div class="countdown-item-label text-xs text-gray-600 dark:text-gray-400">Minutos</div>
 		</div>
+		<!-- Elemento para mostrar minutos -->
 		<div class="countdown-item flex flex-col items-center bg-gray-200 dark:bg-gray-800 rounded-lg p-4 shadow-md">
 			<div class="countdown-number text-2xl md:text-4xl font-bold text-gray-800 dark:text-gray-100" id="seconds"></div>
 			<div class="countdown-item-label text-xs text-gray-600 dark:text-gray-400">Segundos</div>
@@ -34,36 +41,38 @@ import Hero from '@components/astrojs/Hero.astro'
 
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
+		// Fecha objetivo para la cuenta regresiva (14 de febrero de 2025)
 		const targetDate = new Date('February 14, 2025 00:00:00').getTime();
 
+		// Función para actualizar la cuenta regresiva
 		function updateCountdown() {
 			const now = new Date().getTime();
 			const difference = targetDate - now;
 
-			// Calculate time components
+			// Calcular componentes de tiempo
 			const days = Math.floor(difference / (1000 * 60 * 60 * 24));
 			const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 			const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
 			const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-			// Get elements
+			// Obtener elementos del DOM
 			const daysEl = document.getElementById('days');
 			const hoursEl = document.getElementById('hours');
 			const minutesEl = document.getElementById('minutes');
 			const secondsEl = document.getElementById('seconds');
 
-			// Update elements if they exist
+			// Actualizar elementos si existen
 			if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
 			if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
 			if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
 			if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
 		}
 
-		// Start countdown
+		// Iniciar la cuenta regresiva
 		const countdownInterval = setInterval(updateCountdown, 1000);
-		updateCountdown(); // Initial call
+		updateCountdown(); // Llamada inicial
 
-		// Cleanup interval when needed
+		// Limpiar intervalo cuando sea necesario
 		document.addEventListener('astro:after-swap', function() {
 			clearInterval(countdownInterval);
 		});

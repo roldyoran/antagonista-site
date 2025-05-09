@@ -4,17 +4,20 @@ import Titles from '@components/astrojs/Titles.astro'
 import CharactersPage from '@components/vuejs/AllCards.vue'
 ---
 
+<!-- Página de personajes con sistema de votación -->
 <Layout title="Personajes | Sistema de Votacion Antagonista" css="bg-transparent dark:bg-zinc-950">
 	<div id="top">
 		<section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+			<!-- Títulos y subtítulos de la sección -->
 			<Titles
 				title="Segunda Encuesta de Popularidad"
 				subtitle="¡Vota por tus personajes favoritos y ayúdalos a subir al top!"
 				info="Vota por tus 3 personajes favoritos"
 			/>
+			<!-- Componente Vue que muestra las tarjetas de personajes -->
 			<CharactersPage client:load />
 		</section>
-		<!-- Flecha para subir al top -->
+		<!-- Flecha para volver al inicio de la página -->
 		<a
 			href="#top"
 			class="fixed bottom-0 right-0 z-10 mb-2 mr-2 flex h-11 w-11 items-center justify-center rounded-full border-2 border-gray-200/30 bg-zinc-800 font-bold text-white transition-all hover:border-2 hover:border-violet-200 hover:bg-primary"

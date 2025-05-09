@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS Votos (
     id_usuario TEXT NOT NULL,
     id_personaje INTEGER NOT NULL,
     posicion INTEGER NOT NULL CHECK(posicion IN (1, 2, 3)),
+    -- Valor calculado automáticamente según la posición del voto
     valor INTEGER GENERATED ALWAYS AS (
         CASE 
             WHEN posicion = 1 THEN 3
@@ -30,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Votos (
 );
 
 
-
+-- Trigger anterior comentado
 -- -- TRIGGER
 -- CREATE TRIGGER IF NOT EXISTS limitar_votos_por_usuario
 -- BEFORE INSERT ON Votos
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS Votos (
 -- END;
 
 
--- TRIGGER
+-- TRIGGER para limitar votos por usuario
 CREATE TRIGGER IF NOT EXISTS limitar_votos_por_usuario
 BEFORE INSERT ON Votos
 FOR EACH ROW

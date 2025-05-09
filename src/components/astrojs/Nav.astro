@@ -5,20 +5,26 @@ import Insta from '@icons/Insta.astro'
 import MangaPlus from '@icons/MangaPlus.astro'
 ---
 
+<!-- Barra de navegación principal del sitio -->
 <header>
 	<nav
 		class="md:text-md fixed left-0 right-0 top-0 z-50 border-b-2 border-gray-100/10 bg-neutral-50/90 px-3 py-0.5 text-sm uppercase backdrop-blur dark:bg-neutral-950/80 dark:text-white md:px-16 md:py-1 lg:text-base"
 	>
+		<!-- Lista de elementos de navegación -->
 		<ul class="flex items-center gap-5 font-bold">
+			<!-- Logo de Antagonista con enlace a inicio -->
 			<li class="mr-1 font-bold md:mr-6">
 				<a href="/" title="Inicio"><AntagonistaLogo width={96} height={64} /></a>
 			</li>
+			<!-- Enlaces de navegación principales -->
 			<li class="hidden lg:block"><a href="/" title="Inicio">Inicio</a></li>
 			<li class="hidden lg:block"><a href="/personajes" title="Personajes">Personajes</a></li>
+			<!-- Enlaces a redes sociales -->
 			<li class="hidden lg:block"><a href="https://www.instagram.com/saikomic" target="_blank"><Insta /></a></li>
 			<li class="hidden lg:block">
 				<a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank"><MangaPlus /></a>
 			</li>
+			<!-- Botón para cambiar el tema (claro/oscuro) -->
 			<li class="m-0 translate-y-1 p-0" title="Cambiar Tema"><ThemeToggle client:load /></li>
 		</ul>
 	</nav>

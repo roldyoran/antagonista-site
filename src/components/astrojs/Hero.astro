@@ -7,16 +7,21 @@ interface Props {
 const {title, description} = Astro.props
 ---
 
+<!-- Sección de héroe principal con título y descripción -->
 <section class="relative isolate px-6 lg:px-8 mb-1">
 	<div class="mx-auto max-w-3xl py-16 sm:py-28 lg:py-28">
 		<div class="text-center">
+			<!-- Título principal de la página -->
 			<h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
 				{title}
 			</h1>
+			<!-- Descripción o subtítulo de la página -->
 			<p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
 				{description}
 			</p>
+			<!-- Contenedor de botones de acción -->
 			<div class="mt-10 flex items-center justify-center gap-x-6">
+				<!-- Botón principal para ir a la página de personajes -->
 				<a
 					href="/personajes"
 					class="skew-x-[-20deg] border-2 border-primary px-8 py-3 text-xl font-bold uppercase transition-all hover:scale-110 hover:bg-primary hover:text-white motion-safe:hover:ease-out dark:relative dark:border-purple-600 dark:bg-transparent dark:text-white dark:hover:shadow-xl dark:hover:shadow-purple-600"
@@ -26,6 +31,7 @@ const {title, description} = Astro.props
 					<span class="dark:relative">Empieza a Votar</span>
 				</a>
 
+				<!-- Botones alternativos comentados para posible uso futuro -->
 				<!-- <button
           class="relative px-6 py-3 text-white font-bold uppercase tracking-wider bg-black border-2 border-pink-500 rounded-lg transition-transform transform hover:scale-105"
         >
