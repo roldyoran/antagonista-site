@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
+// Configuración del componente de búsqueda
+// Maneja el término de búsqueda y emite cambios al componente padre
 
 interface Props {
   searchTerm: string;
@@ -11,6 +12,7 @@ const emit = defineEmits<{
 }>();
 </script>
 
+// Template con el campo de búsqueda estilizado y un ícono de lupa
 <template>
   <div class="relative w-full max-w-4xl">
     <input

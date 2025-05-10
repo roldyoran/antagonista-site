@@ -12,13 +12,14 @@ interface SelectedCharacter {
   rank: number;
 }
 
-const searchTerm = ref('');
-const selectedCharacters = ref<SelectedCharacter[]>([]);
-const showOnlyVotes = ref(false);
-const voteStatus = ref<'idle' | 'loading' | 'success' | 'error'>('idle');
-const errorMessage = ref('');
+// Estado para manejar la búsqueda y selección de personajes
+const searchTerm = ref(''); // Término de búsqueda para filtrar personajes
+const selectedCharacters = ref<SelectedCharacter[]>([]); // Array para almacenar los personajes seleccionados
+const showOnlyVotes = ref(false); // Bandera para mostrar solo los votos realizados
+const voteStatus = ref<'idle' | 'loading' | 'success' | 'error'>('idle'); // Estado del proceso de votación
+const errorMessage = ref(''); // Mensaje de error para mostrar al usuario
 
-// Load saved votes when component mounts
+// Carga los votos guardados al montar el componente
 onMounted(() => {
   const storedVotes = localStorage.getItem('selectedCharacters');
   if (storedVotes) {
@@ -28,7 +29,7 @@ onMounted(() => {
   }
 });
 
-// Save votes to localStorage when they change
+// Guarda los votos en localStorage cuando cambian
 watch(selectedCharacters, (newValue) => {
   if (newValue.length > 0) {
     console.log('Guardando votos en localStorage:', newValue);
@@ -39,7 +40,7 @@ watch(selectedCharacters, (newValue) => {
   }
 }, { deep: true });
 
-// Computed property for filtered characters
+// Propiedad computada para filtrar los personajes según la búsqueda
 const filteredCharacters = computed(() => {
   return characters.filter((character) => {
     const matchesSearch = character.name.toLowerCase().includes(searchTerm.value.toLowerCase());
@@ -48,7 +49,7 @@ const filteredCharacters = computed(() => {
   });
 });
 
-// Handle voting
+// Maneja la lógica de votación
 const handleVote = (id: number) => {
   const existingSelection = selectedCharacters.value.find((character) => character.id === id);
 
@@ -69,7 +70,7 @@ const handleVote = (id: number) => {
   }
 };
 
-// Handle submit votes
+// Maneja el envío de votos al servidor
 const handleSubmitVotes = async () => {
   if (selectedCharacters.value.length !== 3) return;
   
@@ -136,12 +137,12 @@ const handleSubmitVotes = async () => {
       />
     </transition-group>
 
-    <SubmitButton
+    <!-- <SubmitButton
       :vote-status="voteStatus"
       :selected-count="selectedCharacters.length"
       :error-message="errorMessage"
       @submit="handleSubmitVotes"
-    />
+    /> -->
   </div>
 </template>
 

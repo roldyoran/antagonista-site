@@ -1,4 +1,6 @@
 <script setup lang="ts">
+// Lógica para el cambio de tema claro/oscuro
+// Gestiona el estado del tema y lo persiste en localStorage
 import { ref, onMounted } from 'vue';
 
 const isDarkMode = ref(false);
@@ -24,12 +26,13 @@ const toggleTheme = () => {
 };
 </script>
 
+// Template con el botón que alterna entre íconos de sol y luna
 <template>
   <button 
     type="button" 
     aria-label="Cambiar Tema" 
     @click="toggleTheme"
-    class="relative group p-2 rounded-full
+    class="relative group rounded-full
       transition-all duration-300 hover:scale-110 active:scale-95"
   >
     <svg 

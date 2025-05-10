@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps, computed } from 'vue';
+import { computed } from 'vue';
 
 interface Props {
   id: number;
@@ -15,7 +15,9 @@ const emit = defineEmits<{
   (e: 'vote'): void;
 }>();
 
+// Clases computadas para el estilo de la tarjeta
 const cardClasses = computed(() => {
+  // Calcula las clases CSS según el estado de selección
   return `group overflow-hidden relative cursor-pointer border-2 rounded-lg
     transition-colors duration-300
     ${props.isSelected
@@ -25,6 +27,7 @@ const cardClasses = computed(() => {
 });
 </script>
 
+// Template que muestra la tarjeta del personaje con su imagen y ranking
 <template>
   <li :class="cardClasses" :id="`CardCharacter${id}`" @click="emit('vote')">
     <div>

@@ -106,3 +106,5 @@ export const characters: Character[] = [
     image: "KARUYYARU.webp"
   }
 ];
+
+

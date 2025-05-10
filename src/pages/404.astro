@@ -15,8 +15,12 @@ import {Fragment} from 'astro/jsx-runtime'
 			<p class="mt-4 text-2xl text-gray-400">Oops! Página no encontrada.</p>
 			<p class="mt-2 text-gray-300">Parece que la página que buscas no existe.</p>
 			<p class="mt-6 text-gray-500">Para votar por tu Antofagasta xd.</p>
-			<a href="/" class="mt-6 inline-block rounded-lg bg-primary px-6 py-3 font-bold text-white hover:bg-primary/70">
-				Volver a la página de inicio ←
+			<a 
+			    href="/" 
+			    class="relative mt-6 inline-block px-8 py-3 text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 dark:from-purple-700 dark:to-purple-900"
+			>
+			    <span class="absolute inset-0 bg-purple-500 blur-lg opacity-30 rounded-lg"></span>
+			    <span class="relative">Volver a la página de inicio ←</span>
 			</a>
 		</main>
 	</body>

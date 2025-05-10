@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from 'vue';
 
 interface Props {
   voteStatus: 'idle' | 'loading' | 'success' | 'error';
@@ -19,20 +18,20 @@ const emit = defineEmits<{
       v-if="voteStatus !== 'success'"
       @click="emit('submit')"
       class="relative group text-xl md:text-2xl uppercase font-bold px-9 py-3.5 
-        border-2 rounded-md transition-all duration-300
-        transform md:skew-x-[-15deg] hover:scale-[1.02] active:scale-[0.98]"
+        rounded-md transition-all duration-300
+        transform md:skew-x-[-15deg] hover:scale-105"
       :class="[
         voteStatus === 'error'
-          ? 'bg-red-500/10 border-red-500 text-red-700 cursor-not-allowed dark:text-red-400'
+          ? 'bg-red-900/20 border-2 border-red-500 text-red-500 dark:text-red-400 dark:border-red-400 hover:text-red-400'
           : voteStatus === 'loading'
-            ? 'animate-pulse bg-purple-500/10 border-purple-500 text-purple-700 cursor-wait dark:text-purple-400'
+            ? 'bg-purple-900/20 border-2 border-purple-500 text-purple-500 dark:text-purple-400 dark:border-purple-400 animate-pulse'
             : selectedCount === 3
-              ? 'bg-lime-500/10 border-lime-500 text-lime-700 hover:bg-lime-500/20 dark:text-lime-400 dark:border-lime-600 dark:hover:shadow-lg dark:hover:shadow-lime-600/30'
-              : 'bg-neutral-500/10 border-neutral-400 text-neutral-600 cursor-not-allowed dark:text-neutral-400'
+              ? 'bg-lime-900/20 border-2 border-lime-500 text-lime-500 dark:text-lime-400 dark:border-lime-400 hover:text-lime-400'
+              : 'bg-neutral-900/20 border-2 border-neutral-500 text-neutral-500 dark:text-neutral-400 dark:border-neutral-400 cursor-not-allowed opacity-50'
       ]"
       :disabled="voteStatus === 'loading' || voteStatus === 'error' || selectedCount !== 3"
     >
-      <span class="md:transform md:skew-x-[15deg] inline-block">
+      <span class="md:transform md:skew-x-[15deg] inline-block relative">
         <template v-if="voteStatus === 'loading'">
           Enviando...
         </template>
@@ -45,8 +44,10 @@ const emit = defineEmits<{
       </span>
       <span 
         v-if="selectedCount === 3 && voteStatus === 'idle'"
-        class="absolute inset-0 -z-10 bg-lime-400/10 dark:bg-lime-400/5 
-          rounded-md blur-lg transition-opacity opacity-0 group-hover:opacity-100"
+        class="absolute inset-0 -z-10 rounded-md transition-opacity opacity-0 group-hover:opacity-100 blur-xl"
+        :class="[
+          'bg-lime-500/20'
+        ]"
       ></span>
     </button>
     
@@ -62,8 +63,8 @@ const emit = defineEmits<{
         ¡Votos Enviados Exitosamente!
       </span>
       <span 
-        class="absolute inset-0 -z-10 bg-lime-400/10 dark:bg-lime-400/5 
-          rounded-md blur-lg"
+        class="absolute inset-0 -z-10 rounded-md transition-opacity opacity-0 group-hover:opacity-100
+          bg-lime-400/10 dark:bg-lime-400/5 blur-lg"
       ></span>
     </div>
   </div>
