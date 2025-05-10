@@ -32,7 +32,7 @@ Sistema de votación web para el manga Antagonista, desarrollado con tecnología
 
 1. Clona el repositorio:
 ```bash
-git clone [url-del-repositorio]
+git clone https://github.com/roldyoran/antagonista-site
 ```
 
 2. Instala las dependencias:
