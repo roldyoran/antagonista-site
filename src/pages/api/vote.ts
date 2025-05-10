@@ -1,8 +1,21 @@
 import { type APIRoute } from "astro";
-import { getSession } from "auth-astro/server";
-import { processVoteRequest } from "../api/controllers/voteController";
 
 export const POST: APIRoute = async ({ request }) => {
-    const session = await getSession(request);
-    return await processVoteRequest(session, request);
+    // Log the received request data
+    const data = await request.json();
+    console.log('Datos recibidos en el servidor:', data);
+
+    // Simular un pequeño retraso para ver el estado de carga
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Mock success response without database interaction
+    return new Response(JSON.stringify({ 
+        success: true, 
+        message: "Votos registrados (modo prueba sin base de datos)" 
+    }), {
+        status: 200,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
 };

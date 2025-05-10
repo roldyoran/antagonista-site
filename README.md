@@ -1,54 +1,84 @@
-# Astro Starter Kit: Basics
+# 🎭 Antagonista - Sistema de Votación
 
-```sh
-npm create astro@latest -- --template basics
+Sistema de votación web para el manga Antagonista, desarrollado con tecnologías modernas para ofrecer una experiencia interactiva y atractiva a los lectores.
+
+## 🚀 Tecnologías Principales
+
+- **[Astro](https://astro.build/)** v5.7.12 - Framework web para sitios de alto rendimiento
+- **[Vue.js](https://vuejs.org/)** v3.5.13 - Framework progresivo para interfaces de usuario
+- **[Tailwind CSS](https://tailwindcss.com/)** v3.4.17 - Framework de CSS utilitario
+- **[LibSQL](https://turso.tech/libsql)** v0.14.0 - Cliente SQL para la gestión de base de datos
+- **[Valibot](https://valibot.dev/)** v1.1.0 - Validación de datos
+
+## 📁 Estructura del Proyecto
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
-│   └── favicon.svg
 ├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/     # Componentes reutilizables
+│   │   ├── astrojs/    # Componentes de Astro
+│   │   └── vuejs/      # Componentes de Vue
+│   ├── data/           # Datos y tipos TypeScript
+│   ├── db/             # Configuración de base de datos
+│   ├── icons/          # Iconos SVG
+│   ├── layouts/        # Plantillas de página
+│   ├── lib/            # Utilidades y funciones
+│   └── pages/          # Rutas y páginas
+├── public/             # Activos estáticos
+└── db/                 # Scripts SQL
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🛠️ Instalación
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. Clona el repositorio:
+```bash
+git clone [url-del-repositorio]
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+2. Instala las dependencias:
+```bash
+pnpm install
+```
 
-## 🧞 Commands
+3. Inicia el servidor de desarrollo:
+```bash
+pnpm run dev
+```
 
-All commands are run from the root of the project, from a terminal:
+## 📋 Scripts Disponibles
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- `pnpm dev` - Inicia el servidor de desarrollo
+- `pnpm build` - Construye el proyecto para producción
+- `pnpm preview` - Previsualiza la build de producción
 
-## 👀 Want to learn more?
+## 🌐 Características Principales
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Diseño responsivo con Tailwind CSS
+- Tema claro/oscuro
+- Integración con base de datos SQL
+- Componentes interactivos con Vue.js
+- Optimización de rendimiento con Astro
+- Validación de datos con Valibot
+
+## 🔧 Configuración de Base de Datos
+
+El proyecto utiliza LibSQL como cliente SQL. Los scripts de base de datos se encuentran en el directorio `/db`:
+
+- `esquema.sql` - Estructura de la base de datos
+- `inserts.sql` - Datos iniciales
+- `inserts_examples.sql` - Ejemplos de inserción
+- `selects_examples.sql` - Ejemplos de consultas
+
+## 🎨 Personalización
+
+El proyecto utiliza Tailwind CSS para los estilos. La configuración se encuentra en:
+
+- `tailwind.config.mjs` - Configuración de Tailwind
+- `astro.config.mjs` - Configuración de Astro
+
+## 📱 Rutas Principales
+
+- `/` - Página principal
+- `/personajes` - Galería de personajes
+- `/encuesta-resultados` - Resultados de la votación
+

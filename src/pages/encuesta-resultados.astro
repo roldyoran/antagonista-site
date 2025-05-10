@@ -1,0 +1,72 @@
+---
+import Layout from '@layouts/Layout.astro'
+import Titles from '@components/astrojs/Titles.astro'
+import { surveyResults } from '@data/survey-results'
+---
+
+<Layout title="Resultados | Encuesta de Popularidad Antagonista" css="bg-transparent dark:bg-zinc-950">
+	<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+
+		<!-- Titulo y Subtitulo -->
+		<div class="text-center">
+			<h1 class="text-4xl font-bold text-gray-900 dark:text-white">Resultados de la Encuesta</h1>
+			<p class="mt-2 text-lg text-gray-500 dark:text-gray-400">¡Gracias por participar!</p>   
+		</div>
+
+		<!-- Total de Votantes -->
+		<div class="mt-8 text-center">
+			<p class="text-xl text-gray-500 dark:text-gray-400 font-bold tracking-wider">
+				Total de Votantes: <span class="text-purple-600 dark:text-purple-400">804</span>
+			</p>
+		</div>
+
+		<!-- Lista de resultados -->
+		<div class="mt-12 space-y-4">
+			{surveyResults.map((character) => (
+				<div
+					class={`relative overflow-hidden rounded-lg border-2 p-4 transition-all duration-300
+						${character.rank <= 3
+							? 'bg-purple-500/10 border-purple-500 shadow-lg shadow-purple-500/20 dark:shadow-purple-900/30'
+							: 'bg-white/80 border-neutral-200 dark:bg-neutral-900/80 dark:border-neutral-800'}`}
+				>
+					<div class="flex items-center justify-between">
+						<div class="flex items-center gap-4">
+							<!-- Ranking y Medalla -->
+							<div class="flex items-center justify-center w-12 h-12 rounded-full
+								${character.rank === 1 ? 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-500' :
+								character.rank === 2 ? 'bg-gray-300/20 text-gray-600 dark:text-gray-400' :
+								character.rank === 3 ? 'bg-amber-600/20 text-amber-700 dark:text-amber-600' :
+								'bg-purple-500/10 text-purple-600 dark:text-purple-400'}">
+								<span class="text-2xl font-bold">
+									{character.rank <= 3 ? '🏆' : '#' + character.rank}
+								</span>
+							</div>
+							<!-- Nombre del Personaje -->
+							<h3 class="text-xl font-bold text-gray-900 dark:text-white">
+								{character.name}
+							</h3>
+						</div>
+						<!-- Puntos -->
+						<div class="text-right">
+							<span class="text-2xl font-bold text-purple-600 dark:text-purple-400">
+								{character.points}
+							</span>
+							<span class="text-sm text-gray-500 dark:text-gray-400"> pts</span>
+						</div>
+					</div>
+					<!-- Barra de Progreso -->
+					<div class="mt-4 h-2 w-full rounded-full bg-gray-200 dark:bg-gray-700">
+						<div
+							class={`h-2 rounded-full transition-all duration-500
+							${character.rank === 1 ? 'bg-yellow-500' :
+							character.rank === 2 ? 'bg-orange-400' :
+							character.rank === 3 ? 'bg-amber-600' :
+							'bg-purple-500'}`}
+							style={`width: ${(character.points / 611) * 100}%`}
+						/>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</Layout>

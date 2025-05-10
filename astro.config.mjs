@@ -1,12 +1,14 @@
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
+import vue from '@astrojs/vue';
 import tailwind from '@astrojs/tailwind';
-import auth from 'auth-astro';
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
-
+// Configuración principal de Astro
 export default defineConfig({
-  integrations: [react(), tailwind(), auth()],
+  // Integraciones con Vue.js y Tailwind CSS
+  integrations: [vue(), tailwind()],
+  // Configuración para renderizado en el servidor
   output: 'server',
+  // Adaptador para despliegue en Vercel
   adapter: vercel(),
 });

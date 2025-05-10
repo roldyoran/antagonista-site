@@ -1,30 +1,42 @@
 ---
-import {getSession} from 'auth-astro/server'
 import Layout from '@layouts/Layout.astro'
 import Titles from '@components/astrojs/Titles.astro'
-import CharactersPage from '@components/AllCards'
-
-const session = await getSession(Astro.request)
-const statesession = session ? true : false
+import CharactersPage from '@components/vuejs/AllCards.vue'
 ---
 
+<!-- Página de personajes con sistema de votación -->
 <Layout title="Personajes | Sistema de Votacion Antagonista" css="bg-transparent dark:bg-zinc-950">
 	<div id="top">
 		<section class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+			<!-- Títulos y subtítulos de la sección -->
 			<Titles
 				title="Segunda Encuesta de Popularidad"
 				subtitle="¡Vota por tus personajes favoritos y ayúdalos a subir al top!"
 				info="Vota por tus 3 personajes favoritos"
 			/>
-			<CharactersPage statesession={statesession} client:load />
+			<!-- Componente Vue que muestra las tarjetas de personajes -->
+			<CharactersPage client:load />
 		</section>
-		<!-- Flecha para subir al top -->
+		<!-- Flecha para volver al inicio de la página -->
 		<a
 			href="#top"
-			class="fixed bottom-0 right-0 z-10 mb-2 mr-2 flex h-11 w-11 items-center justify-center rounded-full border-2 border-gray-200/30 bg-zinc-800 font-bold text-white transition-all hover:border-2 hover:border-violet-200 hover:bg-primary"
-		>
-			↑
-		</a>
+			class="fixed bottom-0 right-0 z-10 mb-4 mr-4 
+				flex h-12 w-12 items-center justify-center 
+				rounded-full transition-all duration-300 
+				bg-purple-900/20 border-2 border-purple-500 
+				text-purple-500 hover:text-purple-400 
+				hover:scale-110 hover:border-purple-400
+				dark:text-purple-400 dark:border-purple-400
+				dark:hover:text-purple-300 dark:hover:border-purple-300
+				group"
+			>
+				<span class="text-xl font-bold">↑</span>
+				<span 
+					class="absolute inset-0 -z-10 rounded-full 
+						transition-opacity opacity-0 group-hover:opacity-100 
+						bg-purple-500/20 blur-xl"
+				></span>
+			</a>
 	</div>
 </Layout>
 

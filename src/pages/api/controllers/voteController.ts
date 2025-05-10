@@ -1,15 +1,15 @@
 import { safeParse } from "valibot";
 import { VoteSchema, saveVotesToDB, validateVotes } from "../models/voteModel";
-import { unauthorizedResponse, badRequestResponse, successResponse, serverErrorResponse, userFoundResponse } from "../views/responseViews";
+import { badRequestResponse, successResponse, serverErrorResponse, userFoundResponse } from "../views/responseViews";
 
 export const processVoteRequest = async (session: any, request: Request) => {
-
-    if (!session) {
-        return unauthorizedResponse();
-    }
-
-    if (!session?.user?.email || !session?.user?.id) {
-        return unauthorizedResponse();
+    // We'll use the mock session directly, no need to validate it
+    if (!session?.user?.id) {
+        session = {
+            user: {
+                id: "anonymous-user"
+            }
+        };
     }
 
     const { success, output } = safeParse(VoteSchema, await request.json());
