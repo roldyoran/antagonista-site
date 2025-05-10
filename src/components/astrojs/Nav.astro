@@ -4,6 +4,10 @@ import AntagonistaLogo from '@icons/AntagonistaLogo.astro'
 import Insta from '@icons/Insta.astro'
 import MangaPlus from '@icons/MangaPlus.astro'
 import Github from '@icons/Github.astro'
+import Google from '@icons/Google.astro'
+
+import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/components";
+
 ---
 
 <!-- Barra de navegación principal del sitio -->
@@ -29,6 +33,23 @@ import Github from '@icons/Github.astro'
 			<li class="hidden lg:block"><a href="https://github.com/roldyoran/antagonista-site" target="_blank"><Github /></a></li>
 			<!-- Botón para cambiar el tema (claro/oscuro) -->
 			<li class="m-0 translate-y-1 p-0" title="Cambiar Tema"><ThemeToggle client:load /></li>
+			<!-- Botón para iniciar sesión -->
+			<li class="ml-auto">
+				<SignedOut>
+					<div class="flex items-center justify-center text-center space-x-3 hover:text-purple-500 transition-all">
+						<SignInButton mode="modal" >
+						INICIAR SESION
+					</SignInButton>	
+					<Google />
+					</div>
+				  </SignedOut>
+				  
+				  <SignedIn>
+					<UserButton  />
+				  </SignedIn>
+			</li>
+			
+			
 		</ul>
 	</nav>
 </header>
