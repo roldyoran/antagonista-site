@@ -5,6 +5,7 @@ import Insta from '@icons/Insta.astro'
 import MangaPlus from '@icons/MangaPlus.astro'
 import Github from '@icons/Github.astro'
 import Google from '@icons/Google.astro'
+import Admin from '@icons/Admin.astro'
 
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/components";
 
@@ -31,6 +32,8 @@ import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/comp
 				<a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank"><MangaPlus /></a>
 			</li>
 			<li class="hidden lg:block"><a href="https://github.com/roldyoran/antagonista-site" target="_blank"><Github /></a></li>
+			<!-- Visitar el admin dashboard publico de ejemplo -->
+			<li class="hidden lg:block"><a href="https://admin-antagonista.vercel.app/" target="_blank" title="Panel de Administración"><Admin /></a></li> 
 			<!-- Botón para cambiar el tema (claro/oscuro) -->
 			<li class="m-0 translate-y-1 p-0" title="Cambiar Tema"><ThemeToggle client:load /></li>
 			<!-- Botón para iniciar sesión -->
