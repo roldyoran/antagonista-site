@@ -9,7 +9,27 @@ import Admin from '@icons/Admin.astro'
 
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/components";
 
+// Estado para el menú móvil
+let isMenuOpen = false;
+
+// Función para alternar el menú
+const toggleMenu = () => {
+  isMenuOpen = !isMenuOpen;
+};
 ---
+
+<script>
+  // Manejo del menú móvil en el cliente
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuButton = document.getElementById('menuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuButton?.addEventListener('click', () => {
+      mobileMenu?.classList.toggle('translate-x-full');
+      menuButton.classList.toggle('open');
+    });
+  });
+</script>
 
 <!-- Barra de navegación principal del sitio -->
 <header>
@@ -19,8 +39,18 @@ import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/comp
 		<!-- Lista de elementos de navegación -->
 		<ul class="flex items-center gap-5 font-bold">
 			<!-- Logo de Antagonista con enlace a inicio -->
-			<li class="mr-1 font-bold md:mr-6">
+			<li class="mr-auto font-bold md:mr-6">
 				<a href="/" title="Inicio"><AntagonistaLogo width={96} height={64} /></a>
+			</li>
+			<!-- Botón de menú móvil -->
+			<li class="lg:hidden mr-2">
+				<button
+					id="menuButton"
+					class="hamburger-menu relative z-50 h-8 w-8 text-current focus:outline-none"
+					aria-label="Menú"
+				>
+					<span class="hamburger-line"></span>
+				</button>
 			</li>
 			<!-- Enlaces de navegación principales -->
 			<li class="hidden lg:block"><a href="/" title="Inicio">Inicio</a></li>
@@ -34,31 +64,93 @@ import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/comp
 			<li class="hidden lg:block"><a href="https://github.com/roldyoran/antagonista-site" target="_blank"><Github /></a></li>
 			<!-- Visitar el admin dashboard publico de ejemplo -->
 			<li class="hidden lg:block"><a href="https://admin-antagonista.vercel.app/" target="_blank" title="Panel de Administración"><Admin /></a></li> 
-			<!-- Botón para cambiar el tema (claro/oscuro) -->
-			<li class="m-0 translate-y-1 p-0" title="Cambiar Tema"><ThemeToggle client:load /></li>
 			<!-- Botón para iniciar sesión -->
-			<li class="ml-auto">
+			<li class="lg:flex justify-center ml-auto hidden">
 				<SignedOut>
 					<div class="flex items-center justify-center text-center space-x-3 hover:text-purple-500 transition-all">
 						<SignInButton mode="modal" >
-						INICIAR SESION
-					</SignInButton>	
-					<Google />
+							INICIAR SESION
+						</SignInButton>	
+						<Google />
 					</div>
-				  </SignedOut>
-				  
-				  <SignedIn>
+				</SignedOut>
+				
+				<SignedIn>
 					<UserButton  />
-				  </SignedIn>
+				</SignedIn>
 			</li>
-			
-			
 		</ul>
 	</nav>
 </header>
 
+<!-- Menú móvil -->
+<div
+	id="mobileMenu"
+	class="fixed inset-y-0 right-0 z-40 w-64 transform overflow-y-auto bg-neutral-50/95 px-6 py-24 transition-transform duration-300 ease-in-out translate-x-full dark:bg-neutral-950/95 lg:hidden"
+>
+	<ul class="flex flex-col space-y-6 text-center dark:text-white">
+		<li><a href="/" class="block py-2">Inicio</a></li>
+		<li><a href="/personajes" class="block py-2">Personajes</a></li>
+		<li><a href="/encuesta-resultados" class="block py-2">Resultados</a></li>
+		<li class="flex justify-center"><a href="https://www.instagram.com/saikomic" target="_blank"><Insta /></a></li>
+		<li class="flex justify-center"><a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank"><MangaPlus /></a></li>
+		<li class="flex justify-center"><a href="https://github.com/roldyoran/antagonista-site" target="_blank"><Github /></a></li>
+		<li class="flex justify-center"><a href="https://admin-antagonista.vercel.app/" target="_blank"><Admin /></a></li>
+		<!-- Botón para cambiar el tema (claro/oscuro) -->
+		<li class="flex justify-center" title="Cambiar Tema"><ThemeToggle client:load /></li>
+		<!-- Botón para iniciar sesión -->
+		<li class="flex justify-center">
+			<SignedOut>
+				<div class="flex items-center justify-center text-center space-x-3 hover:text-purple-500 transition-all">
+					<SignInButton mode="modal" >
+						INICIAR SESION
+					</SignInButton>	
+					<Google />
+				</div>
+			</SignedOut>
+			
+			<SignedIn>
+				<UserButton  />
+			</SignedIn>
+		</li>
+	</ul>
+</div>
+
 <style>
 	a {
 		@apply transition-all hover:text-purple-500;
+	}
+
+	/* Estilos para el botón de hamburguesa */
+	.hamburger-menu {
+		@apply flex items-center justify-center;
+	}
+
+	.hamburger-line,
+	.hamburger-line::before,
+	.hamburger-line::after {
+		@apply absolute h-0.5 w-6 bg-current transition-all duration-300;
+		content: "";
+	}
+
+	.hamburger-line::before {
+		transform: translateY(-8px);
+	}
+
+	.hamburger-line::after {
+		transform: translateY(8px);
+	}
+
+	/* Animación del botón cuando está abierto */
+	.hamburger-menu.open .hamburger-line {
+		background-color: transparent;
+	}
+
+	.hamburger-menu.open .hamburger-line::before {
+		transform: rotate(45deg);
+	}
+
+	.hamburger-menu.open .hamburger-line::after {
+		transform: rotate(-45deg);
 	}
 </style>
