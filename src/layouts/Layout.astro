@@ -33,9 +33,9 @@ const {title, css} = Astro.props;
     <title>{title}</title>
     <ViewTransitions />
   </head>
-  <body class={css + " uppercase"}>
+  <body class={css + " uppercase flex flex-col min-h-screen"}>
     <Nav />
-    <main class="mt-16">
+    <main class="mt-16 flex-grow">
       <slot />
 
         <ul class="circles">
@@ -52,7 +52,7 @@ const {title, css} = Astro.props;
         </ul>
     </main>
     <footer
-      class="text-center text-gray-50 py-2 text-xs bg-primary dark:bg-purple-950/95 mt-6 tracking-widest"
+      class="text-center text-gray-50 py-2 text-xs bg-primary dark:bg-purple-950/95 tracking-widest"
     >
       © 2024 Copyright: antagonista.site
     </footer>
