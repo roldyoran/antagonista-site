@@ -147,19 +147,21 @@ const handleSubmitVotes = async () => {
 </template>
 
 <style>
-.character-list-move,
-.character-list-enter-active,
-.character-list-leave-active {
-  transition: all 0.5s ease;
-}
+@media (min-width: 768px) {
+  .character-list-move,
+  .character-list-enter-active,
+  .character-list-leave-active {
+    transition: all 0.5s ease;
+  }
 
-.character-list-enter-from,
-.character-list-leave-to {
-  opacity: 0;
-  transform: scale(0.9);
-}
+  .character-list-enter-from,
+  .character-list-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+  }
 
-.character-list-leave-active {
-  position: absolute;
+  .character-list-leave-active {
+    position: absolute;
+  }
 }
 </style>
