@@ -9,18 +9,11 @@ import Admin from '@icons/Admin.astro'
 
 import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/components";
 
-// Estado para el menú móvil
-let isMenuOpen = false;
-
-// Función para alternar el menú
-const toggleMenu = () => {
-  isMenuOpen = !isMenuOpen;
-};
 ---
 
 <script>
-  // Manejo del menú móvil en el cliente
-  document.addEventListener('DOMContentLoaded', () => {
+  // Función para inicializar el menú móvil
+  function setupMobileMenu() {
     const menuButton = document.getElementById('menuButton');
     const mobileMenu = document.getElementById('mobileMenu');
 
@@ -28,7 +21,15 @@ const toggleMenu = () => {
       mobileMenu?.classList.toggle('translate-x-full');
       menuButton.classList.toggle('open');
     });
-  });
+  }
+
+  setupMobileMenu();
+
+  // Inicializar en la carga inicial del documento
+  document.addEventListener('DOMContentLoaded', setupMobileMenu);
+  
+  // Reinicializar después de cada navegación con ViewTransitions
+  document.addEventListener('astro:page-load', setupMobileMenu);
 </script>
 
 <!-- Barra de navegación principal del sitio -->
