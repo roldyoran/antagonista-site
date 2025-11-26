@@ -66,7 +66,7 @@ import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/comp
 			<!-- Visitar el admin dashboard publico de ejemplo -->
 			<li class="hidden lg:block"><a href="https://admin-antagonista.vercel.app/" target="_blank" title="Panel de Administración"><Admin /></a></li> 
 			<!-- Botón para iniciar sesión -->
-			<li class="lg:flex justify-center ml-auto hidden">
+			<!-- <li class="lg:flex justify-center ml-auto hidden">
 				<SignedOut>
 					<div class="flex items-center justify-center text-center space-x-3 hover:text-purple-500 transition-all">
 						<SignInButton mode="modal" >
@@ -79,7 +79,7 @@ import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/comp
 				<SignedIn>
 					<UserButton  />
 				</SignedIn>
-			</li>
+			</li> -->
 		</ul>
 	</nav>
 </header>
@@ -100,7 +100,7 @@ import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/comp
 		<!-- Botón para cambiar el tema (claro/oscuro) -->
 		<li class="flex justify-center" title="Cambiar Tema"><ThemeToggle client:load /></li>
 		<!-- Botón para iniciar sesión -->
-		<li class="flex justify-center">
+		<!-- <li class="flex justify-center">
 			<SignedOut>
 				<div class="flex items-center justify-center text-center space-x-3 hover:text-purple-500 transition-all">
 					<SignInButton mode="modal" >
@@ -113,7 +113,7 @@ import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/comp
 			<SignedIn>
 				<UserButton  />
 			</SignedIn>
-		</li>
+		</li> -->
 	</ul>
 </div>
 
