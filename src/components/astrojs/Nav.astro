@@ -7,7 +7,7 @@ import Github from '@icons/Github.astro'
 import Google from '@icons/Google.astro'
 import Admin from '@icons/Admin.astro'
 
-// import { SignedIn, SignedOut, UserButton, SignInButton } from "@clerk/astro/components";
+// Clerk removed: previously imported SignedIn/SignedOut/UserButton/SignInButton
 
 ---
 
@@ -65,21 +65,7 @@ import Admin from '@icons/Admin.astro'
 			<li class="hidden lg:block"><a href="https://github.com/roldyoran/antagonista-site" target="_blank"><Github /></a></li>
 			<!-- Visitar el admin dashboard publico de ejemplo -->
 			<li class="hidden lg:block"><a href="https://admin-antagonista.vercel.app/" target="_blank" title="Panel de Administración"><Admin /></a></li> 
-			<!-- Botón para iniciar sesión -->
-			<!-- <li class="lg:flex justify-center ml-auto hidden">
-				<SignedOut>
-					<div class="flex items-center justify-center text-center space-x-3 hover:text-purple-500 transition-all">
-						<SignInButton mode="modal" >
-							INICIAR SESION
-						</SignInButton>	
-						<Google />
-					</div>
-				</SignedOut>
-				
-				<SignedIn>
-					<UserButton  />
-				</SignedIn>
-			</li> -->
+			<!-- Sign-in removed (Clerk). If you want auth again, re-add an auth provider here. -->
 		</ul>
 	</nav>
 </header>
@@ -99,21 +85,7 @@ import Admin from '@icons/Admin.astro'
 		<li class="flex justify-center"><a href="https://admin-antagonista.vercel.app/" target="_blank"><Admin /></a></li>
 		<!-- Botón para cambiar el tema (claro/oscuro) -->
 		<li class="flex justify-center" title="Cambiar Tema"><ThemeToggle client:load /></li>
-		<!-- Botón para iniciar sesión -->
-		<!-- <li class="flex justify-center">
-			<SignedOut>
-				<div class="flex items-center justify-center text-center space-x-3 hover:text-purple-500 transition-all">
-					<SignInButton mode="modal" >
-						INICIAR SESION
-					</SignInButton>	
-					<Google />
-				</div>
-			</SignedOut>
-			
-			<SignedIn>
-				<UserButton  />
-			</SignedIn>
-		</li> -->
+			<!-- Sign-in removed (Clerk). -->
 	</ul>
 </div>
 

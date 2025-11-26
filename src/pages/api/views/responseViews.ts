@@ -1,14 +1,15 @@
+// Responses removed: API endpoints disabled.
 export const unauthorizedResponse = () =>
-    new Response("Unauthorized", { status: 401 });
+    new Response("API removed", { status: 410 });
 
 export const badRequestResponse = (message: string) =>
-    new Response(message, { status: 400 });
+    new Response(JSON.stringify({ message }), { status: 410 });
 
 export const successResponse = () =>
-    new Response("ok", { status: 200 });
+    new Response(JSON.stringify({ ok: false }), { status: 410 });
 
 export const serverErrorResponse = (message: string) =>
-    new Response(message, { status: 500 });
+    new Response(JSON.stringify({ message }), { status: 410 });
 
 export const userFoundResponse = () =>
-    new Response("User found previously", { status: 302 });
+    new Response(JSON.stringify({ message: "User found" }), { status: 410 });
