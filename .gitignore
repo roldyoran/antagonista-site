@@ -32,8 +32,6 @@ pnpm-debug.log*
 # python json
 db/python
 
-# pnpm
-pnpm-lock.yaml
 
 # nextjs
 .next
