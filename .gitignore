@@ -37,3 +37,5 @@ pnpm-lock.yaml
 
 # nextjs
 .next
+
+.vercel/output
