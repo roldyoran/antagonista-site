@@ -53,15 +53,15 @@ import Admin from '@icons/Admin.astro'
         </button>
       </li>
 
-      <li class="hidden lg:block nav-link"><a href="/" title="Inicio">Inicio</a></li>
-      <li class="hidden lg:block nav-link"><a href="/personajes" title="Personajes">Personajes</a></li>
-      <li class="hidden lg:block nav-link"><a href="/encuesta-resultados" title="Resultados">Resultados</a></li>
+      <li class="hidden lg:block nav-link"><a href="/" title="Inicio" class="transition-colors duration-300">Inicio</a></li>
+      <li class="hidden lg:block nav-link"><a href="/personajes" title="Personajes" class="transition-colors duration-300">Personajes</a></li>
+      <li class="hidden lg:block nav-link"><a href="/encuesta-resultados" title="Resultados" class="transition-colors duration-300">Resultados</a></li>
 
       <li class="hidden lg:flex items-center gap-4 ml-2 pl-4 border-l border-red-500/10 nav-social">
-        <a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link"><Insta /></a>
-        <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="nav-icon-link"><MangaPlus /></a>
-        <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="nav-icon-link"><Github /></a>
-        <a href="https://admin-antagonista.vercel.app/" target="_blank" class="nav-icon-link" title="Panel de Administración"><Admin /></a>
+        <a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link transition-all duration-300"><Insta /></a>
+        <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="nav-icon-link transition-all duration-300"><MangaPlus /></a>
+        <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="nav-icon-link transition-all duration-300"><Github /></a>
+        <a href="https://admin-antagonista.vercel.app/" target="_blank" class="nav-icon-link transition-all duration-300" title="Panel de Administración"><Admin /></a>
       </li>
     </ul>
   </nav>
@@ -77,14 +77,14 @@ import Admin from '@icons/Admin.astro'
   class="fixed inset-y-0 right-0 z-40 w-64 transform overflow-y-auto glass px-6 py-24 transition-transform duration-300 ease-in-out translate-x-full lg:hidden"
 >
   <ul class="flex flex-col space-y-6 text-center dark:text-white">
-    <li><a href="/" class="block py-2 nav-link-mobile">Inicio</a></li>
-    <li><a href="/personajes" class="block py-2 nav-link-mobile">Personajes</a></li>
-    <li><a href="/encuesta-resultados" class="block py-2 nav-link-mobile">Resultados</a></li>
+    <li><a href="/" class="block py-2 nav-link-mobile transition-colors duration-300">Inicio</a></li>
+    <li><a href="/personajes" class="block py-2 nav-link-mobile transition-colors duration-300">Personajes</a></li>
+    <li><a href="/encuesta-resultados" class="block py-2 nav-link-mobile transition-colors duration-300">Resultados</a></li>
     <li class="flex justify-center gap-4 pt-4 border-t border-red-500/10">
-      <a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link"><Insta /></a>
-      <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="nav-icon-link"><MangaPlus /></a>
-      <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="nav-icon-link"><Github /></a>
-      <a href="https://admin-antagonista.vercel.app/" target="_blank" class="nav-icon-link" title="Panel de Administración"><Admin /></a>
+      <a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link transition-all duration-300"><Insta /></a>
+      <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="nav-icon-link transition-all duration-300"><MangaPlus /></a>
+      <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="nav-icon-link transition-all duration-300"><Github /></a>
+      <a href="https://admin-antagonista.vercel.app/" target="_blank" class="nav-icon-link transition-all duration-300" title="Panel de Administración"><Admin /></a>
     </li>
     <li class="flex justify-center pt-4" title="Cambiar Tema"><ThemeToggle client:load /></li>
   </ul>
