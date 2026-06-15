@@ -15,7 +15,7 @@ const emit = defineEmits<{
 
 const buttonClasses = computed(() => {
   return `relative group px-5 py-3 rounded-xl border-2
-    transition-all duration-300 active:scale-[0.97]
+    transition-all duration-300 active:scale-[0.97] cursor-pointer
     font-body font-semibold tracking-wider text-sm
     flex items-center gap-2
     ${props.showOnlyVotes

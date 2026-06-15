@@ -32,21 +32,21 @@ const {title} = Astro.props;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap"
       rel="stylesheet"
     />
 
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body class="uppercase">
+  <body class="uppercase min-h-screen flex flex-col">
     <canvas id="bg-canvas" aria-hidden="true"></canvas>
     <Nav />
-    <main class="pt-20">
+    <main class="pt-20 flex-1">
       <slot />
     </main>
     <footer
-      class="text-center text-gray-50 py-3 text-xs bg-surface border-t border-red-500/10 tracking-widest"
+      class="text-center text-gray-50 py-3 text-xs bg-ink border-t border-red-500/10 tracking-widest"
     >
       <span class="text-red-400/60">©</span> 2025 Copyright: votaciones-antagonista.vercel.app
     </footer>
@@ -70,7 +70,16 @@ const {title} = Astro.props;
     const DOT_MAX_A = 0.95;
     const DRIFT_SPEED = 0.08;
 
+    const BOKEH_COUNT = 8;
+    const BOKEH_MIN_R = 40;
+    const BOKEH_MAX_R = 100;
+
     const stars: {
+      x: number; y: number; r: number; a: number;
+      vx: number; vy: number;
+    }[] = [];
+
+    const bokeh: {
       x: number; y: number; r: number; a: number;
       vx: number; vy: number;
     }[] = [];
@@ -112,6 +121,20 @@ const {title} = Astro.props;
           vy: Math.sin(angle) * speed,
         });
       }
+
+      bokeh.length = 0;
+      for (let i = 0; i < BOKEH_COUNT; i++) {
+        const angle = rng() * Math.PI * 2;
+        const speed = (rng() * 0.1 + 0.02) * DRIFT_SPEED;
+        bokeh.push({
+          x: rng() * w,
+          y: rng() * h,
+          r: BOKEH_MIN_R + rng() * (BOKEH_MAX_R - BOKEH_MIN_R),
+          a: 0.01 + rng() * 0.03,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+        });
+      }
     }
 
     function update() {
@@ -125,11 +148,32 @@ const {title} = Astro.props;
         if (s.y < -10) s.y = h + 10;
         else if (s.y > h + 10) s.y = -10;
       }
+
+      for (const b of bokeh) {
+        b.x += b.vx;
+        b.y += b.vy;
+
+        if (b.x < -b.r) b.x = w + b.r;
+        else if (b.x > w + b.r) b.x = -b.r;
+
+        if (b.y < -b.r) b.y = h + b.r;
+        else if (b.y > h + b.r) b.y = -b.r;
+      }
     }
 
     function draw() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, w, h);
+
+      for (const b of bokeh) {
+        const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
+        gradient.addColorStop(0, `rgba(220, 38, 38, ${b.a})`);
+        gradient.addColorStop(1, `rgba(220, 38, 38, 0)`);
+        ctx.beginPath();
+        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+      }
 
       for (let i = 0; i < stars.length; i++) {
         for (let j = i + 1; j < stars.length; j++) {
@@ -151,7 +195,7 @@ const {title} = Astro.props;
       for (const s of stars) {
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${s.a * 0.7})`;
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.a * 0.5})`;
         ctx.fill();
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r * 0.4, 0, Math.PI * 2);
