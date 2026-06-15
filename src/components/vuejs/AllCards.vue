@@ -4,43 +4,31 @@ import { characters } from '@data/characters';
 import CharacterCard from './CharacterCard.vue';
 import SearchBar from './SearchBar.vue';
 import FilterToggle from './FilterToggle.vue';
-import SubmitButton from './SubmitButton.vue';
-import confetti from 'canvas-confetti';
 
 interface SelectedCharacter {
   id: number;
   rank: number;
 }
 
-// Estado para manejar la búsqueda y selección de personajes
-const searchTerm = ref(''); // Término de búsqueda para filtrar personajes
-const selectedCharacters = ref<SelectedCharacter[]>([]); // Array para almacenar los personajes seleccionados
-const showOnlyVotes = ref(false); // Bandera para mostrar solo los votos realizados
-const voteStatus = ref<'idle' | 'loading' | 'success' | 'error'>('idle'); // Estado del proceso de votación
-const errorMessage = ref(''); // Mensaje de error para mostrar al usuario
+const searchTerm = ref('');
+const selectedCharacters = ref<SelectedCharacter[]>([]);
+const showOnlyVotes = ref(false);
 
-// Carga los votos guardados al montar el componente
 onMounted(() => {
   const storedVotes = localStorage.getItem('selectedCharacters');
   if (storedVotes) {
-    const parsedVotes = JSON.parse(storedVotes);
-    console.log('Votos cargados del localStorage:', parsedVotes);
-    selectedCharacters.value = parsedVotes;
+    selectedCharacters.value = JSON.parse(storedVotes);
   }
 });
 
-// Guarda los votos en localStorage cuando cambian
 watch(selectedCharacters, (newValue) => {
   if (newValue.length > 0) {
-    console.log('Guardando votos en localStorage:', newValue);
     localStorage.setItem('selectedCharacters', JSON.stringify(newValue));
   } else {
-    console.log('Eliminando votos del localStorage');
     localStorage.removeItem('selectedCharacters');
   }
 }, { deep: true });
 
-// Propiedad computada para filtrar los personajes según la búsqueda
 const filteredCharacters = computed(() => {
   return characters.filter((character) => {
     const matchesSearch = character.name.toLowerCase().includes(searchTerm.value.toLowerCase());
@@ -49,20 +37,19 @@ const filteredCharacters = computed(() => {
   });
 });
 
-// Maneja la lógica de votación
+const selectionCount = computed(() => selectedCharacters.value.length);
+
 const handleVote = (id: number) => {
-  const existingSelection = selectedCharacters.value.find((character) => character.id === id);
+  const existingSelection = selectedCharacters.value.find((c) => c.id === id);
 
   if (existingSelection) {
-    // If already selected, deselect it and adjust ranks
     selectedCharacters.value = selectedCharacters.value
-      .filter((character) => character.id !== id)
-      .map((character) => ({
-        ...character,
-        rank: character.rank > existingSelection.rank ? character.rank - 1 : character.rank
+      .filter((c) => c.id !== id)
+      .map((c) => ({
+        ...c,
+        rank: c.rank > existingSelection.rank ? c.rank - 1 : c.rank
       }));
   } else if (selectedCharacters.value.length < 3) {
-    // If not selected and less than 3 selections, add it
     selectedCharacters.value.push({
       id,
       rank: selectedCharacters.value.length + 1
@@ -70,79 +57,50 @@ const handleVote = (id: number) => {
   }
 };
 
-// Maneja el envío de votos al servidor
-const handleSubmitVotes = async () => {
-  if (selectedCharacters.value.length !== 3) return;
-  
-  voteStatus.value = 'loading';
-  try {
-    const response = await fetch('/api/vote', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ votes: selectedCharacters.value }),
-    });
-
-    if (!response.ok) {
-      if (response.status === 302) {
-        errorMessage.value = 'Solo puedes votar una vez';
-        voteStatus.value = 'error';
-      } else {
-        errorMessage.value = 'Error al enviar los votos, intenta más tarde';
-        voteStatus.value = 'error';
-      }
-      return;
-    }
-    
-    voteStatus.value = 'success';
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  } catch (error) {
-    voteStatus.value = 'error';
-    errorMessage.value = 'Error al enviar los votos, intenta más tarde';
-  }
+const clearSelection = () => {
+  selectedCharacters.value = [];
 };
 </script>
 
 <template>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pb-8">
-      <SearchBar
-        v-model:searchTerm="searchTerm"
-      />
-      <FilterToggle
-        v-model:showOnlyVotes="showOnlyVotes"
-      />
+  <div class="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pb-6">
+      <SearchBar v-model:searchTerm="searchTerm" />
+      <FilterToggle v-model:showOnlyVotes="showOnlyVotes" :selected-count="selectionCount" />
+    </div>
+
+    <div class="flex items-center justify-center gap-4 pb-8">
+      <div class="flex items-center gap-2 text-sm font-body tracking-wider">
+        <span class="text-text-muted">Seleccionados:</span>
+        <span :class="selectionCount === 3 ? 'text-accent-glow' : 'text-accent'" class="font-bold">
+          {{ selectionCount }}/3
+        </span>
+      </div>
+      <button
+        v-if="selectionCount > 0"
+        @click="clearSelection"
+        class="text-xs uppercase tracking-wider text-text-muted hover:text-accent transition-colors font-body font-semibold"
+      >
+        Limpiar
+      </button>
     </div>
 
     <transition-group
       tag="ul"
-      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 mb-16"
+      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
       name="character-list"
     >
       <CharacterCard
-        v-for="(character, index) in filteredCharacters"
+        v-for="character in filteredCharacters"
         :key="character.id"
         :id="character.id"
         :name="character.name"
         :image="character.image"
         :is-selected="!!selectedCharacters.find(c => c.id === character.id)"
         :rank="selectedCharacters.find(c => c.id === character.id)?.rank"
-        :delay="index * 0.06"
         @vote="handleVote(character.id)"
       />
     </transition-group>
-
-    <!-- <SubmitButton
-      :vote-status="voteStatus"
-      :selected-count="selectedCharacters.length"
-      :error-message="errorMessage"
-      @submit="handleSubmitVotes"
-    /> -->
   </div>
 </template>
 
@@ -151,13 +109,13 @@ const handleSubmitVotes = async () => {
   .character-list-move,
   .character-list-enter-active,
   .character-list-leave-active {
-    transition: all 0.5s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .character-list-enter-from,
   .character-list-leave-to {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.92) translateY(8px);
   }
 
   .character-list-leave-active {

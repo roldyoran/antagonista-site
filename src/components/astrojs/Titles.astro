@@ -1,29 +1,29 @@
 ---
-import Image from 'astro/components/Image.astro'
-// create astro props
+import Image from 'astro/components/Image.astro';
+
 interface Props {
-	title: string
-	subtitle: string
-	info: string
+  title: string;
+  subtitle: string;
+  info: string;
 }
 
-// destructure props
-const {title, subtitle, info} = Astro.props
+const {title, subtitle, info} = Astro.props;
 ---
 
 <div class="mb-12 text-center">
-	<!-- <h1 class="mb-4 text-4xl font-bold text-gray-900 dark:text-white">
-		{title}
-	</h1> -->
-	<p class="mb-2 text-2xl text-gray-600 dark:text-gray-400">
-		{subtitle}
-	</p>
-	<!-- <div
-		class="mx-auto mt-6 max-w-72 rounded-lg border-2 border-purple-500 bg-purple-200/10 px-6 py-3 font-bold tracking-wide text-primary dark:relative dark:rounded-lg dark:border-2 dark:border-purple-600 dark:bg-transparent dark:text-purple-100 dark:shadow-lg dark:shadow-purple-600 md:max-w-md"
-	> -->
-	<div class="mx-auto flex justify-center">
-		<!-- <span class="dark:absolute dark:inset-0 dark:rounded-lg dark:bg-purple-500 dark:opacity-30 dark:blur-xl"></span> -->
-		<!-- <span class="dark:relative">{info}</span> -->
-		<Image src="/encuesta.webp" width={800} height={280} alt="info" class="h-32 sm:h-72 w-auto object-cover" />
-	</div>
+  <div class="relative inline-block mb-4">
+    <span class="text-xs uppercase tracking-[0.25em] text-accent-dim font-body font-semibold">
+      Encuesta de Popularidad
+    </span>
+  </div>
+  <h2 class="mb-4 text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.15] tracking-wide text-white font-display">
+    {title}
+  </h2>
+  <div class="mx-auto h-0.5 w-16 rounded-full bg-accent/25 mb-6"></div>
+  <p class="mb-2 text-lg sm:text-xl text-text-muted font-body font-medium tracking-wider leading-relaxed max-w-2xl mx-auto">
+    {subtitle}
+  </p>
+  <div class="mx-auto flex justify-center">
+    <Image src="/encuesta.webp" width={800} height={280} alt="info" class="h-32 sm:h-72 w-auto object-cover" />
+  </div>
 </div>

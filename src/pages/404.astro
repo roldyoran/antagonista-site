@@ -1,26 +1,23 @@
 ---
-import {Fragment} from 'astro/jsx-runtime'
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>404 - Página no encontrada</title>
 	</head>
-	<body class="flex h-screen items-center justify-center bg-gray-950">
+	<body class="flex h-screen items-center justify-center bg-ink">
 		<main class="text-center">
-			<h1 class="text-9xl font-bold text-gray-200">404</h1>
-			<p class="mt-4 text-2xl text-gray-400">Oops! Página no encontrada.</p>
-			<p class="mt-2 text-gray-300">Parece que la página que buscas no existe.</p>
-			<p class="mt-6 text-gray-500">Para votar por tu Antofagasta xd.</p>
-			<a 
-			    href="/" 
-			    class="relative mt-6 inline-block px-8 py-3 text-lg font-bold uppercase tracking-wider bg-gradient-to-r from-purple-600 to-purple-800 text-white rounded-lg transition-all hover:scale-105 hover:shadow-xl hover:shadow-purple-500/20 dark:from-purple-700 dark:to-purple-900"
+			<h1 class="text-9xl font-bold text-neutral-200">404</h1>
+			<p class="mt-4 text-2xl text-neutral-400">Oops! Página no encontrada.</p>
+			<p class="mt-2 text-neutral-500">Parece que la página que buscas no existe.</p>
+			<a
+				href="/"
+				class="mt-6 inline-block px-8 py-3 text-lg font-bold uppercase tracking-wider bg-accent/10 border border-accent/30 text-accent rounded-lg transition-all hover:scale-105 hover:bg-accent/20 hover:border-accent-glow"
 			>
-			    <span class="absolute inset-0 bg-purple-500 blur-lg opacity-30 rounded-lg"></span>
-			    <span class="relative">Volver a la página de inicio ←</span>
+				Volver al inicio
 			</a>
 		</main>
 	</body>

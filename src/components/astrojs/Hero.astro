@@ -1,66 +1,44 @@
 ---
 interface Props {
-	title: string
-	description: string
+  title: string;
+  description: string;
 }
 
-const {title, description} = Astro.props
+const {title, description} = Astro.props;
 ---
 
-<!-- Sección de héroe principal con título y descripción -->
-<section class="relative isolate px-6 lg:px-8 mb-1">
-	<div class="mx-auto max-w-3xl py-16 sm:py-28 lg:py-28">
-		<div class="text-center">
-			<!-- Título principal de la página -->
-			<h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl">
-				{title}
-			</h1>
-			<!-- Descripción o subtítulo de la página -->
-			<p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-400">
-				{description}
-			</p>
-			<!-- Contenedor de botones de acción -->
-			<div class="mt-10 flex items-center justify-center gap-x-6">
-				<!-- Botón principal para ir a la página de personajes -->
-				<a
-					href="/encuesta-resultados"
-					class="relative px-8 py-3 text-lg font-bold uppercase tracking-wider 
-						 border-2 border-purple-500 text-purple-500
-						rounded-lg transition-all duration-300
-						hover:scale-105 hover:text-purple-400 hover:border-purple-400
-						dark:text-purple-400 dark:border-purple-400
-						dark:hover:text-purple-300 dark:hover:border-purple-300"
-					>
-						<span class="absolute inset-0 bg-purple-500/20 blur-xl opacity-50 rounded-lg 
-							transition-opacity group-hover:opacity-75"></span>
-						<span class="relative">Ver Resultados</span>
-					</a>
+<section class="relative isolate px-6 lg:px-8 min-h-[calc(100vh-5rem)] flex items-center justify-center">
+  <div class="mx-auto max-w-4xl py-8">
+    <div class="text-center">
 
-				<!-- Botones alternativos comentados para posible uso futuro -->
-				<!-- <button
-          class="relative px-6 py-3 text-white font-bold uppercase tracking-wider bg-black border-2 border-pink-500 rounded-lg transition-transform transform hover:scale-105"
+      <div class="relative inline-block mb-6">
+        <span class="text-sm sm:text-base uppercase tracking-[0.3em] text-accent-glow font-body font-semibold">
+          Saikomic • Votación Oficial
+        </span>
+      </div>
+
+      <h1 class="text-5xl sm:text-7xl lg:text-8xl font-normal leading-[1.1] tracking-wide text-white font-display">
+        {title}
+      </h1>
+
+      <div class="mt-4 h-1 w-24 mx-auto rounded-full bg-accent/50"></div>
+
+      <p class="mt-8 text-base sm:text-lg leading-relaxed text-text-muted font-body max-w-2xl mx-auto font-medium">
+        {description}
+      </p>
+
+      <div class="mt-12 flex items-center justify-center gap-x-6">
+        <a
+          href="/encuesta-resultados"
+          class="px-10 py-4 text-lg uppercase tracking-widest font-display
+            border-2 border-accent text-accent
+            rounded-lg transition-all duration-300
+            hover:scale-105 hover:text-white hover:border-accent-glow hover:bg-accent/10
+            shadow-lg shadow-accent/5 hover:shadow-accent/20"
         >
-          <span
-            class="absolute inset-0 bg-pink-500 blur-lg opacity-50 rounded-lg"
-          ></span>
-          <span class="relative">Botón Neón</span>
-        </button> -->
-
-				<!-- <button
-          class="relative px-8 py-4 text-white font-semibold uppercase tracking-widest bg-gray-900 border-2 border-lime-400 rounded-lg transition-all hover:shadow-lime-500 hover:shadow-2xl hover:scale-110"
-        >
-          <span
-            class="absolute inset-0 bg-lime-400 blur-lg opacity-30 rounded-lg"
-          ></span>
-          <span class="relative">Neón Lime</span> -->
-				<!-- </button> -->
-
-				<!-- <div
-        class="w-40 h-20 flex justify-center items-center text-sky-200 border-2 rounded-lg border-sky-200 shadow-lg shadow-cyan-500 transform transition-all hover:drop-shadow-xl hover:shadow-2xl hover:scale-110"
-    >
-        Neon container
-    </div> -->
-			</div>
-		</div>
-	</div>
+          Ver Resultados
+        </a>
+      </div>
+    </div>
+  </div>
 </section>

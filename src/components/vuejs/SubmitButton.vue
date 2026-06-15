@@ -9,25 +9,26 @@ interface Props {
 const props = defineProps<Props>();
 const emit = defineEmits<{
   (e: 'submit'): void;
+  (e: 'reset'): void;
 }>();
 </script>
 
 <template>
-  <div class="flex justify-center min-w-screen mt-20 mb-4">
+  <div class="flex justify-center mt-8 mb-4">
     <button
       v-if="voteStatus !== 'success'"
       @click="emit('submit')"
-      class="relative group text-xl md:text-2xl uppercase font-bold px-9 py-3.5 
-        rounded-md transition-all duration-300
+      class="relative group text-xl md:text-2xl uppercase font-display px-9 py-3.5 
+        rounded-lg transition-all duration-300 tracking-wider
         transform md:skew-x-[-15deg] hover:scale-105"
       :class="[
         voteStatus === 'error'
-          ? 'bg-red-900/20 border-2 border-red-500 text-red-500 dark:text-red-400 dark:border-red-400 hover:text-red-400'
+          ? 'bg-red-600/10 border-2 border-red-600 text-red-500'
           : voteStatus === 'loading'
-            ? 'bg-purple-900/20 border-2 border-purple-500 text-purple-500 dark:text-purple-400 dark:border-purple-400 animate-pulse'
+            ? 'bg-accent/10 border-2 border-accent text-accent animate-pulse'
             : selectedCount === 3
-              ? 'bg-lime-900/20 border-2 border-lime-500 text-lime-500 dark:text-lime-400 dark:border-lime-400 hover:text-lime-400'
-              : 'bg-neutral-900/20 border-2 border-neutral-500 text-neutral-500 dark:text-neutral-400 dark:border-neutral-400 cursor-not-allowed opacity-50'
+              ? 'bg-accent/10 border-2 border-accent text-accent hover:text-accent-glow hover:bg-accent/15'
+              : 'bg-surface/20 border-2 border-surface-light text-text-muted cursor-not-allowed opacity-50'
       ]"
       :disabled="voteStatus === 'loading' || voteStatus === 'error' || selectedCount !== 3"
     >
@@ -42,30 +43,28 @@ const emit = defineEmits<{
           Enviar mis Votos {{ selectedCount }}/3
         </template>
       </span>
-      <span 
-        v-if="selectedCount === 3 && voteStatus === 'idle'"
-        class="absolute inset-0 -z-10 rounded-md transition-opacity opacity-0 group-hover:opacity-100 blur-xl"
-        :class="[
-          'bg-lime-500/20'
-        ]"
-      ></span>
     </button>
     
     <div 
       v-else 
-      class="relative group text-2xl md:text-3xl border-2 mx-auto px-12 py-6 
-        text-center font-bold uppercase rounded-md transition-all duration-300
-        transform md:skew-x-[-15deg]
-        bg-lime-500/10 border-lime-500 text-lime-700
-        dark:text-lime-400 dark:border-lime-600"
+      class="flex flex-col items-center gap-4"
     >
-      <span class="md:transform md:skew-x-[15deg] inline-block">
-        ¡Votos Enviados Exitosamente!
-      </span>
-      <span 
-        class="absolute inset-0 -z-10 rounded-md transition-opacity opacity-0 group-hover:opacity-100
-          bg-lime-400/10 dark:bg-lime-400/5 blur-lg"
-      ></span>
+      <div 
+        class="text-2xl md:text-3xl border-2 mx-auto px-12 py-6 
+          text-center font-display uppercase rounded-lg transition-all duration-300
+          transform md:skew-x-[-15deg]
+          bg-accent/10 border-accent text-accent-glow"
+      >
+        <span class="md:transform md:skew-x-[15deg] inline-block">
+          ¡Votos Enviados!
+        </span>
+      </div>
+      <button
+        @click="emit('reset')"
+        class="text-sm uppercase tracking-wider text-text-muted hover:text-accent transition-colors font-body font-semibold"
+      >
+        Votar de nuevo
+      </button>
     </div>
   </div>
 </template>

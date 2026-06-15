@@ -4,126 +4,165 @@ import AntagonistaLogo from '@icons/AntagonistaLogo.astro'
 import Insta from '@icons/Insta.astro'
 import MangaPlus from '@icons/MangaPlus.astro'
 import Github from '@icons/Github.astro'
-import Google from '@icons/Google.astro'
 import Admin from '@icons/Admin.astro'
-
-// Clerk removed: previously imported SignedIn/SignedOut/UserButton/SignInButton
-
 ---
 
 <script>
-  // Función para inicializar el menú móvil
   function setupMobileMenu() {
     const menuButton = document.getElementById('menuButton');
     const mobileMenu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileOverlay');
 
-    menuButton?.addEventListener('click', () => {
-      mobileMenu?.classList.toggle('translate-x-full');
-      menuButton.classList.toggle('open');
-    });
+    function toggleMenu() {
+      const isOpen = mobileMenu?.classList.contains('translate-x-0');
+      if (isOpen) {
+        mobileMenu?.classList.replace('translate-x-0', 'translate-x-full');
+        overlay?.classList.replace('opacity-100', 'opacity-0');
+        overlay?.classList.add('pointer-events-none');
+        menuButton?.classList.remove('open');
+      } else {
+        mobileMenu?.classList.replace('translate-x-full', 'translate-x-0');
+        overlay?.classList.replace('opacity-0', 'opacity-100');
+        overlay?.classList.remove('pointer-events-none');
+        menuButton?.classList.add('open');
+      }
+    }
+
+    menuButton?.addEventListener('click', toggleMenu);
+    overlay?.addEventListener('click', toggleMenu);
   }
 
   setupMobileMenu();
-
-  // Inicializar en la carga inicial del documento
-  document.addEventListener('DOMContentLoaded', setupMobileMenu);
-  
-  // Reinicializar después de cada navegación con ViewTransitions
   document.addEventListener('astro:page-load', setupMobileMenu);
 </script>
 
-<!-- Barra de navegación principal del sitio -->
 <header>
-	<nav
-		class="md:text-md fixed left-0 right-0 top-0 z-50 border-b-2 border-gray-100/10 bg-neutral-50/90 px-3 py-0.5 text-sm uppercase backdrop-blur dark:bg-neutral-950/80 dark:text-white md:px-16 md:py-1 lg:text-base"
-	>
-		<!-- Lista de elementos de navegación -->
-		<ul class="flex items-center gap-5 font-bold">
-			<!-- Logo de Antagonista con enlace a inicio -->
-			<li class="mr-auto font-bold md:mr-6">
-				<a href="/" title="Inicio"><AntagonistaLogo width={96} height={64} /></a>
-			</li>
-			<!-- Botón de menú móvil -->
-			<li class="lg:hidden mr-2">
-				<button
-					id="menuButton"
-					class="hamburger-menu relative z-50 h-8 w-8 text-current focus:outline-none"
-					aria-label="Menú"
-				>
-					<span class="hamburger-line"></span>
-				</button>
-			</li>
-			<!-- Enlaces de navegación principales -->
-			<li class="hidden lg:block"><a href="/" title="Inicio">Inicio</a></li>
-			<li class="hidden lg:block"><a href="/personajes" title="Personajes">Personajes</a></li>
-			<li class="hidden lg:block"><a href="/encuesta-resultados" title="Resultados">Resultados</a></li>
-			<!-- Enlaces a redes sociales -->
-			<li class="hidden lg:block"><a href="https://www.instagram.com/saikomic" target="_blank"><Insta /></a></li>
-			<li class="hidden lg:block">
-				<a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank"><MangaPlus /></a>
-			</li>
-			<li class="hidden lg:block"><a href="https://github.com/roldyoran/antagonista-site" target="_blank"><Github /></a></li>
-			<!-- Visitar el admin dashboard publico de ejemplo -->
-			<li class="hidden lg:block"><a href="https://admin-antagonista.vercel.app/" target="_blank" title="Panel de Administración"><Admin /></a></li> 
-			<!-- Sign-in removed (Clerk). If you want auth again, re-add an auth provider here. -->
-		</ul>
-	</nav>
+  <nav class="glass fixed left-0 right-0 top-0 z-50 border-b border-red-500/10 px-3 py-0.5 text-sm md:px-16 md:py-1 md:text-md lg:text-base">
+    <ul class="flex items-center gap-5 font-bold">
+      <li class="mr-auto font-bold md:mr-6">
+        <a href="/" title="Inicio"><AntagonistaLogo width={96} height={64} /></a>
+      </li>
+
+      <li class="lg:hidden mr-2">
+        <button
+          id="menuButton"
+          class="hamburger-menu relative z-50 h-8 w-8 text-current focus:outline-none"
+          aria-label="Menú"
+        >
+          <span class="hamburger-line"></span>
+        </button>
+      </li>
+
+      <li class="hidden lg:block nav-link"><a href="/" title="Inicio">Inicio</a></li>
+      <li class="hidden lg:block nav-link"><a href="/personajes" title="Personajes">Personajes</a></li>
+      <li class="hidden lg:block nav-link"><a href="/encuesta-resultados" title="Resultados">Resultados</a></li>
+
+      <li class="hidden lg:flex items-center gap-4 ml-2 pl-4 border-l border-red-500/10 nav-social">
+        <a href="https://www.instagram.com/saikomic" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><Insta /></a>
+        <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><MangaPlus /></a>
+        <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><Github /></a>
+        <a href="https://admin-antagonista.vercel.app/" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors" title="Panel de Administración"><Admin /></a>
+      </li>
+    </ul>
+  </nav>
 </header>
 
-<!-- Menú móvil -->
 <div
-	id="mobileMenu"
-	class="fixed inset-y-0 right-0 z-40 w-64 transform overflow-y-auto bg-neutral-50/95 px-6 py-24 transition-transform duration-300 ease-in-out translate-x-full dark:bg-neutral-950/95 lg:hidden"
+  id="mobileOverlay"
+  class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
+></div>
+
+<div
+  id="mobileMenu"
+  class="fixed inset-y-0 right-0 z-40 w-64 transform overflow-y-auto glass px-6 py-24 transition-transform duration-300 ease-in-out translate-x-full lg:hidden"
 >
-	<ul class="flex flex-col space-y-6 text-center dark:text-white">
-		<li><a href="/" class="block py-2">Inicio</a></li>
-		<li><a href="/personajes" class="block py-2">Personajes</a></li>
-		<li><a href="/encuesta-resultados" class="block py-2">Resultados</a></li>
-		<li class="flex justify-center"><a href="https://www.instagram.com/saikomic" target="_blank"><Insta /></a></li>
-		<li class="flex justify-center"><a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank"><MangaPlus /></a></li>
-		<li class="flex justify-center"><a href="https://github.com/roldyoran/antagonista-site" target="_blank"><Github /></a></li>
-		<li class="flex justify-center"><a href="https://admin-antagonista.vercel.app/" target="_blank"><Admin /></a></li>
-		<!-- Botón para cambiar el tema (claro/oscuro) -->
-		<li class="flex justify-center" title="Cambiar Tema"><ThemeToggle client:load /></li>
-			<!-- Sign-in removed (Clerk). -->
-	</ul>
+  <ul class="flex flex-col space-y-6 text-center dark:text-white">
+    <li><a href="/" class="block py-2 nav-link-mobile">Inicio</a></li>
+    <li><a href="/personajes" class="block py-2 nav-link-mobile">Personajes</a></li>
+    <li><a href="/encuesta-resultados" class="block py-2 nav-link-mobile">Resultados</a></li>
+    <li class="flex justify-center gap-4 pt-4 border-t border-red-500/10">
+      <a href="https://www.instagram.com/saikomic" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><Insta /></a>
+      <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><MangaPlus /></a>
+      <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><Github /></a>
+      <a href="https://admin-antagonista.vercel.app/" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors" title="Panel de Administración"><Admin /></a>
+    </li>
+    <li class="flex justify-center pt-4" title="Cambiar Tema"><ThemeToggle client:load /></li>
+  </ul>
 </div>
 
 <style>
-	a {
-		@apply transition-all hover:text-purple-500;
-	}
+  @reference "../../styles/global.css";
 
-	/* Estilos para el botón de hamburguesa */
-	.hamburger-menu {
-		@apply flex items-center justify-center;
-	}
+  .nav-link a {
+    position: relative;
+    padding-bottom: 4px;
+    color: var(--color-text-muted);
+    transition: color 0.3s ease;
+    letter-spacing: 0.08em;
+  }
 
-	.hamburger-line,
-	.hamburger-line::before,
-	.hamburger-line::after {
-		@apply absolute h-0.5 w-6 bg-current transition-all duration-300;
-		content: "";
-	}
+  .nav-link a::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    border-radius: 1px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
+  }
 
-	.hamburger-line::before {
-		transform: translateY(-8px);
-	}
+  .nav-link a:hover {
+    color: var(--color-accent-glow);
+  }
 
-	.hamburger-line::after {
-		transform: translateY(8px);
-	}
+  .nav-link a:hover::after {
+    width: 100%;
+  }
 
-	/* Animación del botón cuando está abierto */
-	.hamburger-menu.open .hamburger-line {
-		background-color: transparent;
-	}
+  .nav-link-mobile {
+    color: var(--color-text-muted);
+    transition: color 0.2s ease;
+    letter-spacing: 0.08em;
+  }
+  .nav-link-mobile:hover {
+    color: var(--color-accent-glow);
+  }
 
-	.hamburger-menu.open .hamburger-line::before {
-		transform: rotate(45deg);
-	}
+  .nav-social a:hover {
+    filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.4));
+  }
 
-	.hamburger-menu.open .hamburger-line::after {
-		transform: rotate(-45deg);
-	}
+  .hamburger-menu {
+    @apply flex items-center justify-center;
+  }
+
+  .hamburger-line,
+  .hamburger-line::before,
+  .hamburger-line::after {
+    @apply absolute h-0.5 w-6 bg-current transition-all duration-300;
+    content: "";
+  }
+
+  .hamburger-line::before {
+    transform: translateY(-8px);
+  }
+
+  .hamburger-line::after {
+    transform: translateY(8px);
+  }
+
+  .hamburger-menu.open .hamburger-line {
+    background-color: transparent;
+  }
+
+  .hamburger-menu.open .hamburger-line::before {
+    transform: rotate(45deg);
+  }
+
+  .hamburger-menu.open .hamburger-line::after {
+    transform: rotate(-45deg);
+  }
 </style>

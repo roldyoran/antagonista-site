@@ -1,14 +1,13 @@
 ---
-// import Navigation from '../components/Navigation';
 import Nav from "@components/astrojs/Nav.astro";
-import {ViewTransitions} from "astro:transitions";
+import {ClientRouter} from "astro:transitions";
+import "../styles/global.css";
 
 interface Props {
   title: string;
-  css: string;
 }
 
-const {title, css} = Astro.props;
+const {title} = Astro.props;
 ---
 
 <!doctype html>
@@ -20,163 +19,182 @@ const {title, css} = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
 
-    <meta name="description" content="Elige y vota por tus personajes favoritos. Inicia sesión con tu cuenta de Google, selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
+    <meta name="description" content="Elige y vota por tus personajes favoritos. Selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
     <meta name="keywords" content="antagonista, votaciones, saikomic, manga, mangaplus" />
     <meta name="autor" content="Edgar Alvarez (roldyoran)" />
-     
+
     <meta property="url" content="https://antagonista.site" />
     <meta property="og:title" content="Votaciones Antagonista" />
     <meta property="og:type" content="website" />
-    <meta property="og:description" content="Elige y vota por tus personajes favoritos. Inicia sesión con tu cuenta de Google, selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
+    <meta property="og:description" content="Elige y vota por tus personajes favoritos. Selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
     <meta property="og:image" content="https://antagonista.site/TAGO.webp" />
 
-    <title>{title}</title>
-    <ViewTransitions />
-  </head>
-  <body class={css + " uppercase flex flex-col min-h-screen"}>
-    <Nav />
-    <main class="mt-16 flex-grow">
-      <slot />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
-        <ul class="circles">
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
-        </ul>
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body class="uppercase flex flex-col min-h-screen">
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+    <Nav />
+    <main class="mt-20 flex-grow">
+      <slot />
     </main>
     <footer
-      class="text-center text-gray-50 py-2 text-xs bg-primary/50 dark:bg-purple-950/70 tracking-widest backdrop-blur-md"
+      class="text-center text-gray-50 py-3 text-xs bg-surface border-t border-red-500/10 tracking-widest backdrop-blur-md"
     >
-      © 2025 Copyright: votaciones-antagonista.vercel.app
+      <span class="text-red-400/60">©</span> 2025 Copyright: votaciones-antagonista.vercel.app
     </footer>
   </body>
 </html>
 
-<style>
-  body {
-    font-family: "Exo", sans-serif;
-  }
+<script>
+  function initCanvas() {
+    const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement;
+    if (!canvas) return;
 
-  .circles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* Ocupa toda la altura de la pantalla */
-    overflow: hidden;
-    z-index: -50;
-    pointer-events: none; /* Evita que interfiera con elementos interactivos */
-}
+    const ctx = canvas.getContext('2d')!;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const STARS_COUNT = 90;
+    const CONNECT_DIST = 160;
+    const MAX_LINE_ALPHA = 0.35;
+    const DOT_MIN_R = 1.2;
+    const DOT_MAX_R = 3;
+    const DOT_MIN_A = 0.5;
+    const DOT_MAX_A = 0.95;
+    const DRIFT_SPEED = 0.08;
 
-  .circles li {
-    position: absolute;
-    display: block;
-    list-style: none;
-    width: 20px;
-    height: 20px;
-    background: rgba(0, 0, 0, 0.2);
-    animation: animate 25s linear infinite;
-    bottom: -150px;
-  }
+    const stars: {
+      x: number; y: number; r: number; a: number;
+      vx: number; vy: number;
+    }[] = [];
 
-  /* Modificar el color de los círculos en modo oscuro */
-  .dark .circles li {
-    background: rgba(139, 139, 139, 0.2); /* Círculos blancos en modo oscuro */
-  }
+    let dpr = 1;
+    let w = 0;
+    let h = 0;
+    let animId = 0;
+    let running = false;
 
-  .circles li:nth-child(1) {
-    left: 25%;
-    width: 80px;
-    height: 80px;
-    animation-delay: 0s;
-  }
-
-  .circles li:nth-child(2) {
-    left: 10%;
-    width: 20px;
-    height: 20px;
-    animation-delay: 2s;
-    animation-duration: 12s;
-  }
-
-  .circles li:nth-child(3) {
-    left: 70%;
-    width: 20px;
-    height: 20px;
-    animation-delay: 4s;
-  }
-
-  .circles li:nth-child(4) {
-    left: 40%;
-    width: 60px;
-    height: 60px;
-    animation-delay: 0s;
-    animation-duration: 18s;
-  }
-
-  .circles li:nth-child(5) {
-    left: 65%;
-    width: 20px;
-    height: 20px;
-    animation-delay: 0s;
-  }
-
-  .circles li:nth-child(6) {
-    left: 75%;
-    width: 110px;
-    height: 110px;
-    animation-delay: 3s;
-  }
-
-  .circles li:nth-child(7) {
-    left: 35%;
-    width: 150px;
-    height: 150px;
-    animation-delay: 7s;
-  }
-
-  .circles li:nth-child(8) {
-    left: 50%;
-    width: 25px;
-    height: 25px;
-    animation-delay: 15s;
-    animation-duration: 45s;
-  }
-
-  .circles li:nth-child(9) {
-    left: 20%;
-    width: 15px;
-    height: 15px;
-    animation-delay: 2s;
-    animation-duration: 35s;
-  }
-
-  .circles li:nth-child(10) {
-    left: 85%;
-    width: 150px;
-    height: 150px;
-    animation-delay: 0s;
-    animation-duration: 11s;
-  }
-
-  @keyframes animate {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 1;
-      border-radius: 0;
+    function seededRandom(seed: number) {
+      let s = seed;
+      return () => {
+        s = (s * 16807) % 2147483647;
+        return (s - 1) / 2147483646;
+      };
     }
 
-    100% {
-      transform: translateY(-1000px) rotate(720deg);
-      opacity: 0;
-      border-radius: 50%;
+    function resize() {
+      dpr = window.devicePixelRatio || 1;
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+
+      stars.length = 0;
+      const rng = seededRandom(42);
+      for (let i = 0; i < STARS_COUNT; i++) {
+        const angle = rng() * Math.PI * 2;
+        const speed = (rng() * 0.3 + 0.05) * DRIFT_SPEED;
+        stars.push({
+          x: rng() * w,
+          y: rng() * h,
+          r: DOT_MIN_R + rng() * (DOT_MAX_R - DOT_MIN_R),
+          a: DOT_MIN_A + rng() * (DOT_MAX_A - DOT_MIN_A),
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+        });
+      }
     }
+
+    function update() {
+      for (const s of stars) {
+        s.x += s.vx;
+        s.y += s.vy;
+
+        if (s.x < -10) s.x = w + 10;
+        else if (s.x > w + 10) s.x = -10;
+
+        if (s.y < -10) s.y = h + 10;
+        else if (s.y > h + 10) s.y = -10;
+      }
+    }
+
+    function draw() {
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+
+      for (let i = 0; i < stars.length; i++) {
+        for (let j = i + 1; j < stars.length; j++) {
+          const dx = stars[i].x - stars[j].x;
+          const dy = stars[i].y - stars[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < CONNECT_DIST) {
+            const alpha = (1 - dist / CONNECT_DIST) * MAX_LINE_ALPHA;
+            ctx.beginPath();
+            ctx.moveTo(stars[i].x, stars[i].y);
+            ctx.lineTo(stars[j].x, stars[j].y);
+            ctx.strokeStyle = `rgba(220, 38, 38, ${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      for (const s of stars) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.a * 0.7})`;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 0.4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(239, 68, 68, ${s.a})`;
+        ctx.fill();
+      }
+    }
+
+    function loop() {
+      update();
+      draw();
+      animId = requestAnimationFrame(loop);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      resize();
+      draw();
+      if (!prefersReduced) {
+        loop();
+      }
+    }
+
+    if (animId) cancelAnimationFrame(animId);
+    running = false;
+    start();
   }
-</style>
+
+  initCanvas();
+  document.addEventListener('astro:page-load', initCanvas);
+
+  window.addEventListener('resize', () => {
+    const canvas = document.getElementById('bg-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d')!;
+      const dpr = window.devicePixelRatio || 1;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = `${w}px`;
+      canvas.style.height = `${h}px`;
+    }
+  });
+</script>
