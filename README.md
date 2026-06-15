@@ -37,19 +37,19 @@ git clone https://github.com/roldyoran/antagonista-site
 
 2. Instala las dependencias:
 ```bash
-pnpm install
+bun install
 ```
 
 3. Inicia el servidor de desarrollo:
 ```bash
-pnpm run dev
+bun run dev
 ```
 
 ## 📋 Scripts Disponibles
 
-- `pnpm dev` - Inicia el servidor de desarrollo
-- `pnpm build` - Construye el proyecto para producción
-- `pnpm preview` - Previsualiza la build de producción
+- `bun dev` - Inicia el servidor de desarrollo
+- `bun run build` - Construye el proyecto para producción
+- `bun run preview` - Previsualiza la build de producción
 
 ## 🌐 Características Principales
 
