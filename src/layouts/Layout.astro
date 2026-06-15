@@ -39,14 +39,14 @@ const {title} = Astro.props;
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body class="uppercase flex flex-col min-h-screen">
+  <body class="uppercase">
     <canvas id="bg-canvas" aria-hidden="true"></canvas>
     <Nav />
-    <main class="mt-20 flex-grow">
+    <main class="pt-20">
       <slot />
     </main>
     <footer
-      class="text-center text-gray-50 py-3 text-xs bg-surface border-t border-red-500/10 tracking-widest backdrop-blur-md"
+      class="text-center text-gray-50 py-3 text-xs bg-surface border-t border-red-500/10 tracking-widest"
     >
       <span class="text-red-400/60">©</span> 2025 Copyright: votaciones-antagonista.vercel.app
     </footer>

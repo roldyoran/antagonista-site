@@ -105,21 +105,32 @@ const clearSelection = () => {
 </template>
 
 <style>
-@media (min-width: 768px) {
-  .character-list-move,
-  .character-list-enter-active,
-  .character-list-leave-active {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+.character-list-move,
+.character-list-enter-active,
+.character-list-leave-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  .character-list-enter-from,
-  .character-list-leave-to {
-    opacity: 0;
-    transform: scale(0.92) translateY(8px);
-  }
+.character-list-enter-from,
+.character-list-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
 
+.character-list-leave-active {
+  position: absolute;
+  width: calc(25% - 12px);
+}
+
+@media (max-width: 1023px) {
   .character-list-leave-active {
-    position: absolute;
+    width: calc(33.333% - 11px);
+  }
+}
+
+@media (max-width: 639px) {
+  .character-list-leave-active {
+    width: calc(50% - 8px);
   }
 }
 </style>

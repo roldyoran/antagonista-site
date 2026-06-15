@@ -58,10 +58,10 @@ import Admin from '@icons/Admin.astro'
       <li class="hidden lg:block nav-link"><a href="/encuesta-resultados" title="Resultados">Resultados</a></li>
 
       <li class="hidden lg:flex items-center gap-4 ml-2 pl-4 border-l border-red-500/10 nav-social">
-        <a href="https://www.instagram.com/saikomic" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><Insta /></a>
-        <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><MangaPlus /></a>
-        <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><Github /></a>
-        <a href="https://admin-antagonista.vercel.app/" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors" title="Panel de Administración"><Admin /></a>
+        <a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link"><Insta /></a>
+        <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="nav-icon-link"><MangaPlus /></a>
+        <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="nav-icon-link"><Github /></a>
+        <a href="https://admin-antagonista.vercel.app/" target="_blank" class="nav-icon-link" title="Panel de Administración"><Admin /></a>
       </li>
     </ul>
   </nav>
@@ -81,10 +81,10 @@ import Admin from '@icons/Admin.astro'
     <li><a href="/personajes" class="block py-2 nav-link-mobile">Personajes</a></li>
     <li><a href="/encuesta-resultados" class="block py-2 nav-link-mobile">Resultados</a></li>
     <li class="flex justify-center gap-4 pt-4 border-t border-red-500/10">
-      <a href="https://www.instagram.com/saikomic" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><Insta /></a>
-      <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><MangaPlus /></a>
-      <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors"><Github /></a>
-      <a href="https://admin-antagonista.vercel.app/" target="_blank" class="text-neutral-400 hover:text-red-400 transition-colors" title="Panel de Administración"><Admin /></a>
+      <a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link"><Insta /></a>
+      <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="nav-icon-link"><MangaPlus /></a>
+      <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="nav-icon-link"><Github /></a>
+      <a href="https://admin-antagonista.vercel.app/" target="_blank" class="nav-icon-link" title="Panel de Administración"><Admin /></a>
     </li>
     <li class="flex justify-center pt-4" title="Cambiar Tema"><ThemeToggle client:load /></li>
   </ul>
@@ -131,8 +131,26 @@ import Admin from '@icons/Admin.astro'
     color: var(--color-accent-glow);
   }
 
-  .nav-social a:hover {
-    filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.4));
+  .nav-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    color: var(--color-text-muted);
+    transition: all 0.2s ease;
+  }
+
+  .nav-icon-link:hover {
+    color: var(--color-accent-glow);
+    background: rgba(220, 38, 38, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 0 12px rgba(220, 38, 38, 0.25);
+  }
+
+  .nav-icon-link:active {
+    transform: translateY(0);
   }
 
   .hamburger-menu {
