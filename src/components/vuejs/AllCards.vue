@@ -92,23 +92,24 @@ const clearSelection = () => {
       </button>
     </div>
 
-    <transition-group
-      ref="cardsGrid"
-      tag="ul"
-      class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
-      name="character-list"
-    >
-      <CharacterCard
-        v-for="character in filteredCharacters"
-        :key="character.id"
-        :id="character.id"
-        :name="character.name"
-        :image="character.image"
-        :is-selected="!!selectedCharacters.find(c => c.id === character.id)"
-        :rank="selectedCharacters.find(c => c.id === character.id)?.rank"
-        @vote="handleVote(character.id)"
-      />
-    </transition-group>
+    <div ref="cardsGrid">
+      <transition-group
+        tag="ul"
+        class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
+        name="character-list"
+      >
+        <CharacterCard
+          v-for="character in filteredCharacters"
+          :key="character.id"
+          :id="character.id"
+          :name="character.name"
+          :image="character.image"
+          :is-selected="!!selectedCharacters.find(c => c.id === character.id)"
+          :rank="selectedCharacters.find(c => c.id === character.id)?.rank"
+          @vote="handleVote(character.id)"
+        />
+      </transition-group>
+    </div>
   </div>
 </template>
 
