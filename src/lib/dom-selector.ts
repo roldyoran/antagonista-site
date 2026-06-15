@@ -7,10 +7,8 @@
  * @param context
  * @returns  HTMLElement
  */
-export const $ = <T extends HTMLElement>(
-	selector: string,
-	context: Document | HTMLElement = document
-) => context.querySelector<T>(selector)
+export const $ = <T extends HTMLElement>(selector: string, context: Document | HTMLElement = document) =>
+	context.querySelector<T>(selector)
 
 /**
  * Get elements from dom by selector string
@@ -20,7 +18,5 @@ export const $ = <T extends HTMLElement>(
  * @param context
  * @returns  NodeList
  */
-export const $$ = <T extends HTMLElement>(
-	selector: string,
-	context: Document | HTMLElement = document
-) => context.querySelectorAll<T>(selector)
+export const $$ = <T extends HTMLElement>(selector: string, context: Document | HTMLElement = document) =>
+	context.querySelectorAll<T>(selector)

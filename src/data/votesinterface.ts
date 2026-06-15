@@ -1,7 +1,6 @@
 interface RankedItem {
-    id: number;
-    rank: number;
+	id: number
+	rank: number
 }
 
-
-export type TypeVotes = RankedItem[];
+export type TypeVotes = RankedItem[]

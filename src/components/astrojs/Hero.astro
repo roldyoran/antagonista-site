@@ -1,44 +1,39 @@
 ---
 interface Props {
-  title: string;
-  description: string;
+	title: string
+	description: string
 }
 
-const {title, description} = Astro.props;
+const { title, description } = Astro.props
 ---
 
-<section class="relative isolate px-6 lg:px-8 min-h-[calc(100vh-9rem)] flex items-center justify-center overflow-hidden">
-  <div class="mx-auto max-w-4xl py-8">
-    <div class="text-center">
+<section class="relative isolate flex min-h-[calc(100vh-9rem)] items-center justify-center overflow-hidden px-6 lg:px-8">
+	<div class="mx-auto max-w-4xl py-8">
+		<div class="text-center">
+			<div class="relative mb-6 inline-block">
+				<span class="text-accent-glow font-body text-sm font-semibold tracking-[0.3em] uppercase sm:text-base">
+					Antagonista • Votación Oficial
+				</span>
+			</div>
 
-      <div class="relative inline-block mb-6">
-        <span class="text-sm sm:text-base uppercase tracking-[0.3em] text-accent-glow font-body font-semibold">
-          Antagonista • Votación Oficial
-        </span>
-      </div>
+			<h1 class="font-display text-4xl leading-[1.1] font-normal tracking-wide text-white sm:text-5xl lg:text-6xl">
+				{title}
+			</h1>
 
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.1] tracking-wide text-white font-display">
-        {title}
-      </h1>
+			<div class="bg-accent/50 mx-auto mt-4 h-1 w-24 rounded-full"></div>
 
-      <div class="mt-4 h-1 w-24 mx-auto rounded-full bg-accent/50"></div>
+			<p class="text-text-muted font-body mx-auto mt-8 max-w-2xl text-base leading-relaxed font-medium sm:text-lg">
+				{description}
+			</p>
 
-      <p class="mt-8 text-base sm:text-lg leading-relaxed text-text-muted font-body max-w-2xl mx-auto font-medium">
-        {description}
-      </p>
-
-      <div class="mt-12 flex items-center justify-center gap-x-6">
-        <a
-          href="/encuesta-resultados"
-          class="px-10 py-4 text-lg uppercase tracking-widest font-display
-            border-2 border-accent text-accent
-            rounded-lg transition-all duration-300
-            hover:scale-105 hover:text-white hover:border-accent-glow hover:bg-accent/10
-            shadow-lg shadow-accent/5 hover:shadow-accent/20"
-        >
-          Ver Resultados
-        </a>
-      </div>
-    </div>
-  </div>
+			<div class="mt-12 flex items-center justify-center gap-x-6">
+				<a
+					href="/encuesta-resultados"
+					class="font-display border-accent text-accent hover:border-accent-glow hover:bg-accent/10 shadow-accent/5 hover:shadow-accent/20 rounded-lg border-2 px-10 py-4 text-lg tracking-widest uppercase shadow-lg transition-all duration-300 hover:scale-105 hover:text-white"
+				>
+					Ver Resultados
+				</a>
+			</div>
+		</div>
+	</div>
 </section>

@@ -1,244 +1,256 @@
 ---
-import Nav from "@components/astrojs/Nav.astro";
-import {ClientRouter} from "astro:transitions";
-import "../styles/global.css";
+import Nav from '@components/astrojs/Nav.astro'
+import { ClientRouter } from 'astro:transitions'
+import '../styles/global.css'
 
 interface Props {
-  title: string;
+	title: string
 }
 
-const {title} = Astro.props;
+const { title } = Astro.props
 ---
 
 <!doctype html>
 <html lang="es" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/mask.ico" />
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="icon" type="image/x-icon" href="/mask.ico" />
 
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
 
-    <meta name="description" content="Elige y vota por tus personajes favoritos. Selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
-    <meta name="keywords" content="antagonista, votaciones, saikomic, manga, mangaplus" />
-    <meta name="autor" content="Edgar Alvarez (roldyoran)" />
+		<meta
+			name="description"
+			content="Elige y vota por tus personajes favoritos. Selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa"
+		/>
+		<meta name="keywords" content="antagonista, votaciones, saikomic, manga, mangaplus" />
+		<meta name="autor" content="Edgar Alvarez (roldyoran)" />
 
-    <meta property="url" content="https://antagonista.site" />
-    <meta property="og:title" content="Votaciones Antagonista" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content="Elige y vota por tus personajes favoritos. Selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa" />
-    <meta property="og:image" content="https://antagonista.site/TAGO.webp" />
+		<meta property="url" content="https://antagonista.site" />
+		<meta property="og:title" content="Votaciones Antagonista" />
+		<meta property="og:type" content="website" />
+		<meta
+			property="og:description"
+			content="Elige y vota por tus personajes favoritos. Selecciona tus 3 personajes preferidos. Y recuerda que el Orden de Votación Importa"
+		/>
+		<meta property="og:image" content="https://antagonista.site/TAGO.webp" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap"
-      rel="stylesheet"
-    />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=DM+Sans:wght@400;500;600;700&family=Bebas+Neue&display=swap"
+			rel="stylesheet"
+		/>
 
-    <title>{title}</title>
-    <ClientRouter />
-  </head>
-  <body class="uppercase min-h-screen flex flex-col">
-    <canvas id="bg-canvas" aria-hidden="true"></canvas>
-    <Nav />
-    <main class="pt-20 flex-1">
-      <slot />
-    </main>
-    <footer
-      class="text-center text-gray-50 py-3 text-xs bg-ink border-t border-red-500/10 tracking-widest"
-    >
-      <span class="text-red-400/60">©</span> 2025 Copyright: votaciones-antagonista.vercel.app
-    </footer>
-  </body>
+		<title>{title}</title>
+		<ClientRouter />
+	</head>
+	<body class="flex min-h-screen flex-col uppercase">
+		<canvas id="bg-canvas" aria-hidden="true"></canvas>
+		<Nav />
+		<main class="flex-1 pt-20">
+			<slot />
+		</main>
+		<footer class="bg-ink border-t border-red-500/10 py-3 text-center text-xs tracking-widest text-gray-50">
+			<span class="text-red-400/60">©</span> 2025 Copyright: votaciones-antagonista.vercel.app
+		</footer>
+	</body>
 </html>
 
 <script>
-  function initCanvas() {
-    const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement;
-    if (!canvas) return;
+	function initCanvas() {
+		const canvas = document.getElementById('bg-canvas') as HTMLCanvasElement
+		if (!canvas) return
 
-    const ctx = canvas.getContext('2d')!;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const ctx = canvas.getContext('2d')!
+		const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-    const STARS_COUNT = 90;
-    const CONNECT_DIST = 160;
-    const MAX_LINE_ALPHA = 0.35;
-    const DOT_MIN_R = 1.2;
-    const DOT_MAX_R = 3;
-    const DOT_MIN_A = 0.5;
-    const DOT_MAX_A = 0.95;
-    const DRIFT_SPEED = 0.15;
+		const STARS_COUNT = 90
+		const CONNECT_DIST = 160
+		const MAX_LINE_ALPHA = 0.35
+		const DOT_MIN_R = 1.2
+		const DOT_MAX_R = 3
+		const DOT_MIN_A = 0.5
+		const DOT_MAX_A = 0.95
+		const DRIFT_SPEED = 0.15
 
-    const BOKEH_COUNT = 8;
-    const BOKEH_MIN_R = 40;
-    const BOKEH_MAX_R = 100;
+		const BOKEH_COUNT = 8
+		const BOKEH_MIN_R = 40
+		const BOKEH_MAX_R = 100
 
-    const stars: {
-      x: number; y: number; r: number; a: number;
-      vx: number; vy: number;
-    }[] = [];
+		const stars: {
+			x: number
+			y: number
+			r: number
+			a: number
+			vx: number
+			vy: number
+		}[] = []
 
-    const bokeh: {
-      x: number; y: number; r: number; a: number;
-      vx: number; vy: number;
-    }[] = [];
+		const bokeh: {
+			x: number
+			y: number
+			r: number
+			a: number
+			vx: number
+			vy: number
+		}[] = []
 
-    let dpr = 1;
-    let w = 0;
-    let h = 0;
-    let animId = 0;
-    let running = false;
+		let dpr = 1
+		let w = 0
+		let h = 0
+		let animId = 0
+		let running = false
 
-    function seededRandom(seed: number) {
-      let s = seed;
-      return () => {
-        s = (s * 16807) % 2147483647;
-        return (s - 1) / 2147483646;
-      };
-    }
+		function seededRandom(seed: number) {
+			let s = seed
+			return () => {
+				s = (s * 16807) % 2147483647
+				return (s - 1) / 2147483646
+			}
+		}
 
-    function resize() {
-      dpr = window.devicePixelRatio || 1;
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
+		function resize() {
+			dpr = window.devicePixelRatio || 1
+			w = window.innerWidth
+			h = window.innerHeight
+			canvas.width = w * dpr
+			canvas.height = h * dpr
+			canvas.style.width = `${w}px`
+			canvas.style.height = `${h}px`
 
-      stars.length = 0;
-      const rng = seededRandom(42);
-      for (let i = 0; i < STARS_COUNT; i++) {
-        const angle = rng() * Math.PI * 2;
-        const speed = (rng() * 0.3 + 0.05) * DRIFT_SPEED;
-        stars.push({
-          x: rng() * w,
-          y: rng() * h,
-          r: DOT_MIN_R + rng() * (DOT_MAX_R - DOT_MIN_R),
-          a: DOT_MIN_A + rng() * (DOT_MAX_A - DOT_MIN_A),
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-        });
-      }
+			stars.length = 0
+			const rng = seededRandom(42)
+			for (let i = 0; i < STARS_COUNT; i++) {
+				const angle = rng() * Math.PI * 2
+				const speed = (rng() * 0.3 + 0.05) * DRIFT_SPEED
+				stars.push({
+					x: rng() * w,
+					y: rng() * h,
+					r: DOT_MIN_R + rng() * (DOT_MAX_R - DOT_MIN_R),
+					a: DOT_MIN_A + rng() * (DOT_MAX_A - DOT_MIN_A),
+					vx: Math.cos(angle) * speed,
+					vy: Math.sin(angle) * speed
+				})
+			}
 
-      bokeh.length = 0;
-      for (let i = 0; i < BOKEH_COUNT; i++) {
-        const angle = rng() * Math.PI * 2;
-        const speed = (rng() * 0.1 + 0.02) * DRIFT_SPEED;
-        bokeh.push({
-          x: rng() * w,
-          y: rng() * h,
-          r: BOKEH_MIN_R + rng() * (BOKEH_MAX_R - BOKEH_MIN_R),
-          a: 0.01 + rng() * 0.03,
-          vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed,
-        });
-      }
-    }
+			bokeh.length = 0
+			for (let i = 0; i < BOKEH_COUNT; i++) {
+				const angle = rng() * Math.PI * 2
+				const speed = (rng() * 0.1 + 0.02) * DRIFT_SPEED
+				bokeh.push({
+					x: rng() * w,
+					y: rng() * h,
+					r: BOKEH_MIN_R + rng() * (BOKEH_MAX_R - BOKEH_MIN_R),
+					a: 0.01 + rng() * 0.03,
+					vx: Math.cos(angle) * speed,
+					vy: Math.sin(angle) * speed
+				})
+			}
+		}
 
-    function update() {
-      for (const s of stars) {
-        s.x += s.vx;
-        s.y += s.vy;
+		function update() {
+			for (const s of stars) {
+				s.x += s.vx
+				s.y += s.vy
 
-        if (s.x < -10) s.x = w + 10;
-        else if (s.x > w + 10) s.x = -10;
+				if (s.x < -10) s.x = w + 10
+				else if (s.x > w + 10) s.x = -10
 
-        if (s.y < -10) s.y = h + 10;
-        else if (s.y > h + 10) s.y = -10;
-      }
+				if (s.y < -10) s.y = h + 10
+				else if (s.y > h + 10) s.y = -10
+			}
 
-      for (const b of bokeh) {
-        b.x += b.vx;
-        b.y += b.vy;
+			for (const b of bokeh) {
+				b.x += b.vx
+				b.y += b.vy
 
-        if (b.x < -b.r) b.x = w + b.r;
-        else if (b.x > w + b.r) b.x = -b.r;
+				if (b.x < -b.r) b.x = w + b.r
+				else if (b.x > w + b.r) b.x = -b.r
 
-        if (b.y < -b.r) b.y = h + b.r;
-        else if (b.y > h + b.r) b.y = -b.r;
-      }
-    }
+				if (b.y < -b.r) b.y = h + b.r
+				else if (b.y > h + b.r) b.y = -b.r
+			}
+		}
 
-    function draw() {
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
+		function draw() {
+			ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+			ctx.clearRect(0, 0, w, h)
 
-      for (const b of bokeh) {
-        const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r);
-        gradient.addColorStop(0, `rgba(220, 38, 38, ${b.a})`);
-        gradient.addColorStop(1, `rgba(220, 38, 38, 0)`);
-        ctx.beginPath();
-        ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-      }
+			for (const b of bokeh) {
+				const gradient = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r)
+				gradient.addColorStop(0, `rgba(220, 38, 38, ${b.a})`)
+				gradient.addColorStop(1, `rgba(220, 38, 38, 0)`)
+				ctx.beginPath()
+				ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2)
+				ctx.fillStyle = gradient
+				ctx.fill()
+			}
 
-      for (let i = 0; i < stars.length; i++) {
-        for (let j = i + 1; j < stars.length; j++) {
-          const dx = stars[i].x - stars[j].x;
-          const dy = stars[i].y - stars[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * MAX_LINE_ALPHA;
-            ctx.beginPath();
-            ctx.moveTo(stars[i].x, stars[i].y);
-            ctx.lineTo(stars[j].x, stars[j].y);
-            ctx.strokeStyle = `rgba(220, 38, 38, ${alpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
+			for (let i = 0; i < stars.length; i++) {
+				for (let j = i + 1; j < stars.length; j++) {
+					const dx = stars[i].x - stars[j].x
+					const dy = stars[i].y - stars[j].y
+					const dist = Math.sqrt(dx * dx + dy * dy)
+					if (dist < CONNECT_DIST) {
+						const alpha = (1 - dist / CONNECT_DIST) * MAX_LINE_ALPHA
+						ctx.beginPath()
+						ctx.moveTo(stars[i].x, stars[i].y)
+						ctx.lineTo(stars[j].x, stars[j].y)
+						ctx.strokeStyle = `rgba(220, 38, 38, ${alpha})`
+						ctx.lineWidth = 0.5
+						ctx.stroke()
+					}
+				}
+			}
 
-      for (const s of stars) {
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 255, 255, ${s.a * 0.5})`;
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r * 0.4, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(239, 68, 68, ${s.a})`;
-        ctx.fill();
-      }
-    }
+			for (const s of stars) {
+				ctx.beginPath()
+				ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2)
+				ctx.fillStyle = `rgba(255, 255, 255, ${s.a * 0.5})`
+				ctx.fill()
+				ctx.beginPath()
+				ctx.arc(s.x, s.y, s.r * 0.4, 0, Math.PI * 2)
+				ctx.fillStyle = `rgba(239, 68, 68, ${s.a})`
+				ctx.fill()
+			}
+		}
 
-    function loop() {
-      update();
-      draw();
-      animId = requestAnimationFrame(loop);
-    }
+		function loop() {
+			update()
+			draw()
+			animId = requestAnimationFrame(loop)
+		}
 
-    function start() {
-      if (running) return;
-      running = true;
-      resize();
-      draw();
-      if (!prefersReduced) {
-        loop();
-      }
-    }
+		function start() {
+			if (running) return
+			running = true
+			resize()
+			draw()
+			if (!prefersReduced) {
+				loop()
+			}
+		}
 
-    if (animId) cancelAnimationFrame(animId);
-    running = false;
-    start();
-  }
+		if (animId) cancelAnimationFrame(animId)
+		running = false
+		start()
+	}
 
-  initCanvas();
-  document.addEventListener('astro:page-load', initCanvas);
+	initCanvas()
+	document.addEventListener('astro:page-load', initCanvas)
 
-  window.addEventListener('resize', () => {
-    const canvas = document.getElementById('bg-canvas');
-    if (canvas) {
-      const ctx = canvas.getContext('2d')!;
-      const dpr = window.devicePixelRatio || 1;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      canvas.style.width = `${w}px`;
-      canvas.style.height = `${h}px`;
-    }
-  });
+	window.addEventListener('resize', () => {
+		const canvas = document.getElementById('bg-canvas')
+		if (canvas) {
+			const ctx = canvas.getContext('2d')!
+			const dpr = window.devicePixelRatio || 1
+			const w = window.innerWidth
+			const h = window.innerHeight
+			canvas.width = w * dpr
+			canvas.height = h * dpr
+			canvas.style.width = `${w}px`
+			canvas.style.height = `${h}px`
+		}
+	})
 </script>

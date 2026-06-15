@@ -8,178 +8,221 @@ import Admin from '@icons/Admin.astro'
 ---
 
 <script>
-  function setupMobileMenu() {
-    const menuButton = document.getElementById('menuButton');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const overlay = document.getElementById('mobileOverlay');
+	function setupMobileMenu() {
+		const menuButton = document.getElementById('menuButton')
+		const mobileMenu = document.getElementById('mobileMenu')
+		const overlay = document.getElementById('mobileOverlay')
 
-    function toggleMenu() {
-      const isOpen = mobileMenu?.classList.contains('translate-x-0');
-      if (isOpen) {
-        mobileMenu?.classList.replace('translate-x-0', 'translate-x-full');
-        overlay?.classList.replace('opacity-100', 'opacity-0');
-        overlay?.classList.add('pointer-events-none');
-        menuButton?.classList.remove('open');
-      } else {
-        mobileMenu?.classList.replace('translate-x-full', 'translate-x-0');
-        overlay?.classList.replace('opacity-0', 'opacity-100');
-        overlay?.classList.remove('pointer-events-none');
-        menuButton?.classList.add('open');
-      }
-    }
+		function toggleMenu() {
+			const isOpen = mobileMenu?.classList.contains('translate-x-0')
+			if (isOpen) {
+				mobileMenu?.classList.replace('translate-x-0', 'translate-x-full')
+				overlay?.classList.replace('opacity-100', 'opacity-0')
+				overlay?.classList.add('pointer-events-none')
+				menuButton?.classList.remove('open')
+			} else {
+				mobileMenu?.classList.replace('translate-x-full', 'translate-x-0')
+				overlay?.classList.replace('opacity-0', 'opacity-100')
+				overlay?.classList.remove('pointer-events-none')
+				menuButton?.classList.add('open')
+			}
+		}
 
-    menuButton?.addEventListener('click', toggleMenu);
-    overlay?.addEventListener('click', toggleMenu);
-  }
+		menuButton?.addEventListener('click', toggleMenu)
+		overlay?.addEventListener('click', toggleMenu)
+	}
 
-  setupMobileMenu();
-  document.addEventListener('astro:page-load', setupMobileMenu);
+	setupMobileMenu()
+	document.addEventListener('astro:page-load', setupMobileMenu)
 </script>
 
 <header>
-  <nav class="glass fixed left-0 right-0 top-0 z-50 border-b border-red-500/10 px-3 py-0.5 text-sm md:px-16 md:py-1 md:text-md lg:text-base">
-    <ul class="flex items-center gap-5 font-bold">
-      <li class="mr-auto font-bold md:mr-6">
-        <a href="/" title="Inicio"><AntagonistaLogo width={96} height={64} /></a>
-      </li>
+	<nav
+		class="glass md:text-md fixed top-0 right-0 left-0 z-50 border-b border-red-500/10 px-3 py-0.5 text-sm md:px-16 md:py-1 lg:text-base"
+	>
+		<ul class="flex items-center gap-5 font-bold">
+			<li class="mr-auto font-bold md:mr-6">
+				<a href="/" title="Inicio"><AntagonistaLogo width={96} height={64} /></a>
+			</li>
 
-      <li class="lg:hidden mr-2">
-        <button
-          id="menuButton"
-          class="hamburger-menu relative z-50 h-8 w-8 text-current focus:outline-none"
-          aria-label="Menú"
-        >
-          <span class="hamburger-line"></span>
-        </button>
-      </li>
+			<li class="mr-2 lg:hidden">
+				<button
+					id="menuButton"
+					class="hamburger-menu relative z-50 h-8 w-8 text-current focus:outline-none"
+					aria-label="Menú"
+				>
+					<span class="hamburger-line"></span>
+				</button>
+			</li>
 
-      <li class="hidden lg:block nav-link"><a href="/" title="Inicio" class="transition-colors duration-300">Inicio</a></li>
-      <li class="hidden lg:block nav-link"><a href="/personajes" title="Personajes" class="transition-colors duration-300">Personajes</a></li>
-      <li class="hidden lg:block nav-link"><a href="/encuesta-resultados" title="Resultados" class="transition-colors duration-300">Resultados</a></li>
+			<li class="nav-link hidden lg:block">
+				<a href="/" title="Inicio" class="transition-colors duration-300">Inicio</a>
+			</li>
+			<li class="nav-link hidden lg:block">
+				<a href="/personajes" title="Personajes" class="transition-colors duration-300">Personajes</a>
+			</li>
+			<li class="nav-link hidden lg:block">
+				<a href="/encuesta-resultados" title="Resultados" class="transition-colors duration-300">Resultados</a>
+			</li>
 
-      <li class="hidden lg:flex items-center gap-4 ml-2 pl-4 border-l border-red-500/10 nav-social">
-        <a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link transition-all duration-300"><Insta /></a>
-        <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="nav-icon-link transition-all duration-300"><MangaPlus /></a>
-        <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="nav-icon-link transition-all duration-300"><Github /></a>
-        <a href="https://admin-antagonista.vercel.app/" target="_blank" class="nav-icon-link transition-all duration-300" title="Panel de Administración"><Admin /></a>
-      </li>
-    </ul>
-  </nav>
+			<li class="nav-social ml-2 hidden items-center gap-4 border-l border-red-500/10 pl-4 lg:flex">
+				<a
+					href="https://www.instagram.com/saikomic"
+					target="_blank"
+					class="nav-icon-link transition-all duration-300"><Insta /></a
+				>
+				<a
+					href="https://medibang.com/mpc/titles/6k2208160633320990004683825/"
+					target="_blank"
+					class="nav-icon-link transition-all duration-300"><MangaPlus /></a
+				>
+				<a
+					href="https://github.com/roldyoran/antagonista-site"
+					target="_blank"
+					class="nav-icon-link transition-all duration-300"><Github /></a
+				>
+				<a
+					href="https://admin-antagonista.vercel.app/"
+					target="_blank"
+					class="nav-icon-link transition-all duration-300"
+					title="Panel de Administración"><Admin /></a
+				>
+			</li>
+		</ul>
+	</nav>
 </header>
 
 <div
-  id="mobileOverlay"
-  class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
-></div>
+	id="mobileOverlay"
+	class="pointer-events-none fixed inset-0 z-40 bg-black/60 opacity-0 backdrop-blur-sm transition-opacity duration-300 lg:hidden"
+>
+</div>
 
 <div
-  id="mobileMenu"
-  class="fixed inset-y-0 right-0 z-40 w-64 transform overflow-y-auto glass px-6 py-24 transition-transform duration-300 ease-in-out translate-x-full lg:hidden"
+	id="mobileMenu"
+	class="glass fixed inset-y-0 right-0 z-40 w-64 translate-x-full transform overflow-y-auto px-6 py-24 transition-transform duration-300 ease-in-out lg:hidden"
 >
-  <ul class="flex flex-col space-y-6 text-center dark:text-white">
-    <li><a href="/" class="block py-2 nav-link-mobile transition-colors duration-300">Inicio</a></li>
-    <li><a href="/personajes" class="block py-2 nav-link-mobile transition-colors duration-300">Personajes</a></li>
-    <li><a href="/encuesta-resultados" class="block py-2 nav-link-mobile transition-colors duration-300">Resultados</a></li>
-    <li class="flex justify-center gap-4 pt-4 border-t border-red-500/10">
-      <a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link transition-all duration-300"><Insta /></a>
-      <a href="https://medibang.com/mpc/titles/6k2208160633320990004683825/" target="_blank" class="nav-icon-link transition-all duration-300"><MangaPlus /></a>
-      <a href="https://github.com/roldyoran/antagonista-site" target="_blank" class="nav-icon-link transition-all duration-300"><Github /></a>
-      <a href="https://admin-antagonista.vercel.app/" target="_blank" class="nav-icon-link transition-all duration-300" title="Panel de Administración"><Admin /></a>
-    </li>
-    <li class="flex justify-center pt-4" title="Cambiar Tema"><ThemeToggle client:load /></li>
-  </ul>
+	<ul class="flex flex-col space-y-6 text-center dark:text-white">
+		<li><a href="/" class="nav-link-mobile block py-2 transition-colors duration-300">Inicio</a></li>
+		<li><a href="/personajes" class="nav-link-mobile block py-2 transition-colors duration-300">Personajes</a></li>
+		<li>
+			<a href="/encuesta-resultados" class="nav-link-mobile block py-2 transition-colors duration-300">Resultados</a>
+		</li>
+		<li class="flex justify-center gap-4 border-t border-red-500/10 pt-4">
+			<a href="https://www.instagram.com/saikomic" target="_blank" class="nav-icon-link transition-all duration-300"
+				><Insta /></a
+			>
+			<a
+				href="https://medibang.com/mpc/titles/6k2208160633320990004683825/"
+				target="_blank"
+				class="nav-icon-link transition-all duration-300"><MangaPlus /></a
+			>
+			<a
+				href="https://github.com/roldyoran/antagonista-site"
+				target="_blank"
+				class="nav-icon-link transition-all duration-300"><Github /></a
+			>
+			<a
+				href="https://admin-antagonista.vercel.app/"
+				target="_blank"
+				class="nav-icon-link transition-all duration-300"
+				title="Panel de Administración"><Admin /></a
+			>
+		</li>
+		<li class="flex justify-center pt-4" title="Cambiar Tema"><ThemeToggle client:load /></li>
+	</ul>
 </div>
 
 <style>
-  @reference "../../styles/global.css";
+	@reference "../../styles/global.css";
 
-  .nav-link a {
-    position: relative;
-    padding-bottom: 4px;
-    color: var(--color-text-muted);
-    transition: color 0.3s ease;
-    letter-spacing: 0.08em;
-  }
+	.nav-link a {
+		position: relative;
+		padding-bottom: 4px;
+		color: var(--color-text-muted);
+		transition: color 0.3s ease;
+		letter-spacing: 0.08em;
+	}
 
-  .nav-link a::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-accent);
-    border-radius: 1px;
-    transition: width 0.3s ease;
-    box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
-  }
+	.nav-link a::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background: var(--color-accent);
+		border-radius: 1px;
+		transition: width 0.3s ease;
+		box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
+	}
 
-  .nav-link a:hover {
-    color: var(--color-accent-glow);
-  }
+	.nav-link a:hover {
+		color: var(--color-accent-glow);
+	}
 
-  .nav-link a:hover::after {
-    width: 100%;
-  }
+	.nav-link a:hover::after {
+		width: 100%;
+	}
 
-  .nav-link-mobile {
-    color: var(--color-text-muted);
-    transition: color 0.2s ease;
-    letter-spacing: 0.08em;
-  }
-  .nav-link-mobile:hover {
-    color: var(--color-accent-glow);
-  }
+	.nav-link-mobile {
+		color: var(--color-text-muted);
+		transition: color 0.2s ease;
+		letter-spacing: 0.08em;
+	}
+	.nav-link-mobile:hover {
+		color: var(--color-accent-glow);
+	}
 
-  .nav-icon-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    color: var(--color-text-muted);
-    transition: all 0.2s ease;
-  }
+	.nav-icon-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		border-radius: 8px;
+		color: var(--color-text-muted);
+		transition: all 0.2s ease;
+	}
 
-  .nav-icon-link:hover {
-    color: var(--color-accent-glow);
-    background: rgba(220, 38, 38, 0.1);
-    box-shadow: 0 0 12px rgba(220, 38, 38, 0.25);
-  }
+	.nav-icon-link:hover {
+		color: var(--color-accent-glow);
+		background: rgba(220, 38, 38, 0.1);
+		box-shadow: 0 0 12px rgba(220, 38, 38, 0.25);
+	}
 
-  .nav-icon-link:active {
-    transform: none;
-  }
+	.nav-icon-link:active {
+		transform: none;
+	}
 
-  .hamburger-menu {
-    @apply flex items-center justify-center;
-  }
+	.hamburger-menu {
+		@apply flex items-center justify-center;
+	}
 
-  .hamburger-line,
-  .hamburger-line::before,
-  .hamburger-line::after {
-    @apply absolute h-0.5 w-6 bg-current transition-all duration-300;
-    content: "";
-  }
+	.hamburger-line,
+	.hamburger-line::before,
+	.hamburger-line::after {
+		@apply absolute h-0.5 w-6 bg-current transition-all duration-300;
+		content: '';
+	}
 
-  .hamburger-line::before {
-    transform: translateY(-8px);
-  }
+	.hamburger-line::before {
+		transform: translateY(-8px);
+	}
 
-  .hamburger-line::after {
-    transform: translateY(8px);
-  }
+	.hamburger-line::after {
+		transform: translateY(8px);
+	}
 
-  .hamburger-menu.open .hamburger-line {
-    background-color: transparent;
-  }
+	.hamburger-menu.open .hamburger-line {
+		background-color: transparent;
+	}
 
-  .hamburger-menu.open .hamburger-line::before {
-    transform: rotate(45deg);
-  }
+	.hamburger-menu.open .hamburger-line::before {
+		transform: rotate(45deg);
+	}
 
-  .hamburger-menu.open .hamburger-line::after {
-    transform: rotate(-45deg);
-  }
+	.hamburger-menu.open .hamburger-line::after {
+		transform: rotate(-45deg);
+	}
 </style>
