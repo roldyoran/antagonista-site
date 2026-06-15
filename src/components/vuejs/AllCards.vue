@@ -13,6 +13,7 @@ interface SelectedCharacter {
 const searchTerm = ref('');
 const selectedCharacters = ref<SelectedCharacter[]>([]);
 const showOnlyVotes = ref(false);
+const cardsGrid = ref<HTMLElement | null>(null);
 
 onMounted(() => {
   const storedVotes = localStorage.getItem('selectedCharacters');
@@ -28,6 +29,12 @@ watch(selectedCharacters, (newValue) => {
     localStorage.removeItem('selectedCharacters');
   }
 }, { deep: true });
+
+watch(showOnlyVotes, (val) => {
+  if (val && cardsGrid.value) {
+    cardsGrid.value.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
 
 const filteredCharacters = computed(() => {
   return characters.filter((character) => {
@@ -86,6 +93,7 @@ const clearSelection = () => {
     </div>
 
     <transition-group
+      ref="cardsGrid"
       tag="ul"
       class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4"
       name="character-list"
