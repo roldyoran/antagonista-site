@@ -12,18 +12,30 @@ const rest = surveyResults.slice(3)
 <Layout title="Resultados | Encuesta de Popularidad Antagonista">
 	<div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
 		<div class="mb-16 text-center">
-			<span class="text-accent-dim font-body text-xs font-semibold tracking-[0.25em] uppercase"
+			<span
+				class="text-accent-dim font-body animate-fade-in-up text-xs font-semibold tracking-[0.25em] uppercase"
+				style="animation-delay: 0.1s"
 				>Resultados Finales</span
 			>
 			<h1
-				class="font-display mt-3 text-4xl leading-[1.15] font-normal tracking-wide text-white sm:text-5xl lg:text-6xl"
+				class="font-display animate-fade-in-up mt-3 text-4xl leading-[1.15] font-normal tracking-wide text-white sm:text-5xl lg:text-6xl"
+				style="animation-delay: 0.2s"
 			>
 				Resultados de la Encuesta
 			</h1>
-			<div class="bg-accent/40 mx-auto mt-4 h-0.5 w-16 rounded-full"></div>
-			<p class="text-text-muted font-body mt-4 text-lg font-medium">Gracias por participar</p>
 			<div
-				class="bg-surface/60 border-surface-light mt-6 inline-flex items-center gap-3 rounded-xl border px-5 py-2.5"
+				class="bg-accent/40 mx-auto mt-4 h-0.5 w-16 animate-scale-in rounded-full"
+				style="animation-delay: 0.35s"
+			></div>
+			<p
+				class="text-text-muted font-body animate-fade-in-up mt-4 text-lg font-medium"
+				style="animation-delay: 0.45s"
+			>
+				Gracias por participar
+			</p>
+			<div
+				class="bg-surface/60 border-surface-light mt-6 inline-flex animate-fade-in-up items-center gap-3 rounded-xl border px-5 py-2.5"
+				style="animation-delay: 0.55s"
 			>
 				<span class="text-text-muted font-body text-sm tracking-wider">Total de Votantes</span>
 				<span class="text-accent font-score text-2xl font-bold">804</span>
@@ -34,7 +46,10 @@ const rest = surveyResults.slice(3)
 		<div class="relative mb-16 flex flex-col items-end justify-center gap-4 md:flex-row md:gap-6 lg:gap-8">
 			{/* 2nd place - left */}
 			<div class="order-2 w-full md:order-1 md:mt-12 md:w-1/3">
-				<div class="bg-surface/40 relative overflow-hidden rounded-2xl border-2 border-neutral-400/30">
+				<div
+					class="bg-surface/40 animate-pop-in relative overflow-hidden rounded-2xl border-2 border-neutral-400/30"
+					style="animation-delay: 0.4s"
+				>
 					<div class="relative h-44 overflow-hidden sm:h-52">
 						<img
 							src={top3[1].image}
@@ -72,7 +87,8 @@ const rest = surveyResults.slice(3)
 			{/* 1st place - center, elevated */}
 			<div class="z-10 order-1 w-full md:order-2 md:-mt-8 md:w-1/3">
 				<div
-					class="border-accent/60 bg-accent/5 relative overflow-hidden rounded-2xl border-2 shadow-xl shadow-red-600/15"
+					class="border-accent/60 bg-accent/5 animate-pop-in relative overflow-hidden rounded-2xl border-2 shadow-xl shadow-red-600/15"
+					style="animation-delay: 0.55s"
 				>
 					<div class="relative h-56 overflow-hidden sm:h-64">
 						<img src={top3[0].image} alt={top3[0].name} class="h-full w-full object-cover" loading="lazy" />
@@ -108,7 +124,10 @@ const rest = surveyResults.slice(3)
 
 			{/* 3rd place - right */}
 			<div class="order-3 w-full md:mt-20 md:w-1/3">
-				<div class="bg-surface/40 relative overflow-hidden rounded-2xl border-2 border-amber-700/30">
+				<div
+					class="bg-surface/40 animate-pop-in relative overflow-hidden rounded-2xl border-2 border-amber-700/30"
+					style="animation-delay: 0.7s"
+				>
 					<div class="relative h-36 overflow-hidden sm:h-44">
 						<img
 							src={top3[2].image}
@@ -147,9 +166,12 @@ const rest = surveyResults.slice(3)
 		<!-- Remaining ranks -->
 		<div class="space-y-2">
 			{
-				rest.map((character) => (
-					<div class="border-surface-light bg-surface/50 flex items-center gap-4 rounded-xl border p-4 sm:p-5">
-						<span class="font-score text-text-muted w-8 text-center text-sm tracking-wider">
+				rest.map((character, i) => (
+					<div
+						class="border-surface-light bg-surface/50 animate-fade-in-up flex items-center gap-4 rounded-xl border p-4 sm:p-5"
+						style={`animation-delay: ${0.8 + i * 0.06}s`}
+					>
+						<span class="font-score text-text-muted w-8 text-center text-lg tracking-wider">
 							#{character.rank}
 						</span>
 						<div class="border-surface-light h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg border">
@@ -162,7 +184,7 @@ const rest = surveyResults.slice(3)
 						</div>
 						<div class="min-w-0 flex-grow">
 							<h4 class="font-display truncate text-sm text-white sm:text-base">{character.name}</h4>
-							<div class="bg-surface-light mt-1.5 h-1 w-full overflow-hidden rounded-full">
+							<div class="bg-surface-light mt-1.5 h-2.5 w-full overflow-hidden rounded-full">
 								<div
 									class="bg-accent/40 h-full rounded-full"
 									style={`width: ${(character.points / maxPoints) * 100}%`}
